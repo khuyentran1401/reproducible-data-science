@@ -4,6 +4,7 @@
 As data science projects increase in requirements, such as reliability, maintainability, and scalability, the complexity of projects increases significantly.
 
 ![](image/machine_learning.png)
+
 [Image by xkcd](https://xkcd.com/1838/)
 
 Thus, having reproducible data science workflows ensures consistency in our results, making it easier to debug and maintain these projects. 
@@ -16,6 +17,7 @@ At the end of this book you will learn how to structure your project, effectivel
 
 If a data science project is reproducible, results obtained from the project should be achieved again with a high degree of reliability when the project is replicated by another person in another machine.
 ![](image/the_difference.png)
+
 [Image by xkcd](https://xkcd.com/242/).
 
 ## What is Maintainability?
@@ -23,6 +25,7 @@ If a data science project is reproducible, results obtained from the project sho
 If a data science project is maintainable, others can debug, maintenance, and add more features to the project with ease without breaking the code. 
 
 ![](image/wanna_see_the_code.png)
+
 [Image by xkcd](https://xkcd.com/2138/).
 
 ## About The Author
