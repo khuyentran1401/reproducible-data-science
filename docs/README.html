@@ -88,7 +88,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Configure your Data Science Projects with Hydra" href="hydra.html" />
+    <link rel="next" title="1. Structure Project" href="structure_project/structure_project.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -133,10 +133,159 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="hydra.html">
-   1. Configure your Data Science Projects with Hydra
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="structure_project/structure_project.html">
+   1. Structure Project
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -301,10 +450,10 @@ const thebe_selector_output = ".output, .cell_output"
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="hydra.html" title="next page">
+    <a class='right-next' id="next-link" href="structure_project/structure_project.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Configure your Data Science Projects with Hydra</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Structure Project</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

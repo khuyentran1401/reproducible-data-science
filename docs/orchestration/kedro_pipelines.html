@@ -1,0 +1,1096 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.1. Create Maintainable and Modular Data Science Pipelines with Kedro &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.2. Optimize Your Data Science Workflow in a Few Lines of Code" href="prefect.html" />
+    <link rel="prev" title="4. Build Pipelines" href="orchestration.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/orchestration/kedro_pipelines.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Forchestration/kedro_pipelines.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-kedro">
+   4.1.2. What is Kedro?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-a-data-science-project">
+   4.1.3. Set Up a Data Science Project
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-data-science-from-a-cookie-cutter-template">
+     4.1.3.1. Create a Data Science from a Cookie-Cutter Template
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-dependencies">
+     4.1.3.2. Install Dependencies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-pipeline">
+     4.1.3.3. Create a pipeline
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node">
+     4.1.3.4. Node
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pipeline">
+   4.1.4. Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#register-and-run-the-pipeline">
+   4.1.5. Register and Run the Pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slice-a-pipeline">
+     4.1.5.1. Slice a Pipeline
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-a-pipeline">
+     4.1.5.2. Modularize a Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-your-parameters-and-data-through-a-yaml-file">
+   4.1.6. Configure Your Parameters and Data Through a YAML File
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     4.1.6.1. Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-catalog">
+     4.1.6.2. Data Catalog
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data-catalog-and-parameters-from-jupyter-notebook">
+   4.1.7. Load Data Catalog and Parameters From Jupyter Notebook
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data-catalog">
+     4.1.7.1. Load Data Catalog
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-parameters">
+     4.1.7.2. Load Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-a-pipeline">
+     4.1.7.3. Run a Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-your-pipelines">
+   4.1.8. Visualize your Pipelines
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Create Maintainable and Modular Data Science Pipelines with Kedro</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-kedro">
+   4.1.2. What is Kedro?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-a-data-science-project">
+   4.1.3. Set Up a Data Science Project
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-data-science-from-a-cookie-cutter-template">
+     4.1.3.1. Create a Data Science from a Cookie-Cutter Template
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-dependencies">
+     4.1.3.2. Install Dependencies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-pipeline">
+     4.1.3.3. Create a pipeline
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#node">
+     4.1.3.4. Node
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pipeline">
+   4.1.4. Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#register-and-run-the-pipeline">
+   4.1.5. Register and Run the Pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slice-a-pipeline">
+     4.1.5.1. Slice a Pipeline
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-a-pipeline">
+     4.1.5.2. Modularize a Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-your-parameters-and-data-through-a-yaml-file">
+   4.1.6. Configure Your Parameters and Data Through a YAML File
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     4.1.6.1. Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-catalog">
+     4.1.6.2. Data Catalog
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data-catalog-and-parameters-from-jupyter-notebook">
+   4.1.7. Load Data Catalog and Parameters From Jupyter Notebook
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data-catalog">
+     4.1.7.1. Load Data Catalog
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-parameters">
+     4.1.7.2. Load Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-a-pipeline">
+     4.1.7.3. Run a Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-your-pipelines">
+   4.1.8. Visualize your Pipelines
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/kedro_demo"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="create-maintainable-and-modular-data-science-pipelines-with-kedro">
+<h1><span class="section-number">4.1. </span>Create Maintainable and Modular Data Science Pipelines with Kedro<a class="headerlink" href="#create-maintainable-and-modular-data-science-pipelines-with-kedro" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">4.1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Have you ever passed your data to a list of functions and classes without knowing for sure how the output is like?</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*4SmvxvzYWw3MAbIigvhvXA.png" /></p>
+<p>You might try to save the data then check it in your Jupyter Notebook to make sure the output is as you expected. This approach works, but it is cumbersome.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="k">pass</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;processed_data.csv&#39;</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another common issue is that it’s hard to understand the relationships between functions when looking at a Python script that contains both the code to create and execute functions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+  <span class="k">pass</span> 
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+  <span class="k">pass</span> 
+
+<span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">predictions</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="n">report</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your code looks even more complex and hard to follow as the project grows.</p>
+<p>Wouldn’t it be nicer if you can visualize how the inputs and outputs of different functions are connected like below?</p>
+<p><img alt="" src="https://miro.medium.com/max/643/1*445WmOz8pllmGH8cdv6XKg.png" /></p>
+<p>That is when Kedro comes in handy.</p>
+</div>
+<div class="section" id="what-is-kedro">
+<h2><span class="section-number">4.1.2. </span>What is Kedro?<a class="headerlink" href="#what-is-kedro" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://kedro.readthedocs.io/en/stable/index.html">Kedro</a> is an open-source Python framework for creating reproducible, maintainable, and modular data science code. It borrows concepts from software engineering best-practice and applies them to machine learning code.</p>
+<p>Kedro allows you to:</p>
+<ol class="simple">
+<li><p>Create a data science from a cookie-cutter template</p></li>
+<li><p>Create a data science pipeline</p></li>
+<li><p>Slice a pipeline</p></li>
+<li><p>Modularize a pipeline</p></li>
+<li><p>Configure your data and parameters through a YAML file</p></li>
+<li><p>Effortlessly analyze nodes’ outputs in a Jupyter Notebook</p></li>
+<li><p>Visualize your pipeline</p></li>
+<li><p>Create documentation for your project</p></li>
+</ol>
+<p>To install Kedro, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install kedro
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-a-data-science-project">
+<h2><span class="section-number">4.1.3. </span>Set Up a Data Science Project<a class="headerlink" href="#set-up-a-data-science-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-data-science-from-a-cookie-cutter-template">
+<h3><span class="section-number">4.1.3.1. </span>Create a Data Science from a Cookie-Cutter Template<a class="headerlink" href="#create-a-data-science-from-a-cookie-cutter-template" title="Permalink to this headline">¶</a></h3>
+<p>Have you ever contemplated how to structure your data science project so that it is logical and reasonably standardized? Wouldn’t it be nice if you can create a well-defined and standard project structure in one line of code?</p>
+<p>That could be easily done with Kedro. After installing Kedro, you can create a new empty project using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro new
+</pre></div>
+</div>
+<p>After going through a series of questions, a new project will be created with the structure like below:</p>
+<p><img alt="" src="https://miro.medium.com/max/540/1*hLNorY8__XlNphR_7pXXQA.png" /></p>
+<p>If we look at the project structure at a higher level, we can see that there are 5 main directories:</p>
+<p><img alt="" src="https://miro.medium.com/max/370/1*PB54dLrrYdNArniexf9VkQ.png" /></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conf</span></code>: Store configuration files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: Store data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code>: Store documentation of the project</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logs</span></code>: Store log files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">notebooks</span></code>: Store Jupyter Notebooks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: Store the main code</p></li>
+</ul>
+</div>
+<div class="section" id="install-dependencies">
+<h3><span class="section-number">4.1.3.2. </span>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Kedro requires some basic dependencies before using. These dependencies are specified under <code class="docutils literal notranslate"><span class="pre">src/requirements.txt</span></code> . To install these dependencies, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro install
+</pre></div>
+</div>
+<p>And all necessary dependencies to run the pipelines will be installed in your environment.</p>
+<p>Now that we learn how to set up a data science project, let’s understand how to create a pipeline with Kedro.</p>
+</div>
+<div class="section" id="create-a-pipeline">
+<h3><span class="section-number">4.1.3.3. </span>Create a pipeline<a class="headerlink" href="#create-a-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>To create a new pipeline, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro pipeline create &lt;NAME&gt;
+</pre></div>
+</div>
+<p>Since there are often 2 steps in a data science project: data processing and model training, we will create a pipeline called <code class="docutils literal notranslate"><span class="pre">data_engineer</span></code> and a pipeline called <code class="docutils literal notranslate"><span class="pre">data_science</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro pipeline create data_engineering  
+$ kedro pipeline create data_science
+</pre></div>
+</div>
+<p>These two pipeline directories will be created under <code class="docutils literal notranslate"><span class="pre">src/project_name</span></code> :</p>
+<p><img alt="" src="https://miro.medium.com/max/370/1*Hy5h5JGpyqdHQ-DXiIL3Ig.png" /></p>
+<p>Each pipeline consists of 4 files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> : specifies information about the pipeline</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node.py</span></code> : contains nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipeline.py</span></code> : contains pipelines</p></li>
+</ul>
+</div>
+<div class="section" id="node">
+<h3><span class="section-number">4.1.3.4. </span>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h3>
+<p>A pipeline consists of multiple nodes. Each node is a Python function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Node for getting the classes from the Iris data set.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>For each node, there are input(s) and output(s):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">get_classes</span>
+<span class="kn">from</span> <span class="nn">kedro.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">node</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">get_classes</span><span class="p">,</span>
+                <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw_data&quot;</span><span class="p">,</span> <span class="s2">&quot;params:target_col&quot;</span><span class="p">],</span>
+                <span class="n">ouputs</span><span class="o">=</span><span class="s2">&quot;classes&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_classes&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+<p>Visualization of the node <code class="docutils literal notranslate"><span class="pre">get_classes</span></code>:</p>
+<p><img alt="" src="https://miro.medium.com/max/410/1*S4ijcTYNObqdOsq-ZRSJkg.png" /></p>
+<p>Inputs and outputs of each node can be specified using <code class="docutils literal notranslate"><span class="pre">None</span></code> , string, a list of strings, or a dictionary. Note that these strings are <strong>abstract names, not the real values</strong>.</p>
+<p>Why are names useful? If we know the name of each function’s inputs and outputs, we can easily grab a specific input or output by calling its name. Thus, there is <strong>less ambiguity</strong> in your code.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*I5xHyUZqh0UvlEFp74lQjA.png" /></p>
+<p>You can find all node definition syntax <a class="reference external" href="https://kedro.readthedocs.io/en/stable/06_nodes_and_pipelines/01_nodes.html#node-definition-syntax">here</a>.</p>
+</div>
+</div>
+<div class="section" id="pipeline">
+<h2><span class="section-number">4.1.4. </span>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<p>A pipeline consists of a list of nodes. It connects the outputs of one node to the inputs of another node.</p>
+<p>For example, in the code below, <code class="docutils literal notranslate"><span class="pre">'classes'</span></code> (output of the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> ) and <code class="docutils literal notranslate"><span class="pre">'encoded_data'</span></code> (output of the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code>) are used as the inputs of the function <code class="docutils literal notranslate"><span class="pre">split_data</span></code> .</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kedro.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">node</span>
+<span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">get_classes</span><span class="p">,</span> <span class="n">encode_categorical_columns</span><span class="p">,</span> <span class="n">split_data</span>
+
+
+<span class="k">def</span> <span class="nf">create_pipeline</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Pipeline</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">get_classes</span><span class="p">,</span>
+                <span class="p">[</span><span class="s2">&quot;raw_data&quot;</span><span class="p">,</span> <span class="s2">&quot;params:target_col&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;classes&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_classes&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">encode_categorical_columns</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="s1">&#39;params:target_col&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;encoded_data&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;encode_categorical_columns&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">split_data</span><span class="p">,</span>
+                <span class="p">[</span><span class="s2">&quot;encoded_data&quot;</span><span class="p">,</span> <span class="s2">&quot;params:test_data_ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;classes&quot;</span><span class="p">],</span>
+                <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">train_x</span><span class="o">=</span><span class="s2">&quot;train_x&quot;</span><span class="p">,</span>
+                    <span class="n">train_y</span><span class="o">=</span><span class="s2">&quot;train_y&quot;</span><span class="p">,</span>
+                    <span class="n">test_x</span><span class="o">=</span><span class="s2">&quot;test_x&quot;</span><span class="p">,</span>
+                    <span class="n">test_y</span><span class="o">=</span><span class="s2">&quot;test_y&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;split&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The Data Catalog is located under <code class="docutils literal notranslate"><span class="pre">conf/base/catalog.yml</span></code> .</p>
+<p>Visualization of the pipeline above:</p>
+<p><img alt="" src="https://miro.medium.com/max/691/1*5dtZTbWmSI5oAH53KbPijg.png" /></p>
+</div>
+<div class="section" id="register-and-run-the-pipeline">
+<h2><span class="section-number">4.1.5. </span>Register and Run the Pipeline<a class="headerlink" href="#register-and-run-the-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the node and the pipeline, let’s register these pipelines in the file <code class="docutils literal notranslate"><span class="pre">src/project_name/pipeline_registry.py</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Project pipelines.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">kedro.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="kn">from</span> <span class="nn">iris.pipelines</span> <span class="kn">import</span> <span class="n">data_engineering</span> <span class="k">as</span> <span class="n">de</span>
+<span class="kn">from</span> <span class="nn">iris.pipelines</span> <span class="kn">import</span> <span class="n">data_science</span> <span class="k">as</span> <span class="n">ds</span>
+
+
+<span class="k">def</span> <span class="nf">register_pipelines</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Pipeline</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Register the project&#39;s pipelines.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A mapping from a pipeline name to a ``Pipeline`` object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_engineering_pipeline</span> <span class="o">=</span> <span class="n">de</span><span class="o">.</span><span class="n">create_pipeline</span><span class="p">()</span>
+    <span class="n">data_science_pipeline</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">create_pipeline</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;de&quot;</span><span class="p">:</span> <span class="n">data_engineering_pipeline</span><span class="p">,</span>
+        <span class="s2">&quot;ds&quot;</span><span class="p">:</span> <span class="n">data_science_pipeline</span><span class="p">,</span>
+        <span class="s2">&quot;__default__&quot;</span><span class="p">:</span> <span class="n">data_engineering_pipeline</span> <span class="o">+</span> <span class="n">data_science_pipeline</span><span class="p">,</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>After we have registered our pipelines, we can run these pipelines using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro run
+</pre></div>
+</div>
+<p>If you only want to run a specific pipeline, add <code class="docutils literal notranslate"><span class="pre">--pipeline=&lt;NAME&gt;</span></code> to the command <code class="docutils literal notranslate"><span class="pre">kedro</span> <span class="pre">run</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro run --pipeline<span class="o">=</span>de
+</pre></div>
+</div>
+<p>Cool!</p>
+<div class="section" id="slice-a-pipeline">
+<h3><span class="section-number">4.1.5.1. </span>Slice a Pipeline<a class="headerlink" href="#slice-a-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>If you prefer to run only a portion of a pipeline, you can slice the pipeline. Four options to slice a pipeline are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--from-nodes</span></code> : Run the pipeline starting from certain nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--to-nodes</span></code> : Run the pipeline until reaching certain nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--from-inputs</span></code> : Run the pipeline starting from the nodes that produce certain inputs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--to-outputs</span></code> : Run the pipeline until reaching the nodes that produce certain outputs</p></li>
+</ul>
+<p>For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro run --to-nodes<span class="o">=</span>encode<span class="se">\_</span>categorical<span class="se">\_</span>columns
+</pre></div>
+</div>
+<p>… allows you to run the pipeline until reaching the node <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> .</p>
+</div>
+<div class="section" id="modularize-a-pipeline">
+<h3><span class="section-number">4.1.5.2. </span>Modularize a Pipeline<a class="headerlink" href="#modularize-a-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you might want to <strong>reuse the same pipeline for different purposes</strong>. Kedro allows you to create modular pipelines, which are isolated and can be reused.</p>
+<p>For example, instead of writing two separate pipelines “cook lunch pipeline” and “cook dinner pipeline”, you can write a pipeline called “cook pipeline”.</p>
+<p>Then, turn “cook pipeline” into “cook meat pipeline” and the “cook vegetable pipeline” by switching the inputs and outputs of “cook pipeline” with new values.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*DZlTGQ4vGWyvfirqixx4cA.png" /></p>
+<p>Modular pipelines are nice since they are portable, easier to develop, test, and maintain. Find instructions on how to modularize your Kedro pipeline <a class="reference external" href="https://kedro.readthedocs.io/en/stable/06_nodes_and_pipelines/03_modular_pipelines.html">here</a>.</p>
+</div>
+</div>
+<div class="section" id="configure-your-parameters-and-data-through-a-yaml-file">
+<h2><span class="section-number">4.1.6. </span>Configure Your Parameters and Data Through a YAML File<a class="headerlink" href="#configure-your-parameters-and-data-through-a-yaml-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameters">
+<h3><span class="section-number">4.1.6.1. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Kedro also allows you to specify the parameters for a function using a YAML file. This is very nice because you can <strong>view all of your parameters from a file without digging into the source code.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Node for splitting the classical Iris data set into training and test</span>
+<span class="sd">    sets, each split into features and labels.</span>
+<span class="sd">    The split ratio parameter is taken from conf/project/parameters.yml.</span>
+<span class="sd">    The data and the parameters will be loaded and provided to your function</span>
+<span class="sd">    automatically when the pipeline is executed and it is time to run this node.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">classes</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="n">classes</span><span class="p">]</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">)</span>
+
+    <span class="c1"># When returning many variables, it is a good practice to give them names:</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">train_x</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+        <span class="n">train_y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+        <span class="n">test_x</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span>
+        <span class="n">test_y</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>To configure your project with a configuration file, start with putting the parameters used for the <code class="docutils literal notranslate"><span class="pre">data_engineering</span></code> pipeline in the <code class="docutils literal notranslate"><span class="pre">conf/base/parameters/data_engineering.yml</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conf/base
+├── catalog.yml
+├── logging.yml
+└── parameters
+    ├── data_engineering.yml
+    └── data_science.yml
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_data_ratio</span><span class="p">:</span> <span class="mf">0.2</span>
+</pre></div>
+</div>
+<p>Now, accessing a parameter from the pipeline is simple. All we need to do is to add <code class="docutils literal notranslate"><span class="pre">params:</span></code> before the name of parameter we want to access.</p>
+<p>In the example below, we use <code class="docutils literal notranslate"><span class="pre">params:test_data_ratio</span></code> to access the parameter <code class="docutils literal notranslate"><span class="pre">test_data_ratio</span></code> from the configuration file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_pipeline</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Pipeline</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">encode_categorical_columns</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="s1">&#39;params:target_col&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;encoded_data&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;encode_categorical_columns&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-catalog">
+<h3><span class="section-number">4.1.6.2. </span>Data Catalog<a class="headerlink" href="#data-catalog" title="Permalink to this headline">¶</a></h3>
+<p>Now you might wonder: how do we access the data from the pipeline?</p>
+<p>Kedro allows you to load and save data with Data Catalog. Data Catalog is located under <code class="docutils literal notranslate"><span class="pre">conf/base/catalog.yml</span></code> .</p>
+<p>Data Catalog is a configuration file that allows you to <strong>specify the data type, and the location where the data is saved</strong>.</p>
+<p>For example, to save the <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> output from the <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> node,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_pipeline</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Pipeline</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">node</span><span class="p">(</span>
+                <span class="n">encode_categorical_columns</span><span class="p">,</span>
+                <span class="p">[</span><span class="s1">&#39;raw_data&#39;</span><span class="p">,</span> <span class="s1">&#39;params:target_col&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;encoded_data&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;encode_categorical_columns&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>… we can insert the name <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> to the <code class="docutils literal notranslate"><span class="pre">conf/base/catalog.yml</span></code> file. Under <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> , we specify the dataset’s type and its location.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">raw_data</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pandas.CSVDataSet</span>
+  <span class="nt">filepath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/01_raw/iris.csv</span>
+
+<span class="nt">encoded_data</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pandas.CSVDataSet</span>
+  <span class="nt">filepath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/02_intermediate/encoded_data.csv</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pandas.CSVDataSet</span></code> tells Kedro that we want to save <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> as a CSV and load it using pandas. Kedro also supports other dataset types such as pickle, parquet, excel, plot, Spark, SQL, etc. Find all datasets that Kedro supports <a class="reference external" href="https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html">here</a>.</p>
+<p>Using a Data Catalog to manage loading and saving of data is very nice because you can specify:</p>
+<ul class="simple">
+<li><p>the locations of each file</p></li>
+<li><p>how the data is saved and loaded</p></li>
+</ul>
+<p>… by only editing one file. The next time when you forget the locations of your datasets, you can look at this configuration file to find their information.</p>
+</div>
+</div>
+<div class="section" id="load-data-catalog-and-parameters-from-jupyter-notebook">
+<h2><span class="section-number">4.1.7. </span>Load Data Catalog and Parameters From Jupyter Notebook<a class="headerlink" href="#load-data-catalog-and-parameters-from-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-data-catalog">
+<h3><span class="section-number">4.1.7.1. </span>Load Data Catalog<a class="headerlink" href="#load-data-catalog" title="Permalink to this headline">¶</a></h3>
+<p>Have you ever wanted to quickly check the outputs of a function from a Jupyter Notebook? Normally, you need to first save the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># script to process the data</span>
+
+<span class="n">processed_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;processed_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>… then load it into a Jupyter Notebook:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*wbfLlHIBIekB2UkcJmCpcg.png" /></p>
+<p>With Kedro, saving and loading data don’t require extra code. To start a Kedro’s Jupyter session, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro jupyter notebook
+</pre></div>
+</div>
+<p>After running the pipeline that produces the output <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> specified in the <code class="docutils literal notranslate"><span class="pre">catalog.yml</span></code> file,</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">raw_data</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pandas.CSVDataSet</span>
+  <span class="nt">filepath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/01_raw/iris.csv</span>
+
+<span class="nt">encoded_data</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pandas.CSVDataSet</span>
+  <span class="nt">filepath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/02_intermediate/encoded_data.csv</span>
+</pre></div>
+</div>
+<p>… we can easily load the data in the notebook using <code class="docutils literal notranslate"><span class="pre">catalog.load</span></code> :</p>
+<p><img alt="" src="../_images/kedro_notebook.png" /></p>
+<p>If you want to specify how to save and load the output<code class="docutils literal notranslate"><span class="pre">encoded_data</span></code>, add <code class="docutils literal notranslate"><span class="pre">load_args</span></code> and <code class="docutils literal notranslate"><span class="pre">save_args</span></code> under <code class="docutils literal notranslate"><span class="pre">encoded_data</span></code> .</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">encoded_data</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pandas.CSVDataSet</span>
+  <span class="nt">filepath</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/02_intermediate/encoded_data.csv</span>    
+  <span class="nt">load_args</span><span class="p">:</span>
+    <span class="nt">sep</span><span class="p">:</span> <span class="s">&#39;,&#39;</span>
+  <span class="nt">save_args</span><span class="p">:</span>
+    <span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p>Note that the configuration above will be equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
+
+<span class="n">df</span> <span class="o">=</span> <span class="c1"># Code to produce the data</span>
+
+<span class="c1"># Save data</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;encoded_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Load data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;encoded_data.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-parameters">
+<h3><span class="section-number">4.1.7.2. </span>Load Parameters<a class="headerlink" href="#load-parameters" title="Permalink to this headline">¶</a></h3>
+<p>All parameters inside <code class="docutils literal notranslate"><span class="pre">src/base</span></code> can also be easily loaded with<code class="docutils literal notranslate"><span class="pre">context.params</span></code> .</p>
+<p><img alt="" src="https://miro.medium.com/max/670/1*ttmTCv0MGHA1t0kEPPd8lg.png" /></p>
+</div>
+<div class="section" id="run-a-pipeline">
+<h3><span class="section-number">4.1.7.3. </span>Run a Pipeline<a class="headerlink" href="#run-a-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you might want to experiment with new Python functions and observe their outputs in the notebook. Luckily, Kedro allows you to run a pipeline inside a notebook:
+<img alt="" src="../_images/run_pipeline.png" /></p>
+<p>For quick testing, you can also <a class="reference external" href="https://kedro.readthedocs.io/en/stable/11_tools_integration/02_ipython.html#convert-functions-from-jupyter-notebooks-into-kedro-nodes">convert functions from a Jupyter Notebook into Kedro nodes.</a></p>
+</div>
+</div>
+<div class="section" id="visualize-your-pipelines">
+<h2><span class="section-number">4.1.8. </span>Visualize your Pipelines<a class="headerlink" href="#visualize-your-pipelines" title="Permalink to this headline">¶</a></h2>
+<p>If you are confused about the structure of your pipeline, you can visualize the entire pipeline using kedro-viz. Start with installing kedro-viz:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install kedro-viz
+</pre></div>
+</div>
+<p>Then type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kedro viz
+</pre></div>
+</div>
+<p>… to visualize your pipelines. A website will be automatically open in your browser. You should see something like the below:</p>
+<p><img alt="" src="https://miro.medium.com/max/455/1*di9IgvovdIvOBLEXRYI0bA.png" /></p>
+<p>The visualization captures the relationships between datasets and nodes. Clicking a node will provide you more information about that node such as its parameters, inputs, outputs, file path, and code.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*tVtcT29B6jmRDu9UQITe8A.gif" /></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./orchestration"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="orchestration.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Build Pipelines</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="prefect.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Optimize Your Data Science Workflow in a Few Lines of Code</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

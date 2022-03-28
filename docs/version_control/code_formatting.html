@@ -1,0 +1,916 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Deployment" href="../deployment/deployment.html" />
+    <link rel="prev" title="6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers" href="dagshub.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="version_control.html">
+   6. Version Control
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/version_control/code_formatting.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fversion_control/code_formatting.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.3.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-pre-commit">
+   6.3.2. What is pre-commit?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black">
+   6.3.3. black
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flake8">
+   6.3.4. flake8
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#isort">
+   6.3.5. isort
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrogate">
+   6.3.6. interrogate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#final-step-add-pre-commit-to-git-hooks">
+   6.3.7. Final Step — Add pre-commit to Git Hooks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commit">
+   6.3.8. Commit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#skip-verifying">
+   6.3.9. Skip Verifying
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customization">
+   6.3.10. Customization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     6.3.10.1. Black
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     6.3.10.2. flake8
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     6.3.10.3. interrogate
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.3.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-pre-commit">
+   6.3.2. What is pre-commit?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black">
+   6.3.3. black
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flake8">
+   6.3.4. flake8
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#isort">
+   6.3.5. isort
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interrogate">
+   6.3.6. interrogate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#final-step-add-pre-commit-to-git-hooks">
+   6.3.7. Final Step — Add pre-commit to Git Hooks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commit">
+   6.3.8. Commit
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#skip-verifying">
+   6.3.9. Skip Verifying
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customization">
+   6.3.10. Customization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     6.3.10.1. Black
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     6.3.10.2. flake8
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     6.3.10.3. interrogate
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/productive_tools/precommit_examples"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="pre-commit-plugins-to-automate-code-reviewing-and-formatting-in-python">
+<h1><span class="section-number">6.3. </span>4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python<a class="headerlink" href="#pre-commit-plugins-to-automate-code-reviewing-and-formatting-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">6.3.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>When committing your Python code to Git, you need to make sure your code:</p>
+<ul class="simple">
+<li><p>looks nice</p></li>
+<li><p>is organized</p></li>
+<li><p>conforms to the PEP 8 style guide</p></li>
+<li><p>includes docstrings</p></li>
+</ul>
+<p>However, it can be overwhelming to check all of these criteria before committing your code. Wouldn’t it be nice if you can <strong>automatically</strong> check and format your code every time you commit new code like below?</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*b1KAkP6CXPx669MAV3CoQg.png" /></p>
+<p>That is when pre-commit comes in handy. In this section, you will learn what pre-commit is and which plugins you can add to a pre-commit pipeline.</p>
+</div>
+<div class="section" id="what-is-pre-commit">
+<h2><span class="section-number">6.3.2. </span>What is pre-commit?<a class="headerlink" href="#what-is-pre-commit" title="Permalink to this headline">¶</a></h2>
+<p>pre-commit is a framework that allows you to identify simple issues in your code before committing it.</p>
+<p>You can add different plugins to your pre-commit pipeline. Once your files are committed, they will be checked by these plugins. Unless all checks pass, no code will be committed.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*VoFV8eM4iTCjZt7akM243Q.png" /></p>
+<p>To install pre-commit, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install pre-commit
+</pre></div>
+</div>
+<p>Cool! Now let’s add some useful plugins to our pre-commit pipeline.</p>
+</div>
+<div class="section" id="black">
+<h2><span class="section-number">6.3.3. </span>black<a class="headerlink" href="#black" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://black.readthedocs.io/en/stable/">black</a> is a code formatter in Python.</p>
+<p>To install black, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install black
+</pre></div>
+</div>
+<p>Now to see what black can do, we’ll write a very long function like below. Since there are more than 79 characters in the first line of code, this violates PEP 8.</p>
+<p>Let’s try to format the code using black:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ black long_function.py
+</pre></div>
+</div>
+<p>And the code is automatically formatted like below!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">very_long_function</span><span class="p">(</span>
+    <span class="n">long_variable_name</span><span class="p">,</span>
+    <span class="n">long_variable_name2</span><span class="p">,</span>
+    <span class="n">long_variable_name3</span><span class="p">,</span>
+    <span class="n">long_variable_name4</span><span class="p">,</span>
+    <span class="n">long_variable_name5</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>To add black to a pre-commit pipeline, create a file named <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> and insert the following code to the file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">repos</span><span class="p">:</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/ambv/black</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20.8b1</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">black</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flake8">
+<h2><span class="section-number">6.3.4. </span>flake8<a class="headerlink" href="#flake8" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a> is a python tool that checks the style and quality of your Python code. It checks for various issues not covered by black.</p>
+<p>To install flake8, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install flake8
+</pre></div>
+</div>
+<p>To see what flake8 does, let’s write code that violates some guidelines in PEP 8.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">very_long_function_name</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span>
+<span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span> <span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">)</span>
+
+<span class="n">very_long_function_name</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, check the code using flake8:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ flake8 flake_example.py
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flake8_example.py:2:1: E128 continuation line under-indented <span class="k">for</span> visual indent
+flake8_example.py:5:1: E305 expected <span class="m">2</span> blank lines after class or <span class="k">function</span> definition, found <span class="m">1</span>
+flake8_example.py:5:39: W292 no newline at end of file
+</pre></div>
+</div>
+<p>Aha! flake8 detects 3 PEP 8 formatting errors. We can use these errors as the guidelines to fix the code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">very_long_function_name</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span> <span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span> <span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">)</span>
+
+
+<span class="n">very_long_function_name</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code looks much better now!</p>
+<p>To add flake8 to the pre-commit pipeline, insert the following code to the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://gitlab.com/pycqa/flake8</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.8.4</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">flake8</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isort">
+<h2><span class="section-number">6.3.5. </span>isort<a class="headerlink" href="#isort" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/PyCQA/isort">isort</a> is a Python library that automatically sorts imported libraries alphabetically and separates them into sections and types.</p>
+<p>To install isort, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install isort
+</pre></div>
+</div>
+<p>Let’s try to use isort to sort messy imports like below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">flake8_example</span> <span class="kn">import</span> <span class="n">very_long_function_name</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">OrderedLogisticRegression</span><span class="p">,</span> \
+    <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">LogisticRegressionCV</span><span class="p">,</span> <span class="n">LinearRegressionCV</span> 
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ isort isort_example.py
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">flake8_example</span> <span class="kn">import</span> <span class="n">very_long_function_name</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LinearRegression</span><span class="p">,</span>
+    <span class="n">LinearRegressionCV</span><span class="p">,</span>
+    <span class="n">LogisticRegression</span><span class="p">,</span>
+    <span class="n">LogisticRegressionCV</span><span class="p">,</span>
+    <span class="n">OrderedLogisticRegression</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+<p>Cool! The imports are much more organized now.</p>
+<p>To add isort to the pre-commit pipeline, add the following code to the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/timothycrosley/isort</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.7.0</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">isort</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interrogate">
+<h2><span class="section-number">6.3.6. </span>interrogate<a class="headerlink" href="#interrogate" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://interrogate.readthedocs.io/en/latest/index.html?highlight=pre-commit">interrogate</a> checks your codebase for missing docstrings.</p>
+<p>To install interrogate, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install interrogate
+</pre></div>
+</div>
+<p>Sometimes, we might forget to write docstrings for classes and functions like below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MathOperation</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="n">num</span> 
+
+    <span class="k">def</span> <span class="nf">plus_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">multiply_three</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Instead of manually looking at all our functions and classes for missing docstrings, we can run interrogate instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ interrogate -vv interrogate_example.py
+</pre></div>
+</div>
+<p>Output:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*8CeDRAfu9SuVOWcvpGjw8A.png" /></p>
+<p>Cool! From the terminal output, we know which files, classes, and functions don’t have docstrings. Since we know the locations of missing docstrings, adding them is easy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Example for interrogate&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">MathOperation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Perform math operation&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="n">num</span> 
+
+    <span class="k">def</span> <span class="nf">plus_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add 2&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">multiply_three</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Multiply by 3&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ interrogate -vv interrogate_example.py
+</pre></div>
+</div>
+<p><img alt="" src="https://miro.medium.com/max/700/1*z7ixNpScwuuTzOg4GLWODw.png" /></p>
+<p>The docstring for the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method is missing, but it is not necessary. We can tell interrogate to ignore the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method by adding <code class="docutils literal notranslate"><span class="pre">-i</span></code> to the argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ interrogate -vv -i interrogate_example.py
+</pre></div>
+</div>
+<p><img alt="" src="https://miro.medium.com/max/700/1*jy7bW4OCOSZHBjvglxdCCg.png" /></p>
+<p>Cool! To add interrogate to the pre-commit pipeline, insert the following code to the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/econchick/interrogate</span>
+    <span class="l l-Scalar l-Scalar-Plain">rev</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.4.0</span>  
+    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">interrogate</span>
+        <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">--vv</span><span class="p p-Indicator">,</span> <span class="nv">-i</span><span class="p p-Indicator">,</span> <span class="nv">--fail-under=80</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-step-add-pre-commit-to-git-hooks">
+<h2><span class="section-number">6.3.7. </span>Final Step — Add pre-commit to Git Hooks<a class="headerlink" href="#final-step-add-pre-commit-to-git-hooks" title="Permalink to this headline">¶</a></h2>
+<p>The final code in your <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file should look like below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">repos</span><span class="p">:</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/ambv/black</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">20.8b1</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">black</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://gitlab.com/pycqa/flake8</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3.8.4</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">flake8</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/timothycrosley/isort</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5.7.0</span>
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span>   <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">isort</span>
+<span class="p p-Indicator">-</span>   <span class="nt">repo</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://github.com/econchick/interrogate</span>
+    <span class="nt">rev</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.4.0</span>  
+    <span class="nt">hooks</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">interrogate</span>
+      <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">-vv</span><span class="p p-Indicator">,</span> <span class="nv">-i</span><span class="p p-Indicator">,</span> <span class="nv">--fail-under=80</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>To add pre-commit to git hooks, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pre-commit install
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit installed at .git/hooks/pre-commit
+</pre></div>
+</div>
+</div>
+<div class="section" id="commit">
+<h2><span class="section-number">6.3.8. </span>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
+<p>Now we’re ready to commit the new code!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s1">&#39;add pre-commit examples&#39;</span>
+</pre></div>
+</div>
+<p>And you should see something like below:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*b1KAkP6CXPx669MAV3CoQg.png" /></p>
+</div>
+<div class="section" id="skip-verifying">
+<h2><span class="section-number">6.3.9. </span>Skip Verifying<a class="headerlink" href="#skip-verifying" title="Permalink to this headline">¶</a></h2>
+<p>To prevent pre-commit from checking a certain commit, add <code class="docutils literal notranslate"><span class="pre">--no-verify</span></code> to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git commit -m <span class="s1">&#39;add pre-commit examples&#39;</span> --no-verify
+</pre></div>
+</div>
+</div>
+<div class="section" id="customization">
+<h2><span class="section-number">6.3.10. </span>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><span class="section-number">6.3.10.1. </span>Black<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>To choose which files to include and exclude when running black, create a file named <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and add the following code to the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>tool.black<span class="o">]</span>
+line-length <span class="o">=</span> <span class="m">79</span>
+<span class="nv">include</span> <span class="o">=</span> <span class="s1">&#39;\.pyi?$&#39;</span>
+<span class="nv">exclude</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">/(</span>
+<span class="s1">	\.git</span>
+<span class="s1">| \.hg</span>
+<span class="s1">| \.mypy_cache</span>
+<span class="s1">| \.tox</span>
+<span class="s1">| \.venv</span>
+<span class="s1">| _build</span>
+<span class="s1">| buck-out</span>
+<span class="s1">| build   </span>
+<span class="s1">)/ </span>
+<span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">6.3.10.2. </span>flake8<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>To choose which errors to ignore or to edit other configurations, create a file named <code class="docutils literal notranslate"><span class="pre">.flake8</span></code> and add the following code to the <code class="docutils literal notranslate"><span class="pre">.flake8</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>flake8<span class="o">]</span>
+<span class="nv">ignore</span> <span class="o">=</span> E203, E266, E501, W503, F403, F401
+max-line-length <span class="o">=</span> <span class="m">79</span>
+max-complexity <span class="o">=</span> <span class="m">18</span>
+<span class="k">select</span> <span class="o">=</span> B,C,E,F,W,T4,B9
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">6.3.10.3. </span>interrogate<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>To edit interrogate’s default configurations, insert the following code to the<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>tool.interrogate<span class="o">]</span>
+ignore-init-method <span class="o">=</span> <span class="nb">true</span>
+ignore-init-module <span class="o">=</span> <span class="nb">false</span>
+ignore-magic <span class="o">=</span> <span class="nb">false</span>
+ignore-semiprivate <span class="o">=</span> <span class="nb">false</span>
+ignore-private <span class="o">=</span> <span class="nb">false</span>
+ignore-property-decorators <span class="o">=</span> <span class="nb">false</span>
+ignore-module <span class="o">=</span> <span class="nb">true</span>
+ignore-nested-functions <span class="o">=</span> <span class="nb">false</span>
+ignore-nested-classes <span class="o">=</span> <span class="nb">true</span>
+ignore-setters <span class="o">=</span> <span class="nb">false</span>
+fail-under <span class="o">=</span> <span class="m">95</span>
+<span class="nv">exclude</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;setup.py&quot;</span>, <span class="s2">&quot;docs&quot;</span>, <span class="s2">&quot;build&quot;</span><span class="o">]</span>
+ignore-regex <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;^get</span>$<span class="s2">&quot;</span>, <span class="s2">&quot;^mock_.*&quot;</span>, <span class="s2">&quot;.*BaseClass.*&quot;</span><span class="o">]</span>
+<span class="nv">verbose</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">quiet</span> <span class="o">=</span> <span class="nb">false</span>
+whitelist-regex <span class="o">=</span> <span class="o">[]</span>
+<span class="nv">color</span> <span class="o">=</span> <span class="nb">true</span>
+generate-badge <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+badge-format <span class="o">=</span> <span class="s2">&quot;svg&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./version_control"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dagshub.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.2. </span>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../deployment/deployment.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Deployment</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

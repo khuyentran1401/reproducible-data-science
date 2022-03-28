@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python" href="code_formatting.html" />
+    <link rel="prev" title="6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects" href="dvc.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="version_control.html">
+   6. Version Control
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/version_control/dagshub.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fversion_control/dagshub.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-dagshub">
+   6.2.2. What is DagsHub?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#version-your-data-and-code">
+   6.2.3. Version Your Data and Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#track-experiments">
+   6.2.4. Track Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#log-your-experiments-with-mlflow">
+     6.2.4.1. Log Your Experiments with MLFlow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#log-your-experiments-with-dagshub-logger">
+     6.2.4.2. Log Your Experiments with DagsHub Logger
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-both-mlflow-and-dagshub-logger-at-the-same-time">
+     6.2.4.3. Use Both MLflow and DagsHub Logger at the Same Time
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-between-mlflow-experiments">
+   6.2.5. Compare Between MLflow Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-between-git-experiments">
+   6.2.6. Compare Between Git Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-tip-create-a-dvc-pipeline">
+   6.2.7. Bonus Tip: Create a DVC Pipeline
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-dagshub">
+   6.2.2. What is DagsHub?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#version-your-data-and-code">
+   6.2.3. Version Your Data and Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#track-experiments">
+   6.2.4. Track Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#log-your-experiments-with-mlflow">
+     6.2.4.1. Log Your Experiments with MLFlow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#log-your-experiments-with-dagshub-logger">
+     6.2.4.2. Log Your Experiments with DagsHub Logger
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-both-mlflow-and-dagshub-logger-at-the-same-time">
+     6.2.4.3. Use Both MLflow and DagsHub Logger at the Same Time
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-between-mlflow-experiments">
+   6.2.5. Compare Between MLflow Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-between-git-experiments">
+   6.2.6. Compare Between Git Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-tip-create-a-dvc-pipeline">
+   6.2.7. Bonus Tip: Create a DVC Pipeline
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://dagshub.com/khuyentran1401/dagshub-demo"><img alt="View the code" src="https://img.shields.io/badge/DagsHub-View_the_Code-blue?logo=DagsHub" /></a></p>
+<div class="section" id="dagshub-a-github-supplement-for-data-scientists-and-ml-engineers">
+<h1><span class="section-number">6.2. </span>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers<a class="headerlink" href="#dagshub-a-github-supplement-for-data-scientists-and-ml-engineers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">6.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>As a data scientist, you might want to version your code, model, data, parameters, and metrics so that you can reproduce a certain experiment.</p>
+<p><img alt="" src="https://miro.medium.com/max/696/1*d8A13xRhLkUtOLIXTrQF-A.png" /></p>
+<p>GitHub is a great platform for version control your code, but it is not ideal to version your data, model, and metrics for two reasons:</p>
+<ul class="simple">
+<li><p>GitHub has a strict file limit of 100MB so uploading a medium binary file can easily exceed this limit.</p></li>
+<li><p>It is messy to compare the change in different versions of data with GitHub. I used to manually accept over 100 changes in data after using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, and it was a pain.</p></li>
+</ul>
+<p><a class="reference external" href="https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0">DVC</a> (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.</p>
+<p><img alt="" src="https://miro.medium.com/max/483/1*jjZ9YOz4Nhrq-MCunOBxaw.png" /></p>
+<p>Wouldn’t it be nice if there is a platform that is similar to GitHub, but is more optimized for data scientists and machine learning engineers? That is when DagsHub comes in handy.</p>
+</div>
+<div class="section" id="what-is-dagshub">
+<h2><span class="section-number">6.2.2. </span>What is DagsHub?<a class="headerlink" href="#what-is-dagshub" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://dagshub.com/">DagsHub</a> is a platform for data scientists and machine learning engineers to version their data, models, experiments, and code.</p>
+<p>DagsHub allows you to either create a new repository on their platform or connect to a repository on GitHub. If you want to create a new repository on DagsHub, click New Repository:</p>
+<p><img alt="" src="https://miro.medium.com/max/187/1*jzsHKGaK7kNA61ymys_muA.png" /></p>
+<p>If you already have a repository on GitHub and you want to migrate your repository to DagsHub, click Migrate A Repo:</p>
+<p><img alt="" src="https://miro.medium.com/max/188/1*y-Dt143jHSW3pTlriHcjIA.png" /></p>
+<p>If you want to manage your repository through both GitHub and DagsHub, click Connect A Repo:</p>
+<p><img alt="" src="https://miro.medium.com/max/193/1*jg6bsxpCVul0hI64cWi02Q.png" /></p>
+<p>The interface of your new repository on DagsHub should look very similar to the interface on GitHub with the addition of some tabs such as Experiments, Data, Models, Notebooks, DVC, and Git.</p>
+<p><img alt="" src="https://miro.medium.com/max/654/1*kMLz2t7SYnPPmdNMlfcPUA.png" /></p>
+<p>You can check out the repository above <a class="reference external" href="https://dagshub.com/khuyentran1401/dagshub-demo">here</a>. Let’s explore some functionalities of DagsHub.</p>
+</div>
+<div class="section" id="version-your-data-and-code">
+<h2><span class="section-number">6.2.3. </span>Version Your Data and Code<a class="headerlink" href="#version-your-data-and-code" title="Permalink to this headline">¶</a></h2>
+<p>Assume that you have a local copy of your GitHub repository in your machine, we will use <a class="reference external" href="https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0">DVC</a> to version your binary data.</p>
+<p>Start with installing DVC:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dvc
+</pre></div>
+</div>
+<p>Normally, when using DVC, you need to use an external storage such as Google Drive, Amazon S3, Azure Blob Storage, Google Cloud Storage, etc. However, with DagsHub, you can store your data directly on the platform.</p>
+<p>To upload your data to DagsHub, start with getting the DVC link under the Remote button:</p>
+<p><img alt="" src="https://miro.medium.com/max/482/1*bjM9WtbJ44bHY3rj0yxHeA.png" /></p>
+<p>Next, set that link as DVC’s remote storage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc remote add origin https://dagshub.com/khuyentran1401/dagshub-demo.dvc
+</pre></div>
+</div>
+<p>Add authentication:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc remote modify origin --local auth basicdvc remote modify origin --local user DAGSHUB_USERNAMEdvc remote modify origin --local password DAGSHUB_PASSWORD
+</pre></div>
+</div>
+<p>Next, add the binary data we want to store on DagsHub. For example, to add the directory <code class="docutils literal notranslate"><span class="pre">data/raw</span></code> , I run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc add data/raw
+</pre></div>
+</div>
+<p>This command will create a new <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> file. These are small text files that store information on how to access the original data but not the original data itself.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>data
+├── raw
+│   └── marketing_campaign.csv
+└── raw.dvc
+</pre></div>
+</div>
+<p>Push these files to DagsHub’s storage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc push
+</pre></div>
+</div>
+<p>Now we can add both changes in data and code, then commit and push your change to GitHub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add .
+git commit -m <span class="s1">&#39;push data and code&#39;</span>
+git push origin master
+</pre></div>
+</div>
+<p>If you are using GitHub and DagsHub at the same time, you only need to push your files to GitHub. DagsHub will automatically sync with GitHub!</p>
+<p><em>Note: If DagsHub doesn’t sync, click the Refresh icon under the title of the repository:</em></p>
+<p><img alt="" src="https://miro.medium.com/max/507/1*--QihKrYDLY-vV2gJWQOsQ.png" /></p>
+<p>If you are familiar with DVC, there’s nothing new here. However, the magic happens when you visit your repository on DagsHub.</p>
+<p>On GitHub, you can see your <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> files, but not the data itself. This is because the actual data is stored somewhere else:</p>
+<p><img alt="" src="https://miro.medium.com/max/519/1*1bfVk3YMPSbx7vGuEU_khA.png" /></p>
+<p>On DagsHub, you can see both the <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> files and the data itself because the data is stored on DagsHub!</p>
+<p><img alt="" src="https://miro.medium.com/max/634/1*Bdw8maYccZ-sIY4hx8RqnA.png" /></p>
+<p>This is very convenient since I can look at both the code and the data within one platform.</p>
+<p><img alt="" src="https://miro.medium.com/max/553/1*6eghrlMA8OWL9HllX0Siow.png" /></p>
+</div>
+<div class="section" id="track-experiments">
+<h2><span class="section-number">6.2.4. </span>Track Experiments<a class="headerlink" href="#track-experiments" title="Permalink to this headline">¶</a></h2>
+<p>Libraries like MLFlow allow data scientists to track their experiments along with models and parameters. However, they don’t track the code.</p>
+<p>Wouldn’t it be nice if you can save the code, models, parameters, data of an experiment?</p>
+<p><img alt="" src="https://miro.medium.com/max/696/1*d8A13xRhLkUtOLIXTrQF-A.png" /></p>
+<p>That can be easily done with DagsHub. DagsHub allows you to log your experiments with DagsHub logger or MLFlow. Your experiments under the Experiment tab should look like the below:</p>
+<p><img alt="" src="https://miro.medium.com/max/352/1*Jpc1Ubq2azhiXH_KaIr0Pg.png" /></p>
+<p><img alt="" src="https://miro.medium.com/max/608/1*Z4-z-bHAgnLRRYAFot2iEg.png" /></p>
+<p>It is a good practice to use MLFlow to experiment with different parameters quickly without committing your code. Once you find the experiments with good results, you can use DagsHub logger to save the results to open formats (metric.csv, param.yaml) and encapsulate them with the code, model, data that produced it.</p>
+<p>Let’s learn how to log your experiment with each of these methods.</p>
+<div class="section" id="log-your-experiments-with-mlflow">
+<h3><span class="section-number">6.2.4.1. </span>Log Your Experiments with MLFlow<a class="headerlink" href="#log-your-experiments-with-mlflow" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.mlflow.org/">MLflow</a> is an open-source platform that allows you to track and compare experiments. To install MLflow, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install mlflow
+</pre></div>
+</div>
+<p>In the code below, I use MLFlow to log metrics and parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+  
+  <span class="c1"># code to train model </span>
+  <span class="o">...</span>
+  
+  <span class="c1"># log parameters</span>
+  <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">({</span><span class="s2">&quot;model_class&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">})</span>
+  <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">get_params</span><span class="p">()})</span>
+  
+  <span class="c1"># code to evavluate model</span>
+  <span class="o">...</span>
+  
+  <span class="c1"># log metrics</span>
+  <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span>
+          <span class="p">{</span>
+              <span class="s2">&quot;k_best&quot;</span><span class="p">:</span> <span class="n">k_best</span><span class="p">,</span>
+              <span class="s2">&quot;score_best&quot;</span><span class="p">:</span> <span class="n">elbow</span><span class="o">.</span><span class="n">elbow_score_</span><span class="p">,</span>
+          <span class="p">}</span>
+      <span class="p">)</span>
+</pre></div>
+</div>
+<p>I also set tracking URI to be the URL found under MLflow Tracking remote:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">&quot;https://dagshub.com/khuyentran1401/dagshub-demo.mlflow&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="https://miro.medium.com/max/459/1*XWQUqBWEounlDywpcOvXRw.png" /></p>
+<p>That’s it! Now every time you run your code, the parameters and metrics for each experiment will show up under the Experiments tab of your DagsHub repository:</p>
+<p><img alt="" src="https://miro.medium.com/max/683/1*4ceDabZwVZPprquhmnsjnA.png" /></p>
+<p>Being able to log your MLflow experiments in a remote server like DagsHub instead of a local database will allow your teammates to have access to your experiments within their browser.</p>
+</div>
+<div class="section" id="log-your-experiments-with-dagshub-logger">
+<h3><span class="section-number">6.2.4.2. </span>Log Your Experiments with DagsHub Logger<a class="headerlink" href="#log-your-experiments-with-dagshub-logger" title="Permalink to this headline">¶</a></h3>
+<p>Once you find a good experiment and are ready to log the code, data, and outputs of that experiment, simply switch MLFlow to DagsHub logger.</p>
+<p>To use DagsHub logger, start with install DagsHub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dagshub
+</pre></div>
+</div>
+<p>Logging your experiments with DagsHub logger is very similar to logging with MLFlow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dagshub</span> <span class="kn">import</span> <span class="n">DAGsHubLogger</span>
+
+<span class="c1"># intialize DagsHub logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">DAGsHubLogger</span>
+
+<span class="c1"># log parameters</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">log_hyperparams</span><span class="p">({</span><span class="s2">&quot;model_class&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">})</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">log_hyperparams</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">get_params</span><span class="p">()})</span>
+
+<span class="c1"># log metrics</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;k_best&quot;</span><span class="p">:</span> <span class="n">k_best</span><span class="p">,</span>
+            <span class="s2">&quot;score_best&quot;</span><span class="p">:</span> <span class="n">elbow</span><span class="o">.</span><span class="n">elbow_score_</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>After running your code, DagsHub will automatically create two files <code class="docutils literal notranslate"><span class="pre">metrics.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">params.yml</span></code> in your working directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+├── metrics.csv
+└── params.yml
+</pre></div>
+</div>
+<p>Add all changes to the staging area, then commit and push those changes to GitHub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add .
+git commit -m <span class="s1">&#39;experiment 1&#39;</span>
+git push origin master
+</pre></div>
+</div>
+<p>Now, the new experiment will be logged with Git under the Experiment tab.</p>
+<p><img alt="" src="https://miro.medium.com/max/635/1*237DLbf2EGNRUxGnhg6vbQ.png" /></p>
+</div>
+<div class="section" id="use-both-mlflow-and-dagshub-logger-at-the-same-time">
+<h3><span class="section-number">6.2.4.3. </span>Use Both MLflow and DagsHub Logger at the Same Time<a class="headerlink" href="#use-both-mlflow-and-dagshub-logger-at-the-same-time" title="Permalink to this headline">¶</a></h3>
+<p>Even though it is useful to switch between MLflow and DagsHub logger, I found it inconvenient to rewrite my code every time I want to switch to another logger.</p>
+<p>My solution was to create a <code class="docutils literal notranslate"><span class="pre">BaseLogger</span></code> class whose methods are <code class="docutils literal notranslate"><span class="pre">log_metrics</span></code> and <code class="docutils literal notranslate"><span class="pre">log_params</span></code> . Each method will use both MLflow logger and DagsHub logger.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">from</span> <span class="nn">dagshub</span> <span class="kn">import</span> <span class="n">DAGsHubLogger</span>
+
+<span class="k">class</span> <span class="nc">BaseLogger</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">DAGsHubLogger</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">log_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">log_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log_hyperparams</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">BaseLogger</span></code> , I can use two loggers at the same time in one line of code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="kn">from</span> <span class="nn">logger</span> <span class="kn">import</span> <span class="n">BaseLogger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">BaseLogger</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+  
+  <span class="c1"># log parameters</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">log_params</span><span class="p">({</span><span class="s2">&quot;model_class&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">})</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">log_params</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">get_params</span><span class="p">()})</span>
+  
+  <span class="c1"># log metrics</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">(</span>
+          <span class="p">{</span>
+              <span class="s2">&quot;k_best&quot;</span><span class="p">:</span> <span class="n">k_best</span><span class="p">,</span>
+              <span class="s2">&quot;score_best&quot;</span><span class="p">:</span> <span class="n">elbow</span><span class="o">.</span><span class="n">elbow_score_</span><span class="p">,</span>
+          <span class="p">}</span>
+      <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compare-between-mlflow-experiments">
+<h2><span class="section-number">6.2.5. </span>Compare Between MLflow Experiments<a class="headerlink" href="#compare-between-mlflow-experiments" title="Permalink to this headline">¶</a></h2>
+<p>To compare between two or more experiments, tick the boxes of the experiments you want to compare then click Compare.</p>
+<p><img alt="" src="https://miro.medium.com/max/460/1*DoNK5KzL8nZTh3hKWwIbyg.png" /></p>
+<p>You should see the comparisons of all experiments like below:</p>
+<p><img alt="" src="https://miro.medium.com/max/681/1*GuZrkfCZ-0a_eD0tgFg4wg.png" /></p>
+<p>DagsHub also automatically create plots such as parallel coordinate plot and bar plots so that you can observe the relationships between the parameters and the outputs</p>
+<p><img alt="" src="https://miro.medium.com/max/660/1*H7C8W6U6OhteUFWxPiC0yg.png" /></p>
+<p><img alt="" src="https://miro.medium.com/max/601/1*WFEB-kbo4Ffh72PuZqIP7A.png" /></p>
+</div>
+<div class="section" id="compare-between-git-experiments">
+<h2><span class="section-number">6.2.6. </span>Compare Between Git Experiments<a class="headerlink" href="#compare-between-git-experiments" title="Permalink to this headline">¶</a></h2>
+<p>To compare the difference in files between two Git experiments, copy their commit IDs under the Experiments tab:</p>
+<p><img alt="" src="https://miro.medium.com/max/313/1*-0Sl07-AzcMgNQE30nhhtw.png" /></p>
+<p>Then paste each commit ID on each branch under the Files tab:</p>
+<p><img alt="" src="https://miro.medium.com/max/282/1*SnQ229rMHHQUiWEa_Xhs8A.png" /></p>
+<p><img alt="" src="https://miro.medium.com/max/503/1*RVb8AYsXXZ6AwDvGT4R-Rw.gif" /></p>
+<p>The files that are different between the two commits will be highlighted in yellow.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*u8vfHN6Q7tBoKBvt3QkhAw.png" /></p>
+<p>To view the difference, click the files. Since the missing information is highlighted in red and the additional information is highlighted in green, we can clearly see the difference between the two commits.</p>
+<p><img alt="" src="https://miro.medium.com/max/658/1*3xKkHfwGeaOctGoG7O4kow.gif" /></p>
+<p>Better yet, DagsHub provides a nice interface to compare between two Jupyter Notebooks.</p>
+<p><img alt="" src="https://miro.medium.com/max/234/1*BCcU90Hhrp1gIhiyZvXNkQ.png" /></p>
+<p><img alt="" src="https://miro.medium.com/max/649/1*FbgjRteEF316TZ_I3gO-Rw.png" /></p>
+<p>Since data scientists work a lot with Jupyter Notebook, being able to compare the outputs of two notebooks is useful.</p>
+</div>
+<div class="section" id="bonus-tip-create-a-dvc-pipeline">
+<h2><span class="section-number">6.2.7. </span>Bonus Tip: Create a DVC Pipeline<a class="headerlink" href="#bonus-tip-create-a-dvc-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, you might want others to understand the workflow of your project (.i.e, how the outputs of one script are used for another script). DagsHub allows you to create the visualization of your data workflow through the DVC pipeline.</p>
+<p><img alt="" src="https://miro.medium.com/max/652/1*cRlRw_j245fudBc3UD6D5g.png" /></p>
+<p>To create a DVC pipeline, start with creating a <code class="docutils literal notranslate"><span class="pre">dvc.yaml</span></code> file. In the code below, I break my workflow into 3 stages: <code class="docutils literal notranslate"><span class="pre">process_data</span></code> , <code class="docutils literal notranslate"><span class="pre">segment</span></code> , and <code class="docutils literal notranslate"><span class="pre">analyze</span></code> . For each of the stages,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cmd</span></code> specifies the command to execute the stage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deps</span></code> specifies the dependencies of the stage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outs</span></code> specifies the outputs of the stage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> specifies the metrics of the stage</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">stages</span><span class="p">:</span>
+  <span class="nt">process_data</span><span class="p">:</span>
+    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/process_data.py</span>
+    <span class="nt">deps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/raw</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">params.yml</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/main.py</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/process_data.py</span>
+    <span class="nt">outs</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">data/intermediate</span><span class="p">:</span>
+        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">segment</span><span class="p">:</span>
+    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/segment.py</span>
+    <span class="nt">deps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">params.yml</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/main.py</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/segment.py</span>
+    <span class="nt">outs</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">data/final</span><span class="p">:</span>
+        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span>
+        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="p p-Indicator">-</span> <span class="nt">model/cluster.pkl</span><span class="p">:</span>
+        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">metrics</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">metrics.csv</span><span class="p">:</span>
+        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">analyze</span><span class="p">:</span>
+    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/run_notebook.py</span>
+    <span class="nt">deps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notebook/analyze_data.ipynb</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/final</span>
+</pre></div>
+</div>
+<p>All files listed dunder <code class="docutils literal notranslate"><span class="pre">outs</span></code> are cached, which is similar to what happens when you use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">add</span></code> . That’s why you no longer need to use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">add</span></code> with those files.</p>
+<p>Now you can reproduce the entire pipeline specified in <code class="docutils literal notranslate"><span class="pre">dvc.yaml</span></code> by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc repro
+</pre></div>
+</div>
+<p>Outputs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Running stage <span class="s1">&#39;process_data&#39;</span>:
+&gt; python src/process_data.py
+Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>                                                                                                                                                      
+                                                                                                                                                                                   
+Running stage <span class="s1">&#39;segment&#39;</span>:
+&gt; python src/segment.py
+Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>                                                                                                                                                      
+                                                                                                                                                                                   
+Running stage <span class="s1">&#39;analyze&#39;</span>:
+&gt; python src/run_notebook.py
+Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>
+</pre></div>
+</div>
+<p>Now others will be able to reproduce your results by running the <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">repro</span></code> command. How convenient is that?</p>
+<p>Next, run <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">push</span></code> to push all of the files tracked by DVC to DagsHub. Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> to push the changes in the code and data to GitHub.</p>
+<p>If you go to your repository on DagsHub, you should see a nice interactive graph of the entire pipeline on DagsHub!</p>
+<p><img alt="" src="https://miro.medium.com/max/647/1*sgoqLuVvng22Sni8Fz6kyg.gif" /></p>
+<p>You can get more details about a node in the graph by clicking that node. Now others can understand your data workflow by just simply going to your repository on DagsHub.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./version_control"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dvc.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6.1. </span>Introduction to DVC: Data Version Control Tool for Machine Learning Projects</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="code_formatting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.3. </span>4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

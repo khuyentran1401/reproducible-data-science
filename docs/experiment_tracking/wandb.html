@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Version Control" href="../version_control/version_control.html" />
+    <link rel="prev" title="5.1. Configure your Data Science Projects with Hydra" href="hydra.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/experiment_tracking/wandb.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fexperiment_tracking/wandb.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   5.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-weight-biases">
+   5.2.2. What is Weight &amp; Biases?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   5.2.3. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-different-experiments">
+   5.2.4. Compare Different Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-sklearn-models">
+   5.2.5. Visualize Sklearn Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-model">
+   5.2.6. Save Model
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to Weight & Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   5.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-weight-biases">
+   5.2.2. What is Weight &amp; Biases?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   5.2.3. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-different-experiments">
+   5.2.4. Compare Different Experiments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-sklearn-models">
+   5.2.5. Visualize Sklearn Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-model">
+   5.2.6. Save Model
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/wandb_tracking"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="introduction-to-weight-biases-track-and-visualize-your-machine-learning-experiments-in-3-lines-of-code">
+<h1><span class="section-number">5.2. </span>Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code<a class="headerlink" href="#introduction-to-weight-biases-track-and-visualize-your-machine-learning-experiments-in-3-lines-of-code" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://miro.medium.com/max/700/0*MaPXRshRwB21SutD" /></p>
+<p>Photo by <a class="reference external" href="https://unsplash.com/&#64;solebicycles?utm_source=medium&amp;utm_medium=referral">Solé Bicycles</a> on <a class="reference external" href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral">Unsplash</a></p>
+<div class="section" id="motivation">
+<h2><span class="section-number">5.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>If you have applied machine learning or deep learning for your data science projects, you probably know how overwhelming it is to keep track and compare different experiments.</p>
+<p>In each experiment, you might want to track the outputs when you change the model, hyperparameters, feature engineering techniques, etc. You can keep track of your results by writing them in an Excel spreadsheet or saving all outputs of different models in your Jupyter Notebook.</p>
+<p>However, there are multiple disadvantages to the above methods:</p>
+<ul class="simple">
+<li><p>You cannot record every kind of output in your Excel spreadsheet</p></li>
+<li><p>It takes quite a bit of time to manually log the results for each experiment</p></li>
+<li><p>You cannot keep all outputs of your experiments in one place</p></li>
+<li><p>You cannot visually compare all outputs</p></li>
+</ul>
+<p>What if there is a way to track and visualize all experiments like below in 3 lines of code?</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*K80uhagt8U5g7ti54MhMUQ.png" /></p>
+<p>This is when Weight &amp; Biases becomes handy.</p>
+</div>
+<div class="section" id="what-is-weight-biases">
+<h2><span class="section-number">5.2.2. </span>What is Weight &amp; Biases?<a class="headerlink" href="#what-is-weight-biases" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.wandb.com/">Weight &amp; Biases</a> is a free Python library that allows you to track, compare, and visualize ML experiments. It is also integrated with many popular libraries such as TensorFlow, PyTorch, Kera, Scikit, Hugging Face, and XGBoost.</p>
+<p>To install Weight &amp; Biases, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install wandb
+</pre></div>
+</div>
+<p>Sign up for a free account by going to the <a class="reference external" href="https://wandb.ai/home">sign up page</a>. Then login using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wandb login
+</pre></div>
+</div>
+<p>That’s it! Now you’re ready to use <code class="docutils literal notranslate"><span class="pre">wandb.</span></code></p>
+</div>
+<div class="section" id="get-started">
+<h2><span class="section-number">5.2.3. </span>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will work with the famous Iris flower data set then use Weight &amp; Biases to track the results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="c1"># Load dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">data</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c1"># Split into train and test set</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">)</span>
+
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Get metrics</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">f1_macro</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;f1_macro&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">neg_log_loss</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_log_loss&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To track the results, start with initializing the project</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wandb</span>
+
+<span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now all outputs for this experiment will be saved under ‘iris’ project:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*nkfNbvMM7v3_i31C6E51xQ.png" /></p>
+<p>Then log all metrics using</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+          <span class="s1">&#39;f1_macro&#39;</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">,</span>
+          <span class="s1">&#39;neg_log_loss&#39;</span><span class="p">:</span> <span class="n">neg_log_loss</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>That’s it! Now we are ready to run our script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python get_started.py
+</pre></div>
+</div>
+<p>You should see something like this</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wandb: Currently logged in as: khuyentran1401 <span class="o">(</span>use <span class="sb">`</span>wandb login --relogin<span class="sb">`</span> to force relogin<span class="o">)</span>
+wandb: Tracking run with wandb version <span class="m">0</span>.10.12
+wandb: Syncing run resilient-dragon-34
+wandb: ⭐️ View project at https://wandb.ai/khuyentran1401/iris
+wandb: 🚀 View run at https://wandb.ai/khuyentran1401/iris/runs/2jmvmemn
+
+wandb: Run summary:
+wandb:       accuracy <span class="m">0</span>.94167
+wandb:       f1_macro <span class="m">0</span>.93782
+wandb:   neg_log_loss -0.32999
+wandb:          _step <span class="m">0</span>
+wandb:       _runtime <span class="m">1</span>
+wandb:     _timestamp <span class="m">1609020166</span>
+wandb: Run history:
+wandb:       accuracy ▁
+wandb:       f1_macro ▁
+wandb:   neg_log_loss ▁
+wandb:          _step ▁
+wandb:       _runtime ▁
+wandb:     _timestamp ▁
+</pre></div>
+</div>
+<p>If you click the link provided in the output, you should see something like below</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*nifAKjCs4y4WxjZvmBpdEw.png" /></p>
+<p>The output now is a little bit boring since there is just one experiment. Let’s experiment with different models then compare them with one another.</p>
+</div>
+<div class="section" id="compare-different-experiments">
+<h2><span class="section-number">5.2.4. </span>Compare Different Experiments<a class="headerlink" href="#compare-different-experiments" title="Permalink to this headline">¶</a></h2>
+<p>Start with initializing the model. This time, we will add <code class="docutils literal notranslate"><span class="pre">reinit=True</span></code> to allow reinitializing runs. We will also group the runs according to model to compare the outputs of different models.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wandb</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name_model</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+
+    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> 
+                <span class="n">group</span><span class="o">=</span><span class="n">name_model</span><span class="p">,</span> <span class="c1"># Group experiments by model</span>
+                <span class="n">reinit</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Put everything together</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wandb</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name_model</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+
+    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> 
+                <span class="n">group</span><span class="o">=</span><span class="n">name_model</span><span class="p">,</span> <span class="c1"># Group experiments by model</span>
+                <span class="n">reinit</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="c1"># code to get metrics</span>
+    <span class="o">...</span>
+
+    <span class="c1"># log metrics</span>
+    <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+               <span class="s1">&#39;f1_macro&#39;</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">,</span>
+               <span class="s1">&#39;neg_log_loss&#39;</span><span class="p">:</span> <span class="n">neg_log_loss</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;LinearDiscriminantAnalysis&#39;</span><span class="p">:</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(),</span>
+            <span class="s1">&#39;KNeighborsClassifier&#39;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span>
+            <span class="s1">&#39;DecisionTreeClassifier&#39;</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">(),</span>
+            <span class="s1">&#39;GaussianNB&#39;</span><span class="p">:</span> <span class="n">GaussianNB</span><span class="p">()}</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">main</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span> 
+
+</pre></div>
+</div>
+<p>Awesome! Let’s see how the outputs look</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python many_models.py
+</pre></div>
+</div>
+<p><img alt="" src="https://miro.medium.com/max/700/1*mSUatclFNRFMK2_iSofgwA.png" /></p>
+<p>Looks cool! Now we can compare the results of different runs by looking at the charts automatically created by <code class="docutils literal notranslate"><span class="pre">wandb</span></code> .</p>
+<p>Since we are more interested in grouping the results by model, let’s adjust the grouping. The GIF below shows you how to do that.</p>
+<p><img alt="" src="../_images/wandb.gif" /></p>
+<p>After adjusting the grouping, you should see something like this:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*K80uhagt8U5g7ti54MhMUQ.png" /></p>
+<p>It is much clearer now! Based on 3 charts, <code class="docutils literal notranslate"><span class="pre">LinearDiscrimnantAnalysis</span></code> seems to be the best model since it has the highest f1 macro score and accuracy and has the lowest negative log loss.</p>
+<p>You can also view the results by clicking the table icon</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*AsQhZiwa5axIqv2OyEPMvA.png" /></p>
+<p>It also allows you to hide or move columns or sort the table by a certain variable as shown below:
+<img alt="" src="../_images/wandb2.gif" /></p>
+</div>
+<div class="section" id="visualize-sklearn-models">
+<h2><span class="section-number">5.2.5. </span>Visualize Sklearn Models<a class="headerlink" href="#visualize-sklearn-models" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">wandb</span></code> also allows us to create common plots to evaluate Sklearn models with built-in functions.</p>
+<p>To visualize all classification plots, use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wandb</span>
+
+<span class="n">wandb</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">plot_classifier</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> 
+                                <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_probas</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">name_model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">sklearn_model.py</span></code> , we should see 8 different classification plots for a run like below!</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*qJI86NAZhs5RugrR9t6OSw.gif" /></p>
+<p>View all plots <a class="reference external" href="https://wandb.ai/khuyentran1401/iris/runs/7vr53cmz?workspace=user-khuyentran1401">here</a>. Find all possible plots and other integrations <a class="reference external" href="https://docs.wandb.com/integrations/scikit">here</a>.</p>
+</div>
+<div class="section" id="save-model">
+<h2><span class="section-number">5.2.6. </span>Save Model<a class="headerlink" href="#save-model" title="Permalink to this headline">¶</a></h2>
+<p>If you want to reproduce the result, you need to save the model. <code class="docutils literal notranslate"><span class="pre">wandb</span></code> allows you to do that by using <code class="docutils literal notranslate"><span class="pre">wandb.save()</span></code></p>
+<p>Start with saving the model as a local file, then save it in <code class="docutils literal notranslate"><span class="pre">wandb</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">wandb</span>
+
+<span class="c1"># Save model</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+
+<span class="n">wandb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Click the run link, then click the Files tab, you should see something like this</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*B4v78x1wrT_pZsTXuI47xQ.png" /></p>
+<p>In this tab, many files are automatically logged including summary, terminal outputs, config files, requirements.txt, and the model we have just saved.</p>
+<p>Click the download button next to the model to download the model. When clicking the <code class="docutils literal notranslate"><span class="pre">model.pkl</span></code>, you should see information about your model as shown below:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*nsZtuOB0xwl35UOoYF7LQA.png" /></p>
+<p><a class="reference external" href="https://wandb.ai/khuyentran1401/iris/runs/2j4gbvsy/files/model.pkl">Model information</a></p>
+<p>You can also find other information about your run including the overview, charts, system, terminal logs, and files by clicking tabs on the left-hand side of the run.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*OvUN4bH7YXSpRBBIMPK9Bg.png" /></p>
+<p><a class="reference external" href="https://wandb.ai/khuyentran1401/iris?workspace=user-sygnals">System information</a></p>
+<p><img alt="" src="../_images/wandb3.gif" /></p>
+<p>Pretty cool, isn’t it?</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./experiment_tracking"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="hydra.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">5.1. </span>Configure your Data Science Projects with Hydra</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../version_control/version_control.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Version Control</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

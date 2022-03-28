@@ -1,0 +1,679 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers" href="dagshub.html" />
+    <link rel="prev" title="6. Version Control" href="version_control.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="version_control.html">
+   6. Version Control
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/version_control/dvc.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fversion_control/dvc.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-dvc">
+   6.1.2. What is DVC?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   6.1.3. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#storing-the-data-remotely">
+   6.1.4. Storing the Data Remotely
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-the-data">
+   6.1.5. Get the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-changes">
+   6.1.6. Make Changes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#switch-between-different-versions">
+   6.1.7. Switch between Different Versions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction to DVC: Data Version Control Tool for Machine Learning Projects</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   6.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-dvc">
+   6.1.2. What is DVC?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   6.1.3. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#storing-the-data-remotely">
+   6.1.4. Storing the Data Remotely
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-the-data">
+   6.1.5. Get the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-changes">
+   6.1.6. Make Changes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#switch-between-different-versions">
+   6.1.7. Switch between Different Versions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Machine-learning-pipeline"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="introduction-to-dvc-data-version-control-tool-for-machine-learning-projects">
+<h1><span class="section-number">6.1. </span>Introduction to DVC: Data Version Control Tool for Machine Learning Projects<a class="headerlink" href="#introduction-to-dvc-data-version-control-tool-for-machine-learning-projects" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://miro.medium.com/max/700/0*olTevC6kA5WiHtDI" /></p>
+<p>Photo by <a class="reference external" href="https://unsplash.com/&#64;franki?utm_source=medium&amp;utm_medium=referral">Franki Chamaki</a> on <a class="reference external" href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral">Unsplash</a></p>
+<div class="section" id="motivation">
+<h2><span class="section-number">6.1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Git is a powerful tool for version control. It allows you to go back and forth between different versions of your code without being afraid of losing the code you change. As a data scientist, you might not only want to control different versions of your code but also <strong>control different versions of your data</strong> for the same reason: <strong>you don’t want to lose the previous data when the data is changed.</strong></p>
+<p>But Git is not ideal for database version control because for two reasons:</p>
+<ul class="simple">
+<li><p>It is messy to compare the change in different versions of data with Git. I remember that I need to manually accept about 100 lines of data that were changed between 2 commits when using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>and it was a pain</p></li>
+<li><p>Binary files are usually big. If you commit them to your repository, its size will become much larger. It can also take a long time to commit data to Git.</p></li>
+</ul>
+<p>Wouldn’t it be nice if you can store your data in your favorite storage services such as Amazon S3, Google Drive, Google Cloud Storage, or your own local machine while still being able to switch back and forth between different versions of data? That is when DVC comes in handy.</p>
+</div>
+<div class="section" id="what-is-dvc">
+<h2><span class="section-number">6.1.2. </span>What is DVC?<a class="headerlink" href="#what-is-dvc" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://dvc.org/doc/start">DVC</a> is a system for data version control. It is essentially like Git but is used for data. With DVC, you can <strong>keep the information</strong> about different versions of your data in <strong>Git</strong> while s<strong>toring your original data somewhere else</strong>.</p>
+<p>Better yet, DVC syntax is just like Git! If you already know Git, learning DVC is a breeze.</p>
+<p>Let’s see how to use DVC from example. I will use <a class="reference external" href="https://github.com/khuyentran1401/Machine-learning-pipeline">my repository</a> as an example of this section. You can follow along by cloning the repository.</p>
+<p>Start with installing the package</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dvc
+</pre></div>
+</div>
+<p>Find the instruction on more ways to install DVC <a class="reference external" href="https://dvc.org/doc/install">here</a>.</p>
+</div>
+<div class="section" id="get-started">
+<h2><span class="section-number">6.1.3. </span>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>After DVC is installed, <strong>in a Git project</strong>, initialize it by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc init
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.dvc/.gitignore</span></code> and <code class="docutils literal notranslate"><span class="pre">.dvc/config</span></code> is created. Commit this change with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;Initialize DVC&quot;</span>
+</pre></div>
+</div>
+<p>Here is the structure of my data directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>data
+├── processed
+│   ├── test_text.txt
+│   ├── train_label.txt
+│   ├── train_text.txt
+│   ├── val_label.txt
+│   └── val_text.txt
+└── raw
+    ├── mex20_test_full.txt
+    ├── mex20_train_labels.txt
+    ├── mex20_train.txt
+    ├── mex20_val_labels.txt
+    └── mex20_val.txt
+</pre></div>
+</div>
+<p>To start tracking a file or directory, use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">add</span></code></p>
+<p>To track the data directory, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc add data
+</pre></div>
+</div>
+<p>The information of the added file or directory will be stored in <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> file named<code class="docutils literal notranslate"><span class="pre">data.dvc</span></code> . This is a small text file that stores information on how to access the original data but not the original data itself.</p>
+<p>Since the size of this text file is small, it can be versioned like source code with Git.</p>
+<p>Now simply commit the <code class="docutils literal notranslate"><span class="pre">dvc</span></code>file as you would with source code. Make sure to <a class="reference external" href="https://github.com/khuyentran1401/Machine-learning-pipeline/blob/master/.gitignore">add data to <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></a> beforehand to avoid committing the data.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add data.dvc
+git commit -m <span class="s2">&quot;add data&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="storing-the-data-remotely">
+<h2><span class="section-number">6.1.4. </span>Storing the Data Remotely<a class="headerlink" href="#storing-the-data-remotely" title="Permalink to this headline">¶</a></h2>
+<p>Cool! Now we created a file to store the information about the original data. The next step is to figure out where to store the data</p>
+<p>Just like how we use<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">remote</span></code> to store the URL of the remote repository, we also want to use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">remote</span> <span class="pre">add</span></code> to store the location of the remote storage.</p>
+<p>DVC allows us to store our data on Google Drive, Amazon S3, Azure Blob Storage, Google Cloud Storage, Aliyun OSS, SSH, HDFS, and HTTP. Since I assume everybody has Google Drive, let’s learn how to store our data on Google Drive</p>
+<p>Start with creating a folder on Google Drive</p>
+<p><img alt="" src="https://miro.medium.com/max/368/1*YTPGyWpfWOdK7pvkPkC0yQ.png" /></p>
+<p>Once we created a folder, our link will be something like this <a class="reference external" href="https://drive.google.com/drive/folders/1ynNBbT-4J0ida0eKYQqZZbC93juUUbVH">https://drive.google.com/drive/folders/1ynNBbT-4J0ida0eKYQqZZbC93juUUbVH</a></p>
+<p>Simply add that link to DVC to store the location of the remote storage</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc remote add -d remote gdrive://1ynNBbT-4J0ida0eKYQqZZbC93juUUbVH
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-d</span></code> stands for default. The information about the storage will be saved under <code class="docutils literal notranslate"><span class="pre">.dvc/config</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>core<span class="o">]</span>
+<span class="nv">remote</span> <span class="o">=</span> remote
+<span class="o">[</span><span class="s1">&#39;remote &quot;remote&quot;&#39;</span><span class="o">]</span>
+<span class="nv">url</span> <span class="o">=</span> gdrive://1ynNBbT-4J0ida0eKYQqZZbC93juUUbVH
+</pre></div>
+</div>
+<p>Now simply commit the config file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit .dvc/config -m <span class="s2">&quot;Configure remote storage&quot;</span>
+</pre></div>
+</div>
+<p>And push the data to Google Drive</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc push
+</pre></div>
+</div>
+<p>That’s it! Now all of the data is pushed to <a class="reference external" href="https://drive.google.com/drive/u/0/folders/1ynNBbT-4J0ida0eKYQqZZbC93juUUbVH">Google Drive</a>. Checkout <a class="reference external" href="https://dvc.org/doc/command-reference/remote/add">dvc remote add</a> for more ways to store your data in other storage services.</p>
+<p>To push the change we have committed so far to our remote repository, type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git push origin &lt;branch&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-data">
+<h2><span class="section-number">6.1.5. </span>Get the Data<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Your data is stored somewhere safe. But now you or your teammates want to access the data, what should you or your teammates do?</p>
+<p>It’s straight forward. Just use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> to pull the change in code like you normally do. Now you have the <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> file in your local directory.</p>
+<p>To retrieve the data, simply type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc pull
+</pre></div>
+</div>
+<p>to pull the data from the remote storage. That’s it!</p>
+<p>If you are following in tutorial and you still have the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory in your local machine, delete it to see how the <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">pull</span></code>can retrieve your data from remote storage.</p>
+</div>
+<div class="section" id="make-changes">
+<h2><span class="section-number">6.1.6. </span>Make Changes<a class="headerlink" href="#make-changes" title="Permalink to this headline">¶</a></h2>
+<p>To make changes, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dvc add data
+git commit data.dvc -m <span class="s1">&#39;Data updates&#39;</span>
+dvc push
+git push origin &lt;branch&gt;
+</pre></div>
+</div>
+<p>It is straight forward, isn’t it?</p>
+</div>
+<div class="section" id="switch-between-different-versions">
+<h2><span class="section-number">6.1.7. </span>Switch between Different Versions<a class="headerlink" href="#switch-between-different-versions" title="Permalink to this headline">¶</a></h2>
+<p>The whole point of using DVC is that we can switch between different versions of our data. So how exactly can we do that? Again, just like how we switch between different versions of our code with Git, use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">checkout</span></code> to switch between different versions of our data</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout &lt;...&gt;
+dvc checkout
+</pre></div>
+</div>
+<p>For example, if we want to switch to the previous version of the data, type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout HEAD^1 data.dvc
+dvc checkout
+</pre></div>
+</div>
+<p>Now when the data reverts to the previous version, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit data.dvc -m <span class="s2">&quot;revert to previous version&quot;</span>
+</pre></div>
+</div>
+<p>to save the change.</p>
+<p>Basically, we switch to another version of our code with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">chechout</span></code>. <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">checkout</span></code> restores the corresponding versions of the <code class="docutils literal notranslate"><span class="pre">.dvc</span></code> files and directories from <code class="docutils literal notranslate"><span class="pre">.dvc/cache</span></code>to the workspace.</p>
+<p>Pretty cool isn’t it?</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./version_control"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="version_control.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Version Control</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dagshub.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.2. </span>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

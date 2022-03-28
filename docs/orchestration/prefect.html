@@ -1,0 +1,1069 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.2. Optimize Your Data Science Workflow in a Few Lines of Code &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Experiment Tracking" href="../experiment_tracking/experiment_tracking.html" />
+    <link rel="prev" title="4.1. Create Maintainable and Modular Data Science Pipelines with Kedro" href="kedro_pipelines.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/orchestration/prefect.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Forchestration/prefect.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-prefect">
+   4.2.2. What is Prefect?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-your-workflow-with-prefect">
+   4.2.3. Build Your Workflow with Prefect
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-step-create-tasks">
+     4.2.3.1. First Step — Create Tasks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#second-step-create-a-flow">
+     4.2.3.2. Second Step — Create a Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#third-step-add-parameters">
+     4.2.3.3. Third step — Add Parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitor-your-workflow">
+   4.2.4. Monitor Your Workflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     4.2.4.1. Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-workflow-with-default-parameters">
+     4.2.4.2. Run the Workflow with Default Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-workflow-with-custom-parameters">
+     4.2.4.3. Run the Workflow with Custom Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#view-the-graph-of-the-workflow">
+     4.2.4.4. View the Graph of the Workflow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-features">
+   4.2.5. Other Features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input-caching">
+     4.2.5.1. Input Caching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#persist-output">
+     4.2.5.2. Persist Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-output-of-another-flow-for-the-current-flow">
+     4.2.5.3. Use Output of Another Flow for the Current Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connect-dependent-flows">
+     4.2.5.4. Connect Dependent Flows
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#schedule-your-flow">
+     4.2.5.5. Schedule Your Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logging">
+     4.2.5.6. Logging
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Optimize Your Data Science Workflow in a Few Lines of Code</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   4.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-prefect">
+   4.2.2. What is Prefect?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-your-workflow-with-prefect">
+   4.2.3. Build Your Workflow with Prefect
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-step-create-tasks">
+     4.2.3.1. First Step — Create Tasks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#second-step-create-a-flow">
+     4.2.3.2. Second Step — Create a Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#third-step-add-parameters">
+     4.2.3.3. Third step — Add Parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monitor-your-workflow">
+   4.2.4. Monitor Your Workflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     4.2.4.1. Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-workflow-with-default-parameters">
+     4.2.4.2. Run the Workflow with Default Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-workflow-with-custom-parameters">
+     4.2.4.3. Run the Workflow with Custom Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#view-the-graph-of-the-workflow">
+     4.2.4.4. View the Graph of the Workflow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-features">
+   4.2.5. Other Features
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input-caching">
+     4.2.5.1. Input Caching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#persist-output">
+     4.2.5.2. Persist Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-output-of-another-flow-for-the-current-flow">
+     4.2.5.3. Use Output of Another Flow for the Current Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connect-dependent-flows">
+     4.2.5.4. Connect Dependent Flows
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#schedule-your-flow">
+     4.2.5.5. Schedule Your Flow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logging">
+     4.2.5.6. Logging
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/prefect_example"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="optimize-your-data-science-workflow-in-a-few-lines-of-code">
+<h1><span class="section-number">4.2. </span>Optimize Your Data Science Workflow in a Few Lines of Code<a class="headerlink" href="#optimize-your-data-science-workflow-in-a-few-lines-of-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">4.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>As a data scientist, why should you care about optimizing your data science workflow? Let’s start with an example of a basic data science project.</p>
+<p>Imagine you were working with an Iris dataset. You started with building functions to process your data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for getting the classes from the Iris data set.&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span> <span class="nf">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Task for encoding the categorical columns in the Iris data set.&quot;&quot;&quot;</span>
+
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
+<span class="sd">    sets, each split into features and labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>After defining the functions, you execute them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define parameters</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;species&#39;</span>
+<span class="n">test_data_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="c1"># Run functions</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/raw/iris.csv&quot;</span><span class="p">)</span>
+<span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">get_classes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span> 
+<span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> 
+                            <span class="n">test_data_ratio</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">,</span> 
+                            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your code ran fine, and you saw nothing wrong with the output, so you think the workflow is good enough. However, there can be many disadvantages with a linear workflow like above.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*1dE70akxwDPMtw2s1LyHpQ.png" /></p>
+<p>The disadvantages are:</p>
+<ul class="simple">
+<li><p>If there is an error in the function <code class="docutils literal notranslate"><span class="pre">g``et_classes</span></code> , the output produced by the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be lost, and the workflow will need to start from the beginning. This can be frustrating if it takes a long time to execute the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> .</p></li>
+</ul>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*b6hmvPxzWYr9GAX2Q2Sdvw.png" /></p>
+<ul class="simple">
+<li><p>Since the functions <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> and <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> are not dependent on each other, they can be executed at the same time to save time:</p></li>
+</ul>
+<p><img alt="" src="https://miro.medium.com/max/700/1*iuzgmRBi2iMsCsF9IOkABw.png" /></p>
+<p>Running the functions this way can also prevent wasting unnecessary time on functions that don’t work. If there is an error in the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> , the workflow will restart right away without waiting for the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> to finish.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*X40DYs9p2UPcXasHTQ62mQ.png" /></p>
+<p>Now, you might agree with me that it is important to optimize the workflow of different functions. However, it can be a lot of works to manually manage the workflow.</p>
+<p>Is there a way that you can <strong>automatically optimize the workflow</strong> by adding only several lines of code? That is when Prefect comes in handy.</p>
+</div>
+<div class="section" id="what-is-prefect">
+<h2><span class="section-number">4.2.2. </span>What is Prefect?<a class="headerlink" href="#what-is-prefect" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.prefect.io/">Prefect</a> is an open-sourced framework to build workflows in Python. Prefect makes it easy to build, run, and monitor data pipelines at scale.</p>
+<p>To install Prefect, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install prefect
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-your-workflow-with-prefect">
+<h2><span class="section-number">4.2.3. </span>Build Your Workflow with Prefect<a class="headerlink" href="#build-your-workflow-with-prefect" title="Permalink to this headline">¶</a></h2>
+<p>To learn how Prefect works, let’s encapsulate the workflow introduced above with Prefect.</p>
+<div class="section" id="first-step-create-tasks">
+<h3><span class="section-number">4.2.3.1. </span>First Step — Create Tasks<a class="headerlink" href="#first-step-create-tasks" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Task</span></code> is a discrete action in a Prefect flow. Start with turning the functions defined above into tasks using the decorator <code class="docutils literal notranslate"><span class="pre">prefect.task</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for getting the classes from the Iris data set.&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Task for encoding the categorical columns in the Iris data set.&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
+<span class="sd">    sets, each split into features and labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span> 
+</pre></div>
+</div>
+</div>
+<div class="section" id="second-step-create-a-flow">
+<h3><span class="section-number">4.2.3.2. </span>Second Step — Create a Flow<a class="headerlink" href="#second-step-create-a-flow" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Flow</span></code> represents the entire workflow by managing the dependencies between tasks. To create a flow, simply insert the code to run your functions inside the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;data-engineer&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+    
+    <span class="c1"># Define parameters</span>
+    <span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;species&#39;</span>
+    <span class="n">test_data_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
+    
+    <span class="c1"># Define tasks</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/raw/iris.csv&quot;</span><span class="p">)</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">get_classes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span> 
+    <span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span>
+    <span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that none of these tasks are executed when running the code above. Prefect allows you to either run the flow right away or schedule for later.</p>
+<p>Let’s try to execute the flow right away using <code class="docutils literal notranslate"><span class="pre">flow.run()</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;data-engineer&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+  <span class="c1"># Define your flow here</span>
+  <span class="o">...</span>
+  
+<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Running the code above will give you the output similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>└── <span class="m">15</span>:49:46 <span class="p">|</span> INFO    <span class="p">|</span> Beginning Flow run <span class="k">for</span> <span class="s1">&#39;data-engineer&#39;</span>
+└── <span class="m">15</span>:49:46 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;target_col&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:46 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;target_col&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:46 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;test_data_ratio&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;test_data_ratio&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;load_data&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;load_data&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;encode_categorical_columns&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;encode_categorical_columns&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;get_classes&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;get_classes&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;split_data&#39;</span>: Starting task run...
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Task <span class="s1">&#39;split_data&#39;</span>: Finished task run <span class="k">for</span> task with final state: <span class="s1">&#39;Success&#39;</span>
+└── <span class="m">15</span>:49:47 <span class="p">|</span> INFO    <span class="p">|</span> Flow run SUCCESS: all reference tasks succeeded
+Flow run succeeded!
+</pre></div>
+</div>
+<p>To understand the workflow created by Prefect, let’s visualize the entire workflow.</p>
+<p>Start with installing <code class="docutils literal notranslate"><span class="pre">prefect[viz]</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="s2">&quot;prefect[viz]&quot;</span>
+</pre></div>
+</div>
+<p>Then add the method <code class="docutils literal notranslate"><span class="pre">visualize</span></code> to the code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And you should see the visualization of the <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> workflow like below!</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*JzMfqTsK9EZ09GnhgQm1lA.png" /></p>
+<p>Note that Prefect automatically manages the orders of execution among tasks so that the workflow is optimized. This is pretty cool for a few additional pieces of code!</p>
+</div>
+<div class="section" id="third-step-add-parameters">
+<h3><span class="section-number">4.2.3.3. </span>Third step — Add Parameters<a class="headerlink" href="#third-step-add-parameters" title="Permalink to this headline">¶</a></h3>
+<p>If you find yourself frequently experimenting with different values of one variable, it’s ideal to turn that variable into a <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_data_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> 
+                            <span class="n">test_data_ratio</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">,</span> 
+                            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can consider a <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> as a <code class="docutils literal notranslate"><span class="pre">Task</span></code> , except that it can receive user inputs whenever a flow is run. To turn a variable into a parameter, simply use <code class="docutils literal notranslate"><span class="pre">task.Parameter</span></code> .</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Parameter</span> 
+
+<span class="n">test_data_ratio</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;test_data_ratio&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> 
+                            <span class="n">test_data_ratio</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">,</span> 
+                            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first argument of <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> specifies the name of the parameter. <code class="docutils literal notranslate"><span class="pre">default</span></code> is an optional argument that specifies the default value of the parameter.</p>
+<p>Running <code class="docutils literal notranslate"><span class="pre">flow.visualize</span></code> again will give us an output like below:</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*DlV8AkZmuVrPlo9hm1P93Q.png" /></p>
+<p>You can overwrite the default parameter for each run by:</p>
+<ul class="simple">
+<li><p>adding the argument <code class="docutils literal notranslate"><span class="pre">parameters</span></code> to <code class="docutils literal notranslate"><span class="pre">flow.run()</span></code> :</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ flow.run<span class="o">(</span><span class="nv">parameters</span><span class="o">={</span><span class="s1">&#39;test_data_ratio&#39;</span>: <span class="m">0</span>.3<span class="o">})</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>or using Prefect CLI:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect run -p data_engineering.py --param <span class="nv">test_data_ratio</span><span class="o">=</span><span class="m">0</span>.2 
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>or using a JSON file:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect run -p data_engineering.py --param-file<span class="o">=</span><span class="s1">&#39;params.json&#39;</span>
+</pre></div>
+</div>
+<p>Your JSON file should look similar to this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;test_data_ratio&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also change parameters for each run using Prefect Cloud, which will be introduced in the next section.</p>
+</div>
+</div>
+<div class="section" id="monitor-your-workflow">
+<h2><span class="section-number">4.2.4. </span>Monitor Your Workflow<a class="headerlink" href="#monitor-your-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3><span class="section-number">4.2.4.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>Prefect also allows you to monitor your workflow in Prefect Cloud. Follow <a class="reference external" href="https://docs.prefect.io/orchestration/getting-started/set-up.html#server-or-cloud">this instruction</a> to install relevant dependencies for Prefect Cloud.</p>
+<p>After all of the dependencies are installed and set up, start with creating a project on Prefect by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect create project <span class="s2">&quot;Iris Project&quot;</span>
+</pre></div>
+</div>
+<p>Next, start a local agent to deploy our flows locally on a single machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect agent <span class="nb">local</span> start
+</pre></div>
+</div>
+<p>Then add:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;Iris Project&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>… at the end of your file. You should see something similar to the below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Flow URL: https://cloud.prefect.io/khuyentran1476-gmail-com-s-account/flow/dba26bea-8827-4db4-9988-3289f6cb662f
+ └── ID: 2944dc36-cdac-4079-8497-be4ec5594785
+ └── Project: Iris Project
+ └── Labels: <span class="o">[</span><span class="s1">&#39;khuyen-Precision-7740&#39;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Click the URL in the output, and you will be redirected to an Overview page. The Overview page shows the version of your flow, when it is created, the flow’s run history, and its runs summary.</p>
+<p><img alt="" src="https://miro.medium.com/max/1810/1*olT8irSQON3D2N3g9K-wzg.png" /></p>
+<p>You can also view the summary of other runs, when they are executed, and their configurations.</p>
+<p><img alt="" src="https://miro.medium.com/max/594/1*Jce9rCOQURyNJPBNye0c-Q.png" /></p>
+<p>It is pretty cool how these important pieces of information are automatically tracked by Perfect!</p>
+</div>
+<div class="section" id="run-the-workflow-with-default-parameters">
+<h3><span class="section-number">4.2.4.2. </span>Run the Workflow with Default Parameters<a class="headerlink" href="#run-the-workflow-with-default-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Note that the workflow is registered to Prefect Cloud, but it is not executed yet. To execute the workflow with the default parameters, click Quick Run in the top right corner.</p>
+<p><img alt="" src="https://miro.medium.com/max/376/1*kSdZ7ILVXcMurXJc-1n6Dw.png" /></p>
+<p>Click the run that is created. Now you will be able to see the activity for your new flow run in real-time!</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*JbKeDKz2sN_9cQP89yXVvg.gif" /></p>
+</div>
+<div class="section" id="run-the-workflow-with-custom-parameters">
+<h3><span class="section-number">4.2.4.3. </span>Run the Workflow with Custom Parameters<a class="headerlink" href="#run-the-workflow-with-custom-parameters" title="Permalink to this headline">¶</a></h3>
+<p>To run the workflow with custom parameters, click the Run tab, then change the parameters under Inputs.</p>
+<p><img alt="" src="https://miro.medium.com/max/1885/1*4FD_0vEttydd1pvivVEpjw.png" /></p>
+<p>When you are satisfied with the parameters, simply click the Run button to start the run.</p>
+</div>
+<div class="section" id="view-the-graph-of-the-workflow">
+<h3><span class="section-number">4.2.4.4. </span>View the Graph of the Workflow<a class="headerlink" href="#view-the-graph-of-the-workflow" title="Permalink to this headline">¶</a></h3>
+<p>Clicking Schematic will give you the graph of the entire workflow.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*Inj8ey1ZWrMiVtmDPCYGyQ.png" /></p>
+</div>
+</div>
+<div class="section" id="other-features">
+<h2><span class="section-number">4.2.5. </span>Other Features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
+<p>Besides some basic features mentioned above, Prefect also provides some other cool features that will significantly increase the efficiency of your workflow.</p>
+<div class="section" id="input-caching">
+<h3><span class="section-number">4.2.5.1. </span>Input Caching<a class="headerlink" href="#input-caching" title="Permalink to this headline">¶</a></h3>
+<p>Remember the problem we mentioned at the beginning of the section? Normally, if the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> fails, the data created by the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be discarded and the entire workflow needs to start from the beginning.</p>
+<p>However, with Prefect, the output of <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> is stored. Next time when the workflow is rerun, the output of <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be used by the next task <strong>without rerunning</strong> the task <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> .</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*WN5iFz3QunvTDNc8ijpizg.png" /></p>
+<p>This can result in a huge decrease in the time it takes to run the workflow.</p>
+</div>
+<div class="section" id="persist-output">
+<h3><span class="section-number">4.2.5.2. </span>Persist Output<a class="headerlink" href="#persist-output" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you might want to export your task’s data to an external location. This can be done by inserting to the task function the code to save the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+  
+  <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="o">...</span>
+  
+  <span class="kn">import</span> <span class="nn">pickle</span>
+  <span class="n">pickle</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, doing that will make it difficult to test the function.</p>
+<p>Prefect makes it easy to save the output of a task for each run by:</p>
+<ul class="simple">
+<li><p>setting the checkpoint to <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">PREFECT__FLOWS__CHECKPOINTING</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>and adding <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">LocalResult(dir=...))</span></code> to the decorator <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> .</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from prefect.engine.results import LocalResult
+
+@task<span class="o">(</span><span class="nv">result</span> <span class="o">=</span> LocalResult<span class="o">(</span><span class="nv">dir</span><span class="o">=</span><span class="s1">&#39;data/processed&#39;</span><span class="o">))</span>
+def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float, classes: list<span class="o">)</span> -&gt; Dict<span class="o">[</span>str, Any<span class="o">]</span>:
+    <span class="s2">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
+<span class="s2">    sets, each split into features and labels.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    X_train, X_test, y_train, <span class="nv">y_test</span> <span class="o">=</span> ...
+    
+    <span class="k">return</span> dict<span class="o">(</span>
+        <span class="nv">train_x</span><span class="o">=</span>X_train,
+        <span class="nv">train_y</span><span class="o">=</span>y_train,
+        <span class="nv">test_x</span><span class="o">=</span>X_test,
+        <span class="nv">test_y</span><span class="o">=</span>y_test,
+</pre></div>
+</div>
+<p>Now the output of the task <code class="docutils literal notranslate"><span class="pre">split_data</span></code> will be saved to the directory <code class="docutils literal notranslate"><span class="pre">data/processed</span></code> ! The name will look something similar to this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>prefect-result-2021-11-06t15-37-29-605869-00-00
+</pre></div>
+</div>
+<p>If you want to customize the name of your file, you can add the argument <code class="docutils literal notranslate"><span class="pre">target</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">prefect.engine.results</span> <span class="kn">import</span> <span class="n">LocalResult</span>
+
+<span class="nd">@task</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;{date:%a_%b_</span><span class="si">%d</span><span class="s2">_%Y_%H:%M:%S}/{task_name}_output&quot;</span><span class="p">,</span> 
+      <span class="n">result</span> <span class="o">=</span> <span class="n">LocalResult</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;data/processed&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
+<span class="sd">    sets, each split into features and labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Prefect also provides other <code class="docutils literal notranslate"><span class="pre">Result</span></code> classes such as <code class="docutils literal notranslate"><span class="pre">GCSResult</span></code> and <code class="docutils literal notranslate"><span class="pre">S3Result</span></code> . You can check out API docs for results <a class="reference external" href="https://docs.prefect.io/api/latest/engine/results.html">here</a>.</p>
+</div>
+<div class="section" id="use-output-of-another-flow-for-the-current-flow">
+<h3><span class="section-number">4.2.5.3. </span>Use Output of Another Flow for the Current Flow<a class="headerlink" href="#use-output-of-another-flow-for-the-current-flow" title="Permalink to this headline">¶</a></h3>
+<p>If you are working with multiple flows, for example, <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow and <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow, you might want to use the output of the <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow for the <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*Hl_8w9TqtGTzMKW_RygsDw.png" /></p>
+<p>After saving the output of your <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow as a file, you can read that file using the <code class="docutils literal notranslate"><span class="pre">read</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect.engine.results</span> <span class="kn">import</span> <span class="n">LocalResult</span>
+
+<span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">LocalResult</span><span class="p">(</span><span class="nb">dir</span><span class="o">=...</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">location</span><span class="o">=...</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connect-dependent-flows">
+<h3><span class="section-number">4.2.5.4. </span>Connect Dependent Flows<a class="headerlink" href="#connect-dependent-flows" title="Permalink to this headline">¶</a></h3>
+<p>Imagine this scenario: You created two flows that depend on each other. The flow <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> needs to be executed before the flow <code class="docutils literal notranslate"><span class="pre">data-science</span></code></p>
+<p>Somebody who looked at your workflow didn’t understand the relationship between these two flows. As a result, they executed the flow <code class="docutils literal notranslate"><span class="pre">data-science</span></code> and the flow <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> at the same time and encountered an error!</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*J7-kWMCMm3332B-Ff0D6JA.png" /></p>
+<p>To prevent this from happening, we should specify the relationship between flows. Luckily, Prefect makes it easier for us to do so.</p>
+<p>Start with grabbing two different flows using <code class="docutils literal notranslate"><span class="pre">StartFlowRun</span></code> . Add <code class="docutils literal notranslate"><span class="pre">wait=True</span></code> to the argument so that the downstream flow is executed only after the upstream flow finishes executing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Flow</span> 
+<span class="kn">from</span> <span class="nn">prefect.tasks.prefect</span> <span class="kn">import</span> <span class="n">StartFlowRun</span>
+
+<span class="n">data_engineering_flow</span> <span class="o">=</span> <span class="n">StartFlowRun</span><span class="p">(</span><span class="n">flow_name</span><span class="o">=</span><span class="s2">&quot;data-engineer&quot;</span><span class="p">,</span> 
+                                    <span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;Iris Project&#39;</span><span class="p">,</span>
+                                    <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                    
+<span class="n">data_science_flow</span> <span class="o">=</span> <span class="n">StartFlowRun</span><span class="p">(</span><span class="n">flow_name</span><span class="o">=</span><span class="s2">&quot;data-science&quot;</span><span class="p">,</span> 
+                                <span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;Iris Project&#39;</span><span class="p">,</span>
+                                <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, calling <code class="docutils literal notranslate"><span class="pre">data_science_flow</span></code> under the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager. Use <code class="docutils literal notranslate"><span class="pre">upstream_tasks</span></code> to specify the tasks/flows that will be executed before the <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow is executed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;main-flow&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">data_science_flow</span><span class="p">(</span><span class="n">upstream_tasks</span><span class="o">=</span><span class="p">[</span><span class="n">data_engineering_flow</span><span class="p">])</span>
+    
+<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now the two flows are connected like below:</p>
+<p><img alt="" src="https://miro.medium.com/max/450/1*X1ck_cQSkmpJ3G9CBaw18g.png" /></p>
+<p>Pretty cool!</p>
+</div>
+<div class="section" id="schedule-your-flow">
+<h3><span class="section-number">4.2.5.5. </span>Schedule Your Flow<a class="headerlink" href="#schedule-your-flow" title="Permalink to this headline">¶</a></h3>
+<p>Prefect also makes it seamless to execute a flow at a certain time or at a certain interval.</p>
+<p>For example, to run a flow every 1 minute, you can initiate the class <code class="docutils literal notranslate"><span class="pre">IntervalSchedule</span></code> and add <code class="docutils literal notranslate"><span class="pre">schedule</span></code> to the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">IntervalSchedule</span>
+
+<span class="n">schedule</span> <span class="o">=</span> <span class="n">IntervalSchedule</span><span class="p">(</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">data_engineering_flow</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">data_science_flow</span> <span class="o">=</span> <span class="o">...</span>
+
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;main-flow&quot;</span><span class="p">,</span> <span class="n">schedule</span><span class="o">=</span><span class="n">schedule</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+    <span class="n">data_science</span> <span class="o">=</span> <span class="n">data_science_flow</span><span class="p">(</span><span class="n">upstream_tasks</span><span class="o">=</span><span class="p">[</span><span class="n">data_engineering_flow</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Now your flow will be rerun every 1 minute!</p>
+<p>Learn more about different ways to schedule your flow <a class="reference external" href="https://docs.prefect.io/core/concepts/schedules.html#overview">here</a>.</p>
+</div>
+<div class="section" id="logging">
+<h3><span class="section-number">4.2.5.6. </span>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<p>You can log the print statements within a task by simply adding <code class="docutils literal notranslate"><span class="pre">log_stdout=True</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">report_accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">test_y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+
+  <span class="n">target</span> <span class="o">=</span> <span class="o">...</span> 
+  <span class="n">accuracy</span> <span class="o">=</span> <span class="o">...</span>
+    
+  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Model accuracy on test set: {round(accuracy * 100, 2)}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And you should see an output like below when executing the task:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2021</span>-11-06 <span class="m">11</span>:41:16-0500<span class="o">]</span> INFO - prefect.TaskRunner <span class="p">|</span> Model accuracy on <span class="nb">test</span> set: <span class="m">93</span>.33
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./orchestration"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="kedro_pipelines.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4.1. </span>Create Maintainable and Modular Data Science Pipelines with Kedro</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../experiment_tracking/experiment_tracking.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Experiment Tracking</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1. Stop writing Python functions that take more than three minutes to understand &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Test Code" href="../testing_code/testing_code.html" />
+    <link rel="prev" title="1. Structure Project" href="structure_project.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="structure_project.html">
+   1. Structure Project
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/structure_project/functions.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fstructure_project/functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   1.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   1.1.2. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#small">
+   1.1.3. Small
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-one-task">
+   1.1.4. Do One Task
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-level-of-abstraction">
+   1.1.5. One Level of Abstraction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duplication">
+   1.1.6. Duplication
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#descriptive-names">
+   1.1.7. Descriptive Names
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#have-fewer-than-4-arguments">
+   1.1.8. Have Fewer than 4 Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-i-write-a-function-like-this">
+   1.1.9. How do I write a function like this?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   1.1.10. Conclusion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Stop writing Python functions that take more than three minutes to understand</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   1.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-started">
+   1.1.2. Get Started
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#small">
+   1.1.3. Small
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-one-task">
+   1.1.4. Do One Task
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-level-of-abstraction">
+   1.1.5. One Level of Abstraction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duplication">
+   1.1.6. Duplication
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#descriptive-names">
+   1.1.7. Descriptive Names
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#have-fewer-than-4-arguments">
+   1.1.8. Have Fewer than 4 Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-i-write-a-function-like-this">
+   1.1.9. How do I write a function like this?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   1.1.10. Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/python/good_functions"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="stop-writing-python-functions-that-take-more-than-three-minutes-to-understand">
+<h1><span class="section-number">1.1. </span>Stop writing Python functions that take more than three minutes to understand<a class="headerlink" href="#stop-writing-python-functions-that-take-more-than-three-minutes-to-understand" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://miro.medium.com/max/700/0*kCH3-jlwMVCig7As" /></p>
+<p>Photo by <a class="reference external" href="https://unsplash.com/&#64;thecreative_exchange?utm_source=medium&amp;utm_medium=referral">The Creative Exchange</a> on <a class="reference external" href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral">Unsplash</a></p>
+<div class="section" id="motivation">
+<h2><span class="section-number">1.1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Have you ever looked at a function you wrote one month earlier and found it difficult to understand in 3 minutes? If that is the case, it is time to refactor your code. If it takes you more than 3 minutes to understand your code, imagine how long it would take for your teammates to understand your code.</p>
+<p>If you want your code to be reusable, you want it to be readable. Writing clean code is especially important to data scientists who collaborate with other team members in different roles.</p>
+<p>You want your Python function to:</p>
+<ul class="simple">
+<li><p>be small</p></li>
+<li><p>do one thing</p></li>
+<li><p>contain code with the same level of abstraction</p></li>
+<li><p>have fewer than 4 arguments</p></li>
+<li><p>have no duplication</p></li>
+<li><p>use descriptive names</p></li>
+</ul>
+<p>These practices will make your functions more readable and easier to detect errors.</p>
+<p>Inspired by the book <em>Clean Code: A Handbook of Agile Software Craftsmanship</em> by Robert C. Martin with code examples written in Java, I decided to write an article on how to write clean code in Python for data scientists.</p>
+<p>In this article, I will show you how to utilize the 6 practices mentioned above to write better Python functions.</p>
+</div>
+<div class="section" id="get-started">
+<h2><span class="section-number">1.1.2. </span>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by taking a look at the function <code class="docutils literal notranslate"><span class="pre">load_data</span></code> below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+
+<span class="kn">import</span> <span class="nn">gdown</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">load_data</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://drive.google.com/uc?id=1jI1cmxqnwsmC-vbl8dNY6b4aNBtBbKy3&quot;</span><span class="p">,</span>
+        <span class="n">output</span><span class="o">=</span><span class="s2">&quot;Twitter.zip&quot;</span><span class="p">,</span>
+        <span class="n">path_train</span><span class="o">=</span><span class="s2">&quot;Data/train/en&quot;</span><span class="p">,</span>
+        <span class="n">path_test</span><span class="o">=</span><span class="s2">&quot;Data/test/en&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_train</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_test</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+    <span class="c1"># Download data from Google Drive</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Twitter.zip&quot;</span>
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c1"># Unzip data</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get train, test data files</span>
+    <span class="n">tweets_train_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">file</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_train</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+    <span class="p">]</span>
+    <span class="n">tweets_test_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">file</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_test</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Extract texts from each file</span>
+    <span class="n">t_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
+        <span class="n">train_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">t_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">train_doc_1</span><span class="p">))</span>
+
+    <span class="n">t_test</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
+        <span class="n">test_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">t_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">test_doc_1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">t_test</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The function<code class="docutils literal notranslate"><span class="pre">load_data</span></code> tries to download data from Google Drive and extract the data. Even though there are many comments in this function, it is difficult to understand what this function does in 3 minutes. It is because:</p>
+<ul class="simple">
+<li><p>The function is awfully long</p></li>
+<li><p>The function tries to do multiple things</p></li>
+<li><p>The code within the function is at multiple levels of abstractions.</p></li>
+<li><p>The function has more than 3 arguments</p></li>
+<li><p>There are multiple duplications</p></li>
+<li><p>Function’s name is not descriptive</p></li>
+</ul>
+<p>We will refactor this code by using the 6 practices mentioned above</p>
+</div>
+<div class="section" id="small">
+<h2><span class="section-number">1.1.3. </span>Small<a class="headerlink" href="#small" title="Permalink to this headline">¶</a></h2>
+<p>A function should be small because it is easier to know what the function does. How small is small? There should rarely be more than 20 lines of code in one function. It can be as small as below. The indent level of a function should not be greater than one or two.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="k">def</span> <span class="nf">unzip_data</span><span class="p">(</span><span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+  
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="do-one-task">
+<h2><span class="section-number">1.1.4. </span>Do One Task<a class="headerlink" href="#do-one-task" title="Permalink to this headline">¶</a></h2>
+<p>A function should complete only one task, not multiple tasks. The function <code class="docutils literal notranslate"><span class="pre">load_data</span></code> tries to do multiple tasks such as download the data, unzip the data, get names of files that contain train and test data, and extract texts from each file.</p>
+<p>Thus, it should be split into multiple functions like below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download_zip_data_from_google_drive</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+
+<span class="n">unzip_data</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+<span class="n">tweet_train</span><span class="p">,</span> <span class="n">tweet_test</span> <span class="o">=</span> <span class="n">get_train_test_docs</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">path_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And each function should do only one thing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gdown</span>
+
+<span class="k">def</span> <span class="nf">download_zip_data_from_google_drive</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">download_zip_data_from_google_drive</span></code> only downloads a zip file from Google Drive and does nothing else.</p>
+</div>
+<div class="section" id="one-level-of-abstraction">
+<h2><span class="section-number">1.1.5. </span>One Level of Abstraction<a class="headerlink" href="#one-level-of-abstraction" title="Permalink to this headline">¶</a></h2>
+<p>The code within the function <code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> is at a different level of abstraction from the function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span> 
+
+<span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">list_of_text_in_one_file</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">text_in_one_file_as_string</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">list_of_text_in_one_file</span><span class="p">)</span>
+        <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file_as_string</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">all_docs</span>
+</pre></div>
+</div>
+<p>That is why:</p>
+<ul class="simple">
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> is at a high-level of abstraction.</p></li>
+<li><p>The code <code class="docutils literal notranslate"><span class="pre">list_of_text_in_one_file</span> <span class="pre">=[r.text</span> <span class="pre">for</span> <span class="pre">r</span> <span class="pre">in</span> <span class="pre">ET.parse(join(path_to_file,</span> <span class="pre">file_name)).getroot()[0]]</span></code> is at a low-level of abstraction.</p></li>
+</ul>
+<p>To make the code within the function to be at the same level of abstraction, we can put the low-level code into another function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span> 
+
+<span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">all_docs</span>
+    
+<span class="k">def</span> <span class="nf">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    
+    <span class="n">list_of_text_in_one_file</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">text_in_one_file_as_string</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">list_of_text_in_one_file</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">text_in_one_file_as_string</span>
+</pre></div>
+</div>
+<p>Now, the code <code class="docutils literal notranslate"><span class="pre">extract_texts_from_each_file(path_to_file,</span> <span class="pre">file)</span></code> is at a high-level of abstraction, which is the same level of abstraction as the function <code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> .</p>
+</div>
+<div class="section" id="duplication">
+<h2><span class="section-number">1.1.6. </span>Duplication<a class="headerlink" href="#duplication" title="Permalink to this headline">¶</a></h2>
+<p>There is duplication in the code below. The part of code that is used to get the training data is very similar to the part of code that is used to get the test data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
+    <span class="n">train_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">t_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">train_doc_1</span><span class="p">))</span>
+
+
+<span class="n">t_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
+    <span class="n">test_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">t_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">test_doc_1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We should avoid duplication because:</p>
+<ul class="simple">
+<li><p>It is redundant</p></li>
+<li><p>If we make a change to one piece of code, we need to remember to make the same change to another piece of code. If we forget to do so, we will introduce bugs into our code.</p></li>
+</ul>
+<p>We can eliminate duplication by putting the duplicated code into a function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="k">def</span> <span class="nf">get_train_test_docs</span><span class="p">(</span><span class="n">path_train</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_test</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+    <span class="n">tweets_train_files</span> <span class="o">=</span> <span class="n">get_files</span><span class="p">(</span><span class="n">path_train</span><span class="p">)</span>
+    <span class="n">tweets_test_files</span> <span class="o">=</span> <span class="n">get_files</span><span class="p">(</span><span class="n">path_test</span><span class="p">)</span>
+
+    <span class="n">t_train</span> <span class="o">=</span> <span class="n">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">tweets_train_files</span><span class="p">)</span>
+    <span class="n">t_test</span>  <span class="o">=</span> <span class="n">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="n">tweets_test_files</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">t_test</span>
+    
+<span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">all_docs</span>
+</pre></div>
+</div>
+<p>Since the code to extract texts from training files and the code to extract texts from test files are similar, we put the repeated code into the function <code class="docutils literal notranslate"><span class="pre">extract_tests_from_multiple_files</span></code>. This function can extract texts from either training or test files.</p>
+</div>
+<div class="section" id="descriptive-names">
+<h2><span class="section-number">1.1.7. </span>Descriptive Names<a class="headerlink" href="#descriptive-names" title="Permalink to this headline">¶</a></h2>
+<p>Users can understand what the function<code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> does by looking at its name.</p>
+<p>Don’t be afraid to write long names. <strong>It is better to write long names rather than write vague names.</strong> If you try to shorten your code by writing something like <code class="docutils literal notranslate"><span class="pre">get_texts</span></code> , it would be difficult for others to understand exactly what this function does without looking at the source code.</p>
+<p>If the descriptive name of a function is too long such as <code class="docutils literal notranslate"><span class="pre">download_file_from_</span> <span class="pre">Google_drive_and_extract_text_from_that_file</span></code> . It is a good sign that your function is doing multiple things and you should split it into smaller functions.</p>
+</div>
+<div class="section" id="have-fewer-than-4-arguments">
+<h2><span class="section-number">1.1.8. </span>Have Fewer than 4 Arguments<a class="headerlink" href="#have-fewer-than-4-arguments" title="Permalink to this headline">¶</a></h2>
+<p>A function should not have more than 3 arguments since it is a sign that the function is performing multiple tasks. It is also difficult to test a function with more than 3 different combinations of variables.</p>
+<p>For example, the function <code class="docutils literal notranslate"><span class="pre">load_data</span></code> has 4 arguments: <code class="docutils literal notranslate"><span class="pre">url</span></code>, <code class="docutils literal notranslate"><span class="pre">output_path</span></code>, <code class="docutils literal notranslate"><span class="pre">path_train</span></code>, and<code class="docutils literal notranslate"><span class="pre">path_test</span></code> . So we might guess that it tries to do multiple things at once:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">url</span></code> to download data</p></li>
+<li><p>Save it at <code class="docutils literal notranslate"><span class="pre">output_path</span></code></p></li>
+<li><p>Extract the train and test files in <code class="docutils literal notranslate"><span class="pre">output_path</span></code> and save it to <code class="docutils literal notranslate"><span class="pre">path_train</span></code> , <code class="docutils literal notranslate"><span class="pre">path_test</span></code></p></li>
+</ul>
+<p><strong>If a function has more than 3 arguments, consider turning it into a class.</strong></p>
+<p>For example, we could split <code class="docutils literal notranslate"><span class="pre">load_data</span></code> into 3 different functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">download_zip_data_from_google_drive</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+
+<span class="n">unzip_data</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+
+<span class="n">tweet_train</span><span class="p">,</span> <span class="n">tweet_test</span> <span class="o">=</span> <span class="n">get_train_test_docs</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">path_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since the functions <code class="docutils literal notranslate"><span class="pre">download_zip_data_from_google_drive</span></code> , <code class="docutils literal notranslate"><span class="pre">unzip_data</span></code> , and <code class="docutils literal notranslate"><span class="pre">get_train_test_docs</span></code> are all trying to achieve one goal: get data, we could put them into one class called <code class="docutils literal notranslate"><span class="pre">DataGetter</span></code> .</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">gdown</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://drive.google.com/uc?id=1jI1cmxqnwsmC-vbl8dNY6b4aNBtBbKy3&quot;</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;Twitter.zip&quot;</span>
+    <span class="n">path_train</span> <span class="o">=</span> <span class="s2">&quot;Data/train/en&quot;</span>
+    <span class="n">path_test</span> <span class="o">=</span> <span class="s2">&quot;Data/test/en&quot;</span>
+
+    <span class="n">data_getter</span> <span class="o">=</span> <span class="n">DataGetter</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">path_train</span><span class="p">,</span> <span class="n">path_test</span><span class="p">)</span>
+
+    <span class="n">tweet_train</span><span class="p">,</span> <span class="n">tweet_test</span> <span class="o">=</span> <span class="n">data_getter</span><span class="o">.</span><span class="n">get_train_test_docs</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">DataGetter</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_train</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path_test</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="n">output_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_train</span> <span class="o">=</span> <span class="n">path_train</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_test</span> <span class="o">=</span> <span class="n">path_test</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_zip_data_from_google_drive</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unzip_data</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">download_zip_data_from_google_drive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unzip_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+            <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_train_test_docs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+
+        <span class="n">tweets_train_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_train</span><span class="p">)</span>
+        <span class="n">tweets_test_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_test</span><span class="p">)</span>
+
+        <span class="n">t_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_texts_from_multiple_files</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_train</span><span class="p">,</span> <span class="n">tweets_train_files</span>
+        <span class="p">)</span>
+        <span class="n">t_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_texts_from_multiple_files</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_test</span><span class="p">,</span> <span class="n">tweets_test_files</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">t_test</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nb">file</span>
+            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+        <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+            <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">all_docs</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+        <span class="n">list_of_text_in_one_file</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="n">text_in_one_file_as_string</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">list_of_text_in_one_file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">text_in_one_file_as_string</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><em>Side note: In the code above, I use</em> <code class="docutils literal notranslate"><span class="pre">_staticmethod_</span></code> <em>as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods</em> <a class="reference external" href="https://realpython.com/instance-class-and-static-methods-demystified/"><em>here</em></a><em>.</em></p>
+<p>As we can see, none of the functions above have more than 3 arguments! Even though the code that uses a class is longer compared to the code that uses a function, it is much more readable! We also know exactly what each piece of code does.</p>
+</div>
+<div class="section" id="how-do-i-write-a-function-like-this">
+<h2><span class="section-number">1.1.9. </span>How do I write a function like this?<a class="headerlink" href="#how-do-i-write-a-function-like-this" title="Permalink to this headline">¶</a></h2>
+<p>Don’t try to be perfect when starting to write code. Start with writing down complicated code that matches your thoughts. Then as your code grows, ask yourself whether your function violates any of the practices mentioned above. If yes, refactor it. <a class="reference external" href="https://towardsdatascience.com/pytest-for-data-scientists-2990319e55e6">Test it</a>. Then move on to the next function.</p>
+</div>
+<div class="section" id="conclusion">
+<h2><span class="section-number">1.1.10. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations! You have just learned 6 best practices to write readable and testable functions. Since each function does one task, it will make it easier for you to test your functions and ensure that they pass the unit tests when a change is made.</p>
+<p>If you make it effortless for your teammates to understand your code, they will be happy to reuse your code for other tasks.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./structure_project"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="structure_project.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Structure Project</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../testing_code/testing_code.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Test Code</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

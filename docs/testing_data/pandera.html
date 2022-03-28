@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.2. Validate Your pandas DataFrame with Pandera &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3. Introduction to Schema: A Python Libary to Validate your Data" href="schema.html" />
+    <link rel="prev" title="3.1. Great Expectations: Always Know What to Expect From Your Data" href="great_expectations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="testing_data.html">
+   3. Test Data
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../deployment/deployment.html">
+   7. Deployment
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../deployment/bentoml.html">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/testing_data/pandera.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Ftesting_data/pandera.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/khuyentran1401/reproducible-data-science/master?urlpath=tree/./testing_data/pandera.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   3.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   3.2.2. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#custom-checks">
+   3.2.3. Custom Checks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#schema-model">
+   3.2.4. Schema Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validation-decorator">
+   3.2.5. Validation Decorator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-input">
+     3.2.5.1. Check Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-output">
+     3.2.5.2. Check Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-both-inputs-and-outputs">
+     3.2.5.3. Check Both Inputs and Outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-arguments-for-column-validation">
+   3.2.6. Other Arguments for Column Validation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deal-with-null-values">
+     3.2.6.1. Deal with Null Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deal-with-duplicates">
+     3.2.6.2. Deal with Duplicates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-data-types">
+     3.2.6.3. Convert Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#match-patterns">
+     3.2.6.4. Match Patterns
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-and-load-from-a-yaml-file">
+   3.2.7. Export and Load From a YAML File
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-to-yaml">
+   3.2.8. Export to YAML
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-from-yaml">
+   3.2.9. Load from YAML
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Validate Your pandas DataFrame with Pandera</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   3.2.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   3.2.2. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#custom-checks">
+   3.2.3. Custom Checks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#schema-model">
+   3.2.4. Schema Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validation-decorator">
+   3.2.5. Validation Decorator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-input">
+     3.2.5.1. Check Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-output">
+     3.2.5.2. Check Output
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-both-inputs-and-outputs">
+     3.2.5.3. Check Both Inputs and Outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-arguments-for-column-validation">
+   3.2.6. Other Arguments for Column Validation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deal-with-null-values">
+     3.2.6.1. Deal with Null Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deal-with-duplicates">
+     3.2.6.2. Deal with Duplicates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-data-types">
+     3.2.6.3. Convert Data Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#match-patterns">
+     3.2.6.4. Match Patterns
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-and-load-from-a-yaml-file">
+   3.2.7. Export and Load From a YAML File
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-to-yaml">
+   3.2.8. Export to YAML
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-from-yaml">
+   3.2.9. Load from YAML
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/pandera_example/pandera.ipynb"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="validate-your-pandas-dataframe-with-pandera">
+<h1><span class="section-number">3.2. </span>Validate Your pandas DataFrame with Pandera<a class="headerlink" href="#validate-your-pandas-dataframe-with-pandera" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">3.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>In a data science project, it is not only important to test your functions, but it is also important to test your data to make sure they work as you expected.</p>
+<p><img alt="" src="../_images/pandera1.png" /></p>
+<p>In the previous section, I showed how to use Great Expectations to validate your data.</p>
+<p>Even though Great Expectations provide a lot of useful utilities, it can be complicated to create a validation suite with Great Expectations. For a small data science project, using Great Expectations can be overkill.</p>
+<p>That is why in this section, we will learn about <a class="reference external" href="https://pandera.readthedocs.io/en/stable/">Pandera</a>, a simple Python library for validating a pandas DataFrame.</p>
+<p>To install Pandera, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install pandera
+</pre></div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2><span class="section-number">3.2.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>To learn how Pandera works, let’s start with creating a simple dataset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">fruits</span>
+</pre></div>
+</div>
+<p><img alt="" src="../_images/pandera2.png" /></p>
+<p>Imagine this scenario. Your manager told you that there can only be certain fruits and stores in the dataset, and the price must be less than 4.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">available_fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">]</span>
+<span class="n">nearby_stores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To make sure your data follow these conditions, checking your data manually can cost too much time, especially when your data is big. Is there a way that you can automate this process?</p>
+<p>That is when Pandera comes in handy. Specifically, we:</p>
+<ul class="simple">
+<li><p>Create multiple tests for the entire dataset using <code class="docutils literal notranslate"><span class="pre">DataFrameSchema</span></code></p></li>
+<li><p>Create multiple tests for each column using <code class="docutils literal notranslate"><span class="pre">Column</span></code></p></li>
+<li><p>Specify the type of test using <code class="docutils literal notranslate"><span class="pre">Check</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandera</span> <span class="kn">as</span> <span class="nn">pa</span>
+<span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Check</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">)),</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: &lt;Schema Column<span class="o">(</span><span class="nv">name</span><span class="o">=</span>price, <span class="nv">type</span><span class="o">=</span>DataType<span class="o">(</span>int64<span class="o">))</span>&gt; failed element-wise validator <span class="m">0</span>:
+&lt;Check less_than: less_than<span class="o">(</span><span class="m">4</span><span class="o">)</span>&gt;
+failure cases:
+   index  failure_case
+<span class="m">0</span>      <span class="m">3</span>             <span class="m">4</span>
+</pre></div>
+</div>
+<p>In the code above:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;name&quot;:</span> <span class="pre">Column(str,</span> <span class="pre">Check.isin(available_fruits))</span></code> checks if the column <code class="docutils literal notranslate"><span class="pre">name</span></code> is of type string and if all values of the column <code class="docutils literal notranslate"><span class="pre">name</span></code> are inside a specified list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;price&quot;:</span> <span class="pre">Column(int,</span> <span class="pre">Check.less_than(4))</span></code> checks if all values in the column <code class="docutils literal notranslate"><span class="pre">price</span></code> are of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and are less than 4.</p></li>
+<li><p>Since not all values in the column <code class="docutils literal notranslate"><span class="pre">price</span></code> are less than 4, the test fails.</p></li>
+</ul>
+<p>Find other built-in <code class="docutils literal notranslate"><span class="pre">Checks</span></code> methods <a class="reference external" href="https://pandera.readthedocs.io/en/stable/reference/generated/pandera.checks.Check.html#pandera-checks-check">here</a>.</p>
+</div>
+<div class="section" id="custom-checks">
+<h2><span class="section-number">3.2.3. </span>Custom Checks<a class="headerlink" href="#custom-checks" title="Permalink to this headline">¶</a></h2>
+<p>We can also create custom checks using <code class="docutils literal notranslate"><span class="pre">lambda</span></code> . In the code below, <code class="docutils literal notranslate"><span class="pre">Check(lambda</span> <span class="pre">price:</span> <span class="pre">sum(price)</span> <span class="pre">&lt;</span> <span class="pre">20)</span></code> checks if the sum of the column <code class="docutils literal notranslate"><span class="pre">price</span></code> is less than 20.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">)),</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">Check</span><span class="p">(</span><span class="k">lambda</span> <span class="n">price</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">)]</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schema-model">
+<h2><span class="section-number">3.2.4. </span>Schema Model<a class="headerlink" href="#schema-model" title="Permalink to this headline">¶</a></h2>
+<p>When our tests are complicated, using dataclass can make our tests look much cleaner than using a dictionary. Luckily, Pandera also allows us to create tests using a dataclass instead of a dictionary.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera.typing</span> <span class="kn">import</span> <span class="n">Series</span>
+
+<span class="k">class</span> <span class="nc">Schema</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">SchemaModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">isin</span><span class="o">=</span><span class="n">available_fruits</span><span class="p">)</span>
+    <span class="n">store</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">isin</span><span class="o">=</span><span class="n">nearby_stores</span><span class="p">)</span>
+    <span class="n">price</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">le</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="nd">@pa.check</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">price_sum_lt_20</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Series</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span>
+
+<span class="n">Schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validation-decorator">
+<h2><span class="section-number">3.2.5. </span>Validation Decorator<a class="headerlink" href="#validation-decorator" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="check-input">
+<h3><span class="section-number">3.2.5.1. </span>Check Input<a class="headerlink" href="#check-input" title="Permalink to this headline">¶</a></h3>
+<p>Now that we know how to create tests for our data, how do we use it to test the input of our function? A straightforward approach is to add <code class="docutils literal notranslate"><span class="pre">schema.validate(input)</span></code> inside a function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">)),</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">):</span>
+    <span class="n">validated</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">validated</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+
+<span class="n">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, this approach makes it difficult for us to test our function. Since the argument of <code class="docutils literal notranslate"><span class="pre">get_total_price</span></code> is both <code class="docutils literal notranslate"><span class="pre">fruits</span></code> and <code class="docutils literal notranslate"><span class="pre">schema</span></code> , we need to include both of these arguments inside the test:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_get_total_price</span><span class="p">():</span>
+    <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">],</span> <span class="s1">&#39;store&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Aldi&#39;</span><span class="p">,</span> <span class="s1">&#39;Walmart&#39;</span><span class="p">],</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+    
+    <span class="c1"># Need to include schema in the unit test</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+            <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">)),</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">test_get_total_price</span></code> tests both the data and the function. Because a unit test should only test one thing, including data validation inside a function is not ideal.</p>
+<p>Pandera provides a solution for this with the <code class="docutils literal notranslate"><span class="pre">check_input</span></code> decorator. The argument of this decorator is used to validate the input of the function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">check_input</span>
+
+<span class="nd">@check_input</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fruits</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the input is not valid, Pandera will raise an error before the input is processed by your function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nd">@check_input</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fruits</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: error in check_input decorator of <span class="k">function</span> <span class="s1">&#39;get_total_price&#39;</span>: expected series <span class="s1">&#39;price&#39;</span> to have <span class="nb">type</span> int64, got object
+</pre></div>
+</div>
+<p>Validating data before processing is very nice since it <strong>prevents</strong> us from <strong>wasting a significant amount of time on processing the data</strong>.</p>
+</div>
+<div class="section" id="check-output">
+<h3><span class="section-number">3.2.5.2. </span>Check Output<a class="headerlink" href="#check-output" title="Permalink to this headline">¶</a></h3>
+<p>We can also use Pandera’s <code class="docutils literal notranslate"><span class="pre">check_output</span></code> decorator to check the output of a function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">check_output</span>
+
+<span class="n">fruits_nearby</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">fruits_faraway</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">out_schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">]))}</span>
+<span class="p">)</span>
+
+
+<span class="nd">@check_output</span><span class="p">(</span><span class="n">out_schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">fruits</span>
+
+
+<span class="n">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-both-inputs-and-outputs">
+<h3><span class="section-number">3.2.5.3. </span>Check Both Inputs and Outputs<a class="headerlink" href="#check-both-inputs-and-outputs" title="Permalink to this headline">¶</a></h3>
+<p>Now you might wonder, is there a way to check both inputs and outputs? We can do that using the decorator <code class="docutils literal notranslate"><span class="pre">check_io</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">check_io</span>
+
+<span class="n">in_schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span><span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">)})</span>
+
+<span class="n">out_schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">]))}</span>
+<span class="p">)</span>
+
+
+<span class="nd">@check_io</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="o">=</span><span class="n">in_schema</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="o">=</span><span class="n">in_schema</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out_schema</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">fruits</span>
+
+
+<span class="n">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="other-arguments-for-column-validation">
+<h2><span class="section-number">3.2.6. </span>Other Arguments for Column Validation<a class="headerlink" href="#other-arguments-for-column-validation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="deal-with-null-values">
+<h3><span class="section-number">3.2.6.1. </span>Deal with Null Values<a class="headerlink" href="#deal-with-null-values" title="Permalink to this headline">¶</a></h3>
+<p>By default, Pandera will raise an error if there are null values in a column we are testing. If null values are acceptable, add <code class="docutils literal notranslate"><span class="pre">nullable=False</span></code> to our <code class="docutils literal notranslate"><span class="pre">Column</span></code> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">fruits</span> <span class="o">=</span> <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deal-with-duplicates">
+<h3><span class="section-number">3.2.6.2. </span>Deal with Duplicates<a class="headerlink" href="#deal-with-duplicates" title="Permalink to this headline">¶</a></h3>
+<p>By default, duplicates are acceptable. To raise an error when there are duplicates, use <code class="docutils literal notranslate"><span class="pre">allow_duplicates=False</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">allow_duplicates</span><span class="o">=</span><span class="bp">False</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: series <span class="s1">&#39;store&#39;</span> contains duplicate values: <span class="o">{</span><span class="m">2</span>: <span class="s1">&#39;Walmart&#39;</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-data-types">
+<h3><span class="section-number">3.2.6.3. </span>Convert Data Types<a class="headerlink" href="#convert-data-types" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">coerce=True</span></code> changes the data type of a column if its data type doesn’t satisfy the test condition.</p>
+<p>In the code below, the data type of price is changed from integer to string.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">coerce</span><span class="o">=</span><span class="bp">True</span><span class="p">)})</span>
+<span class="n">validated</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+<span class="n">validated</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name     object
+store    object
+price    object
+dtype: object
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-patterns">
+<h3><span class="section-number">3.2.6.4. </span>Match Patterns<a class="headerlink" href="#match-patterns" title="Permalink to this headline">¶</a></h3>
+<p>What if we want to change all columns that start with the word <code class="docutils literal notranslate"><span class="pre">store</span></code> ?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">favorite_stores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">]</span>
+
+<span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store_nearby&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Aldi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;store_far&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Pandera allows us to apply the same checks on multiple columns that share a certain pattern by adding <code class="docutils literal notranslate"><span class="pre">regex=True</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
+        <span class="s2">&quot;store_+&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">favorite_stores</span><span class="p">),</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="export-and-load-from-a-yaml-file">
+<h2><span class="section-number">3.2.7. </span>Export and Load From a YAML File<a class="headerlink" href="#export-and-load-from-a-yaml-file" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="export-to-yaml">
+<h2><span class="section-number">3.2.8. </span>Export to YAML<a class="headerlink" href="#export-to-yaml" title="Permalink to this headline">¶</a></h2>
+<p>Using a YAML file is a neat way to show your tests to colleagues who don’t know Python. We can keep a record of all validations in a YAML file using <code class="docutils literal notranslate"><span class="pre">schema.to_yaml()</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Get a YAML object</span>
+<span class="n">yaml_schema</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">()</span>
+
+<span class="c1"># Save to a file</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;schema.yml&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">yaml_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> should look like the below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">schema_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dataframe</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.7.0</span>
+<span class="nt">columns</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span>
+    <span class="nt">dtype</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="nt">nullable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">checks</span><span class="p">:</span>
+      <span class="nt">isin</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">apple</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">banana</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">orange</span>
+    <span class="nt">allow_duplicates</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">coerce</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">regex</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">store</span><span class="p">:</span>
+    <span class="nt">dtype</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">str</span>
+    <span class="nt">nullable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">checks</span><span class="p">:</span>
+      <span class="nt">isin</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Aldi</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Walmart</span>
+    <span class="nt">allow_duplicates</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">coerce</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">regex</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">price</span><span class="p">:</span>
+    <span class="nt">dtype</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">int64</span>
+    <span class="nt">nullable</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">checks</span><span class="p">:</span>
+      <span class="nt">less_than</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+    <span class="nt">allow_duplicates</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">coerce</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">regex</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">checks</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="nt">coerce</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">strict</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-from-yaml">
+<h2><span class="section-number">3.2.9. </span>Load from YAML<a class="headerlink" href="#load-from-yaml" title="Permalink to this headline">¶</a></h2>
+<p>To load from a YAML file, simple use <code class="docutils literal notranslate"><span class="pre">pa.io.from_yaml(yaml_schema)</span></code> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">f</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">yaml_schema</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">yaml_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./testing_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="great_expectations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3.1. </span>Great Expectations: Always Know What to Expect From Your Data</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="schema.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>Introduction to Schema: A Python Libary to Validate your Data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
