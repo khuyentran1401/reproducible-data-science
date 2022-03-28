@@ -132,9 +132,14 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="how_to_read.html">
+   1. How to read this book
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="structure_project/structure_project.html">
-   1. Structure Project
+   2. Structure Project
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -144,14 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="structure_project/functions.html">
-     1.1. Best Practices for Writing Python Functions
+     2.1. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="testing_code/testing_code.html">
-   2. Test Code
+   3. Test Code
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -161,19 +166,19 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="testing_code/pytest.html">
-     2.1. Pytest for Data Scientists
+     3.1. Pytest for Data Scientists
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="testing_code/pytest_plugins.html">
-     2.2. 4 Useful Tips for Pytest
+     3.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="testing_data/testing_data.html">
-   3. Test Data
+   4. Test Data
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -183,24 +188,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="testing_data/great_expectations.html">
-     3.1. Great Expectations: Always Know What to Expect From Your Data
+     4.1. Great Expectations: Always Know What to Expect From Your Data
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="testing_data/pandera.html">
-     3.2. Validate Your pandas DataFrame with Pandera
+     4.2. Validate Your pandas DataFrame with Pandera
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="testing_data/schema.html">
-     3.3. Introduction to Schema: A Python Libary to Validate your Data
+     4.3. Introduction to Schema: A Python Libary to Validate your Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="orchestration/orchestration.html">
-   4. Build Pipelines
+   5. Build Pipelines
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -210,19 +215,19 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="orchestration/kedro_pipelines.html">
-     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="orchestration/prefect.html">
-     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="experiment_tracking/experiment_tracking.html">
-   5. Experiment Tracking
+   6. Experiment Tracking
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -232,19 +237,19 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="experiment_tracking/hydra.html">
-     5.1. Configure your Data Science Projects with Hydra
+     6.1. Configure your Data Science Projects with Hydra
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="experiment_tracking/wandb.html">
-     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+     6.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="version_control/version_control.html">
-   6. Version Control
+   7. Version Control
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -254,24 +259,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="version_control/dvc.html">
-     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+     7.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="version_control/dagshub.html">
-     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+     7.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="version_control/code_formatting.html">
-     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+     7.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="deploy_models/deploy_models.html">
-   7. Deploy Models
+   8. Deploy Models
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -281,7 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="deploy_models/bentoml.html">
-     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+     8.1. BentoML: Create an ML Powered Prediction Service in Minutes
     </a>
    </li>
   </ul>

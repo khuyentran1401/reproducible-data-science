@@ -6,6 +6,7 @@ root: README.md
 options:
   numbered: True
 chapters:
+- file: how_to_read.md
 - file: structure_project/structure_project.md
   sections: 
   - file: structure_project/functions.md
