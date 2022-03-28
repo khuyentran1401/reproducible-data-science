@@ -90,7 +90,7 @@ if __name__ == "__main__":
     main()
 ```
 
-The function`load_data` tries to download data from Google Drive and extract the data. Even though there are many comments in this function, it is difficult to understand what this function does in 3 minutes. It is because:
+The function `load_data` tries to download data from Google Drive and extract the data. Even though there are many comments in this function, it is difficult to understand what this function does in 3 minutes. It is because:
 
 -   The function is awfully long
 -   The function tries to do multiple things
@@ -99,11 +99,12 @@ The function`load_data` tries to download data from Google Drive and extract the
 -   There are multiple duplications
 -   Function’s name is not descriptive
 
-We will refactor this code by using the 6 practices mentioned above
+We will refactor this code by using the 6 practices mentioned above.
 
 ### Small
 
 A function should be small because it is easier to know what the function does. How small is small? There should rarely be more than 20 lines of code in one function. It can be as small as below. The indent level of a function should not be greater than one or two.
+
 ```python
 import zipfile
 
@@ -243,7 +244,7 @@ Since the code to extract texts from training files and the code to extract text
 A long descriptive name is better than a short enigmatic name. A long descriptive name is better than a long descriptive comment. — Clean Code by Robert C. Martin
 ```
 
-Users can understand what the function`extract_texts_from_multiple_files` does by looking at its name.
+Users can understand what the function `extract_texts_from_multiple_files` does by looking at its name.
 
 Don’t be afraid to write long names. **It is better to write long names rather than write vague names.** If you try to shorten your code by writing something like `get_texts` , it would be difficult for others to understand exactly what this function does without looking at the source code.
 
@@ -359,15 +360,17 @@ if __name__ == "__main__":
     main()
 ```
 
-_Side note: In the code above, I use_ `_staticmethod_` _as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods_ [_here_](https://realpython.com/instance-class-and-static-methods-demystified/)_._
+```{note}
+In the code above, I use `staticmethod` _as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods [here](https://realpython.com/instance-class-and-static-methods-demystified/).
+```
 
 As we can see, none of the functions above have more than 3 arguments! Even though the code that uses a class is longer compared to the code that uses a function, it is much more readable! We also know exactly what each piece of code does.
 
 ### How do I write a function like this?
 
-Don’t try to be perfect when starting to write code. Start with writing down complicated code that matches your thoughts. Then as your code grows, ask yourself whether your function violates any of the practices mentioned above. If yes, refactor it. [Test it](https://towardsdatascience.com/pytest-for-data-scientists-2990319e55e6). Then move on to the next function.
+Don’t try to be perfect when starting to write code. Start with writing down complicated code that matches your thoughts. Then as your code grows, ask yourself whether your function violates any of the practices mentioned above. If yes, refactor it. [Test it](../testing_code/pytest.md). Then move on to the next function.
 
 ### Conclusion
-Congratulations! You have just learned 6 best practices to write readable and testable functions. Since each function does one task, it will make it easier for you to test your functions and ensure that they pass the unit tests when a change is made.
+You have just learned 6 best practices to write readable and testable functions. Since each function does one task, it will make it easier for you to test your functions and ensure that they pass the unit tests when a change is made.
 
 If you make it effortless for your teammates to understand your code, they will be happy to reuse your code for other tasks.

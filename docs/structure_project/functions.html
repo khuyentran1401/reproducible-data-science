@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../testing_code/pytest_plugins.html">
-     2.3. 4 Useful Plugins for Pytest
+     2.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
@@ -587,7 +587,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The function<code class="docutils literal notranslate"><span class="pre">load_data</span></code> tries to download data from Google Drive and extract the data. Even though there are many comments in this function, it is difficult to understand what this function does in 3 minutes. It is because:</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">load_data</span></code> tries to download data from Google Drive and extract the data. Even though there are many comments in this function, it is difficult to understand what this function does in 3 minutes. It is because:</p>
 <ul class="simple">
 <li><p>The function is awfully long</p></li>
 <li><p>The function tries to do multiple things</p></li>
@@ -596,7 +596,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>There are multiple duplications</p></li>
 <li><p>Function’s name is not descriptive</p></li>
 </ul>
-<p>We will refactor this code by using the 6 practices mentioned above</p>
+<p>We will refactor this code by using the 6 practices mentioned above.</p>
 </div>
 <div class="section" id="small">
 <h2><span class="section-number">1.1.3. </span>Small<a class="headerlink" href="#small" title="Permalink to this headline">¶</a></h2>
@@ -727,7 +727,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p class="admonition-title">Descriptive Names</p>
 <p>A long descriptive name is better than a short enigmatic name. A long descriptive name is better than a long descriptive comment. — Clean Code by Robert C. Martin</p>
 </div>
-<p>Users can understand what the function<code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> does by looking at its name.</p>
+<p>Users can understand what the function <code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> does by looking at its name.</p>
 <p>Don’t be afraid to write long names. <strong>It is better to write long names rather than write vague names.</strong> If you try to shorten your code by writing something like <code class="docutils literal notranslate"><span class="pre">get_texts</span></code> , it would be difficult for others to understand exactly what this function does without looking at the source code.</p>
 <p>If the descriptive name of a function is too long such as <code class="docutils literal notranslate"><span class="pre">download_file_from_</span> <span class="pre">Google_drive_and_extract_text_from_that_file</span></code> . It is a good sign that your function is doing multiple things and you should split it into smaller functions.</p>
 </div>
@@ -837,16 +837,19 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><em>Side note: In the code above, I use</em> <code class="docutils literal notranslate"><span class="pre">_staticmethod_</span></code> <em>as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods</em> <a class="reference external" href="https://realpython.com/instance-class-and-static-methods-demystified/"><em>here</em></a><em>.</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the code above, I use <code class="docutils literal notranslate"><span class="pre">staticmethod</span></code> _as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods <a class="reference external" href="https://realpython.com/instance-class-and-static-methods-demystified/">here</a>.</p>
+</div>
 <p>As we can see, none of the functions above have more than 3 arguments! Even though the code that uses a class is longer compared to the code that uses a function, it is much more readable! We also know exactly what each piece of code does.</p>
 </div>
 <div class="section" id="how-do-i-write-a-function-like-this">
 <h2><span class="section-number">1.1.9. </span>How do I write a function like this?<a class="headerlink" href="#how-do-i-write-a-function-like-this" title="Permalink to this headline">¶</a></h2>
-<p>Don’t try to be perfect when starting to write code. Start with writing down complicated code that matches your thoughts. Then as your code grows, ask yourself whether your function violates any of the practices mentioned above. If yes, refactor it. <a class="reference external" href="https://towardsdatascience.com/pytest-for-data-scientists-2990319e55e6">Test it</a>. Then move on to the next function.</p>
+<p>Don’t try to be perfect when starting to write code. Start with writing down complicated code that matches your thoughts. Then as your code grows, ask yourself whether your function violates any of the practices mentioned above. If yes, refactor it. <a class="reference internal" href="../testing_code/pytest.html"><span class="doc std std-doc">Test it</span></a>. Then move on to the next function.</p>
 </div>
 <div class="section" id="conclusion">
 <h2><span class="section-number">1.1.10. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>Congratulations! You have just learned 6 best practices to write readable and testable functions. Since each function does one task, it will make it easier for you to test your functions and ensure that they pass the unit tests when a change is made.</p>
+<p>You have just learned 6 best practices to write readable and testable functions. Since each function does one task, it will make it easier for you to test your functions and ensure that they pass the unit tests when a change is made.</p>
 <p>If you make it effortless for your teammates to understand your code, they will be happy to reuse your code for other tasks.</p>
 </div>
 </div>

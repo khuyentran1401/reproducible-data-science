@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.1. Pytest for Data Scientists" href="pytest.html" />
-    <link rel="prev" title="1.1. Stop writing Python functions that take more than three minutes to understand" href="../structure_project/functions.html" />
+    <link rel="prev" title="1.1. Best Practices for Writing Python Functions" href="../structure_project/functions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -146,7 +146,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     1.1. Stop writing Python functions that take more than three minutes to understand
+     1.1. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="pytest_plugins.html">
-     2.3. 4 Useful Plugins for Pytest
+     2.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
@@ -390,6 +390,28 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="test-code">
 <h1><span class="section-number">2. </span>Test Code<a class="headerlink" href="#test-code" title="Permalink to this headline">¶</a></h1>
+<p>It is fun to apply different python code to process your data in your notebook, but in order to make your code reproducible, you need to put them into functions and classes. When you put your code in the script, the code may break because of some functions. Even if you code doesn’t break, how do you know if your function will work as you expected?</p>
+<p>For example, we create a function to extract the sentiment of a text with <a class="reference external" href="https://textblob.readthedocs.io/en/dev/">TextBlob</a>, a Python library for processing textual data. We want to make sure it works as we expect: the function returns a value that is greater than 0 if the test is positive and returns a value that is less than 0 if the text is negative.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+
+<span class="k">def</span> <span class="nf">extract_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Extract sentiment using textblob. </span>
+<span class="sd">        Polarity is within range [-1, 1]&#39;&#39;&#39;</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+</pre></div>
+</div>
+<p>To find out whether the function will return the right value for every time, the best way is to apply the functions to different examples to see if it produces the results we want. That is when testing becomes important.</p>
+<p>In general, you should use testing for your data science projects because it allows you to:</p>
+<ul class="simple">
+<li><p>Make sure the code works as expected</p></li>
+<li><p>Detect edge cases</p></li>
+<li><p>Feel confident to swap your existing code with improved code without being afraid of breaking the entire pipeline</p></li>
+<li><p>Your teammates can understand your functions by looking at your tests.</p></li>
+</ul>
+<p>In this chapter, you will learn how to test your code with Pytest.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -423,7 +445,7 @@ const thebe_selector_output = ".output, .cell_output"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1.1. </span>Stop writing Python functions that take more than three minutes to understand</p>
+            <p class="prev-next-title"><span class="section-number">1.1. </span>Best Practices for Writing Python Functions</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="pytest.html" title="next page">

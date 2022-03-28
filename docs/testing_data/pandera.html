@@ -146,7 +146,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     1.1. Stop writing Python functions that take more than three minutes to understand
+     1.1. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../testing_code/pytest_plugins.html">
-     2.3. 4 Useful Plugins for Pytest
+     2.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
@@ -329,9 +329,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/testing_data/pandera.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/testing_data/pandera.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -364,23 +364,6 @@ const thebe_selector_output = ".output, .cell_output"
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/khuyentran1401/reproducible-data-science/master?urlpath=tree/./testing_data/pandera.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
 
         </div>
 
@@ -594,8 +577,6 @@ const thebe_selector_output = ".output, .cell_output"
 <h1><span class="section-number">3.2. </span>Validate Your pandas DataFrame with Pandera<a class="headerlink" href="#validate-your-pandas-dataframe-with-pandera" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="motivation">
 <h2><span class="section-number">3.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
-<p>In a data science project, it is not only important to test your functions, but it is also important to test your data to make sure they work as you expected.</p>
-<p><img alt="" src="../_images/pandera1.png" /></p>
 <p>In the previous section, I showed how to use Great Expectations to validate your data.</p>
 <p>Even though Great Expectations provide a lot of useful utilities, it can be complicated to create a validation suite with Great Expectations. For a small data science project, using Great Expectations can be overkill.</p>
 <p>That is why in this section, we will learn about <a class="reference external" href="https://pandera.readthedocs.io/en/stable/">Pandera</a>, a simple Python library for validating a pandas DataFrame.</p>

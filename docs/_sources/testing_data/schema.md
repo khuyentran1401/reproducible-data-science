@@ -6,7 +6,7 @@
 
 Photo by [Nonsap Visuals](https://unsplash.com/@nonsapvisuals?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
-### Motivation
+### What is schema?
 
 In the last two sections, we learned how to validate a pandas DataFrame. However, sometimes you might want to validate Python data structures instead of a pandas DataFrame. That is when schema comes in handy. 
 

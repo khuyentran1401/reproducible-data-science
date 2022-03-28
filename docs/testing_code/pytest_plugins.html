@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2.3. 4 Useful Plugins for Pytest &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    <title>2.2. 4 Useful Tips for Pytest &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -146,7 +146,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     1.1. Stop writing Python functions that take more than three minutes to understand
+     1.1. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.3. 4 Useful Plugins for Pytest
+     2.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
@@ -377,27 +377,27 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
-   2.3.1. Motivation
+   2.2.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#filter-warnings">
-   2.3.2. Filter warnings
+   2.2.2. Filter warnings
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#print-the-output">
-   2.3.3. Print the Output
+   2.2.3. Print the Output
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#repeat-one-test-multiple-times">
-   2.3.4. Repeat One Test Multiple Times
+   2.2.4. Repeat One Test Multiple Times
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#benchmark-your-code">
-   2.3.5. Benchmark your Code
+   2.2.5. Benchmark your Code
   </a>
  </li>
 </ul>
@@ -410,7 +410,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>4 Useful Plugins for Pytest</h1>
+                <h1>4 Useful Tips for Pytest</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -422,27 +422,27 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
-   2.3.1. Motivation
+   2.2.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#filter-warnings">
-   2.3.2. Filter warnings
+   2.2.2. Filter warnings
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#print-the-output">
-   2.3.3. Print the Output
+   2.2.3. Print the Output
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#repeat-one-test-multiple-times">
-   2.3.4. Repeat One Test Multiple Times
+   2.2.4. Repeat One Test Multiple Times
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#benchmark-your-code">
-   2.3.5. Benchmark your Code
+   2.2.5. Benchmark your Code
   </a>
  </li>
 </ul>
@@ -455,13 +455,11 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/advanced_pytest"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
-<div class="section" id="useful-plugins-for-pytest">
-<h1><span class="section-number">2.3. </span>4 Useful Plugins for Pytest<a class="headerlink" href="#useful-plugins-for-pytest" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useful-tips-for-pytest">
+<h1><span class="section-number">2.2. </span>4 Useful Tips for Pytest<a class="headerlink" href="#useful-tips-for-pytest" title="Permalink to this headline">¶</a></h1>
 <p><img alt="" src="https://miro.medium.com/max/700/0*Thjx7rZfjHz_aKPp" /></p>
 <div class="section" id="motivation">
-<h2><span class="section-number">2.3.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
-<p>As a data scientist, it is important to make sure your functions work as expected. A good practice is to write a small function then test your function with unit testing.</p>
-<p>Rather than trying to debug a big chunk of code, it is better to break your code down into smaller pieces and make sure the smaller pieces work.</p>
+<h2><span class="section-number">2.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://docs.pytest.org/en/stable/"><strong>Pytest</strong></a> is the ideal framework that makes it easy to write small tests in Python. I covered the benefits of unit testing and how to get started with pytest in the last section.</p>
 <p>In this section, I will show you how to:</p>
 <ul class="simple">
@@ -470,10 +468,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Benchmark your code</p></li>
 <li><p>Repeat a single test for a specific number of times</p></li>
 </ul>
-<p>Let’s get started!</p>
 </div>
 <div class="section" id="filter-warnings">
-<h2><span class="section-number">2.3.2. </span>Filter warnings<a class="headerlink" href="#filter-warnings" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.2. </span>Filter warnings<a class="headerlink" href="#filter-warnings" title="Permalink to this headline">¶</a></h2>
 <p>It is common to see deprecation warnings when running pytest. The warnings might not be necessary and appear annoying when we just want to debug our code. Luckily, we can filter pytest warnings.</p>
 <p>I will borrow the examples from <a class="reference internal" href="pytest.html"><span class="doc std std-doc">my previous pytest section</span></a>. In this example, I want to test whether TextBlob accurately predicts the sentiment of a text. If you don’t know about TextBlob, you can learn more about the tool <a class="reference external" href="https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05">here</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
@@ -495,18 +492,18 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">assert</span> <span class="n">sentiment</span> <span class="o">&gt;</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>When we test this script using</p>
+<p>When we test this script using:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest test_example.py
 </pre></div>
 </div>
-<p>we will see warnings.</p>
-<p>In order to filter the warnings, create a file called <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> in the same directory that we run our script</p>
+<p>… we will see warnings.</p>
+<p>In order to filter the warnings, create a file called <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code> in the same directory that we run our script:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
 ├── pytest.ini
 └── test_example.py
 </pre></div>
 </div>
-<p>Then insert the content below inside the <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code></p>
+<p>Then insert the content below inside the <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>pytest<span class="o">]</span>
 <span class="nv">addopts</span> <span class="o">=</span> -p no:warnings
 </pre></div>
@@ -514,10 +511,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>That’s it! Now rerun our test. We will have a clean output without the warnings!</p>
 </div>
 <div class="section" id="print-the-output">
-<h2><span class="section-number">2.3.3. </span>Print the Output<a class="headerlink" href="#print-the-output" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.3. </span>Print the Output<a class="headerlink" href="#print-the-output" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes we might want to see the intermediate output before writing <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement. Why not print the output to know the intermediate output?</p>
 <p>This will also help us develop a function that produces the output we want.</p>
-<p>For example, we can print <code class="docutils literal notranslate"><span class="pre">text.sentiment</span></code> to know what exactly <code class="docutils literal notranslate"><span class="pre">text.sentiment</span></code> does</p>
+<p>For example, we can print <code class="docutils literal notranslate"><span class="pre">text.sentiment</span></code> to know what exactly <code class="docutils literal notranslate"><span class="pre">text.sentiment</span></code> does:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
 
 <span class="k">def</span> <span class="nf">extract_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -539,7 +536,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">assert</span> <span class="n">sentiment</span> <span class="o">&gt;</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>When running <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">test_example.py</span></code>, we will see no output. In order to see the output of the<code class="docutils literal notranslate"><span class="pre">print</span></code> function, we need to include <code class="docutils literal notranslate"><span class="pre">-s</span></code> at the end of our command</p>
+<p>When running <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">test_example.py</span></code>, we will see no output. In order to see the output of the<code class="docutils literal notranslate"><span class="pre">print</span></code> function, we need to include <code class="docutils literal notranslate"><span class="pre">-s</span></code> at the end of our command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest test_example.py -s
 <span class="o">=======================</span> <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.49s <span class="o">=======================</span>
 </pre></div>
@@ -547,7 +544,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Awesome! Now we know we can use <code class="docutils literal notranslate"><span class="pre">text.sentiment.polarity</span></code>to get the <a class="reference external" href="https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d">polarity of the sentiment.</a></p>
 </div>
 <div class="section" id="repeat-one-test-multiple-times">
-<h2><span class="section-number">2.3.4. </span>Repeat One Test Multiple Times<a class="headerlink" href="#repeat-one-test-multiple-times" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.4. </span>Repeat One Test Multiple Times<a class="headerlink" href="#repeat-one-test-multiple-times" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes we might want to run one test 100 times to make sure the function always works as expected.</p>
 <p>For example, we discovered the method to combine 2 Python lists</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
@@ -561,7 +558,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>From the output, it seems like the values in the list <code class="docutils literal notranslate"><span class="pre">l2</span></code> are inserted after the values in the list <code class="docutils literal notranslate"><span class="pre">l1</span></code>. But is the order always that way with every pair of lists?</p>
 <p>To make sure the order of insertion is preserved when using the function<code class="docutils literal notranslate"><span class="pre">extend</span></code>, we can create two random lists then test it 100 times. If all tests pass, we are certain that the function will always work as we expected</p>
-<p>To repeat a single test, install <code class="docutils literal notranslate"><span class="pre">pytest-repeat</span></code></p>
+<p>To repeat a single test, install <code class="docutils literal notranslate"><span class="pre">pytest-repeat</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install pytest-repeat
 </pre></div>
 </div>
@@ -602,16 +599,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p>If you want to be more certain, increase the number to 1000 and see what you get. You can find more about <code class="docutils literal notranslate"><span class="pre">pytest-repeat</span></code> <a class="reference external" href="https://pypi.org/project/pytest-repeat/">here</a>.</p>
 </div>
 <div class="section" id="benchmark-your-code">
-<h2><span class="section-number">2.3.5. </span>Benchmark your Code<a class="headerlink" href="#benchmark-your-code" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2.5. </span>Benchmark your Code<a class="headerlink" href="#benchmark-your-code" title="Permalink to this headline">¶</a></h2>
 <p>We might not only want to assert the outputs are what we expected, but we also want to compare the speed of different functions.</p>
 <p>A <strong>benchmark</strong> is a test that we can use to measure how fast our code is.</p>
 <p>Luckily, there is a library called <code class="docutils literal notranslate"><span class="pre">pytest-benchmark</span></code> that allows us to benchmark our code while testing our function with pytest!</p>
-<p>Install <code class="docutils literal notranslate"><span class="pre">pytest-benchmark</span></code> with</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">pytest-benchmark</span></code> with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install pytest-benchmark
 </pre></div>
 </div>
 <p>I will borrow the examples from my article on <a class="reference external" href="https://towardsdatascience.com/timing-the-performance-to-choose-the-right-python-object-for-your-data-science-project-670db6f11b8e">timing for efficient Python code</a> to show how we can use <code class="docutils literal notranslate"><span class="pre">pytest-benchmark.</span></code></p>
-<p>Here we test how long it takes to create a list using <code class="docutils literal notranslate"><span class="pre">concat</span></code> method</p>
+<p>Here we test how long it takes to create a list using <code class="docutils literal notranslate"><span class="pre">concat</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">concat</span><span class="p">(</span><span class="n">len_list</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_list</span><span class="p">):</span>

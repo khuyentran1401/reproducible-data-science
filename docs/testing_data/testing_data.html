@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.1. Great Expectations: Always Know What to Expect From Your Data" href="great_expectations.html" />
-    <link rel="prev" title="2.3. 4 Useful Plugins for Pytest" href="../testing_code/pytest_plugins.html" />
+    <link rel="prev" title="2.2. 4 Useful Tips for Pytest" href="../testing_code/pytest_plugins.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -146,7 +146,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     1.1. Stop writing Python functions that take more than three minutes to understand
+     1.1. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../testing_code/pytest_plugins.html">
-     2.3. 4 Useful Plugins for Pytest
+     2.2. 4 Useful Tips for Pytest
     </a>
    </li>
   </ul>
@@ -390,6 +390,17 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="test-data">
 <h1><span class="section-number">3. </span>Test Data<a class="headerlink" href="#test-data" title="Permalink to this headline">¶</a></h1>
+<p>Let’s say your company is training a machine learning model to predict whether a user will click an ad or not using the data collected from users. In September 2021, the model you trained correctly predict whether a user clicked an ad 90% of the time. Hooray!</p>
+<p>However, in October 2021, the same model correctly predict whether a user clicked an ad only 70% of the time. What happened?</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*NRULCRnrGKDMf4D1Q6cYSQ.png" /></p>
+<p>You suspected that the change in the performance of your model might be due to the change in your data. So you decided to compare the distribution of daily time spent on site of the data collected in September 2021 and one collected in October 2021.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*fX7dj47Yd99bQep0w4o6Zg.png" /></p>
+<p>And you were right! There is a significant difference in the distribution of the daily time spent on site between the two data.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*kysVtQj3tlHd6C16PehWTg.png" /></p>
+<p>Since the daily time spent on site is one of the most important features in your model, the shift in the distribution of this feature leads to a drop in the performance of your model.</p>
+<p>Instead of manually checking whether there is a change in the distribution of your data every month, is there a way that you can automatically check for the change in the distribution before the data is being fed to the model?</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*bSf8SxM6abTeZzdi_3koxA.png" /></p>
+<p>In this chapter, you will learn some libraries to validate your data in Python.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -423,7 +434,7 @@ const thebe_selector_output = ".output, .cell_output"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.3. </span>4 Useful Plugins for Pytest</p>
+            <p class="prev-next-title"><span class="section-number">2.2. </span>4 Useful Tips for Pytest</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="great_expectations.html" title="next page">

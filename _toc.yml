@@ -16,7 +16,7 @@ chapters:
 - file: testing_data/testing_data.md
   sections:
   - file: testing_data/great_expectations.md
-  - file: testing_data/pandera.ipynb
+  - file: testing_data/pandera.md
   - file: testing_data/schema.md
 - file: orchestration/orchestration.md
   sections:

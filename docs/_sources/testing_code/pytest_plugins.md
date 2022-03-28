@@ -1,14 +1,10 @@
 [![View the code](https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub)](https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/advanced_pytest) 
 
-## 4 Useful Plugins for Pytest
+## 4 Useful Tips for Pytest
 
 ![](https://miro.medium.com/max/700/0*Thjx7rZfjHz_aKPp)
 
 ### Motivation
-
-As a data scientist, it is important to make sure your functions work as expected. A good practice is to write a small function then test your function with unit testing.
-
-Rather than trying to debug a big chunk of code, it is better to break your code down into smaller pieces and make sure the smaller pieces work.
 
 [**Pytest**](https://docs.pytest.org/en/stable/) is the ideal framework that makes it easy to write small tests in Python. I covered the benefits of unit testing and how to get started with pytest in the last section.
 
@@ -18,8 +14,6 @@ In this section, I will show you how to:
 -   Print the output of the function being tested
 -   Benchmark your code
 -   Repeat a single test for a specific number of times
-
-Let’s get started!
 
 ### Filter warnings
 
@@ -47,15 +41,15 @@ def test_extract_sentiment():
     assert sentiment > 0
 ```
 
-When we test this script using
+When we test this script using:
 
 ```bash
 $ pytest test_example.py
 ```
 
-we will see warnings.
+... we will see warnings.
 
-In order to filter the warnings, create a file called `pytest.ini` in the same directory that we run our script
+In order to filter the warnings, create a file called `pytest.ini` in the same directory that we run our script:
 
 ```bash
 .
@@ -63,7 +57,7 @@ In order to filter the warnings, create a file called `pytest.ini` in the same d
 └── test_example.py
 ```
 
-Then insert the content below inside the `pytest.ini`
+Then insert the content below inside the `pytest.ini`:
 
 ```bash
 [pytest]
@@ -78,7 +72,7 @@ Sometimes we might want to see the intermediate output before writing `assert` s
 
 This will also help us develop a function that produces the output we want.
 
-For example, we can print `text.sentiment` to know what exactly `text.sentiment` does
+For example, we can print `text.sentiment` to know what exactly `text.sentiment` does:
 ```python
 from textblob import TextBlob
 
@@ -101,7 +95,7 @@ def test_extract_sentiment():
     assert sentiment > 0
 ```
 
-When running `pytest test_example.py`, we will see no output. In order to see the output of the`print` function, we need to include `-s` at the end of our command
+When running `pytest test_example.py`, we will see no output. In order to see the output of the`print` function, we need to include `-s` at the end of our command:
 
 ```bash
 $ pytest test_example.py -s
@@ -129,7 +123,7 @@ From the output, it seems like the values in the list `l2` are inserted after th
 
 To make sure the order of insertion is preserved when using the function`extend`, we can create two random lists then test it 100 times. If all tests pass, we are certain that the function will always work as we expected
 
-To repeat a single test, install `pytest-repeat`
+To repeat a single test, install `pytest-repeat`:
 
 ```bash
 $ pip install pytest-repeat
@@ -183,7 +177,7 @@ A **benchmark** is a test that we can use to measure how fast our code is.
 
 Luckily, there is a library called `pytest-benchmark` that allows us to benchmark our code while testing our function with pytest!
 
-Install `pytest-benchmark` with
+Install `pytest-benchmark` with:
 
 ```bash
 pip install pytest-benchmark
@@ -191,7 +185,7 @@ pip install pytest-benchmark
 
 I will borrow the examples from my article on [timing for efficient Python code](https://towardsdatascience.com/timing-the-performance-to-choose-the-right-python-object-for-your-data-science-project-670db6f11b8e) to show how we can use `pytest-benchmark.`
 
-Here we test how long it takes to create a list using `concat` method
+Here we test how long it takes to create a list using `concat` method:
 
 ```python
 def concat(len_list=1000):
