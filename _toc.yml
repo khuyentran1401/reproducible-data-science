@@ -8,7 +8,6 @@ options:
 chapters:
 - file: structure_project/structure_project.md
   sections: 
-  # - file: structure_project/why_not_notebook.md
   - file: structure_project/functions.md
 - file: testing_code/testing_code.md
   sections:

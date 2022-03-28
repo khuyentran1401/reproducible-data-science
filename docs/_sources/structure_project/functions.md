@@ -1,6 +1,6 @@
 [![View the code](https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub)](https://github.com/khuyentran1401/Data-science/tree/master/python/good_functions)
 
-## Stop writing Python functions that take more than three minutes to understand
+## Best Practices for Writing Python Functions
 
 ![](https://miro.medium.com/max/700/0*kCH3-jlwMVCig7As)
 
