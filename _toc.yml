@@ -32,6 +32,6 @@ chapters:
   - file: version_control/dvc.md
   - file: version_control/dagshub.md
   - file: version_control/code_formatting.md
-- file: deployment/deployment.md
+- file: deploy_models/deploy_models.md
   sections: 
-  - file: deployment/bentoml.md
+  - file: deploy_models/bentoml.md

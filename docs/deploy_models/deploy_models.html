@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Structure Project &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    <title>7. Deploy Models &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -88,8 +88,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.1. Stop writing Python functions that take more than three minutes to understand" href="functions.html" />
-    <link rel="prev" title="Build a Reproducible and Maintainable Data Science Project" href="../README.html" />
+    <link rel="next" title="7.1. BentoML: Create an ML Powered Prediction Service in Minutes" href="bentoml.html" />
+    <link rel="prev" title="6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python" href="../version_control/code_formatting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -134,18 +134,18 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
    1. Structure Project
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="functions.html">
+    <a class="reference internal" href="../structure_project/functions.html">
      1.1. Stop writing Python functions that take more than three minutes to understand
     </a>
    </li>
@@ -271,18 +271,18 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../deploy_models/deploy_models.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    7. Deploy Models
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../deploy_models/bentoml.html">
+    <a class="reference internal" href="bentoml.html">
      7.1. BentoML: Create an ML Powered Prediction Service in Minutes
     </a>
    </li>
@@ -329,7 +329,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/structure_project/structure_project.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/deploy_models/deploy_models.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -349,7 +349,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fstructure_project/structure_project.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fdeploy_models/deploy_models.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -377,7 +377,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Structure Project</h1>
+                <h1>Deploy Models</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -388,8 +388,8 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="structure-project">
-<h1><span class="section-number">1. </span>Structure Project<a class="headerlink" href="#structure-project" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="deploy-models">
+<h1><span class="section-number">7. </span>Deploy Models<a class="headerlink" href="#deploy-models" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -407,7 +407,7 @@ const thebe_selector_output = ".output, .cell_output"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./structure_project"
+            path: "./deploy_models"
         },
         predefinedOutput: true
     }
@@ -419,17 +419,17 @@ const thebe_selector_output = ".output, .cell_output"
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../version_control/code_formatting.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Build a Reproducible and Maintainable Data Science Project</p>
+            <p class="prev-next-title"><span class="section-number">6.3. </span>4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="functions.html" title="next page">
+    <a class='right-next' id="next-link" href="bentoml.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.1. </span>Stop writing Python functions that take more than three minutes to understand</p>
+        <p class="prev-next-title"><span class="section-number">7.1. </span>BentoML: Create an ML Powered Prediction Service in Minutes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

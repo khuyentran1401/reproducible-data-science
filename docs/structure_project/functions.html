@@ -272,8 +272,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../deployment/deployment.html">
-   7. Deployment
+  <a class="reference internal" href="../deploy_models/deploy_models.html">
+   7. Deploy Models
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -282,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../deployment/bentoml.html">
+    <a class="reference internal" href="../deploy_models/bentoml.html">
      7.1. BentoML: Create an ML Powered Prediction Service in Minutes
     </a>
    </li>
@@ -529,7 +529,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="get-started">
 <h2><span class="section-number">1.1.2. </span>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
 <p>Let’s start by taking a look at the function <code class="docutils literal notranslate"><span class="pre">load_data</span></code> below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
@@ -551,7 +551,7 @@ const thebe_selector_output = ".output, .cell_output"
 
     <span class="c1"># Download data from Google Drive</span>
     <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;Twitter.zip&quot;</span>
-    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Unzip data</span>
     <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
@@ -559,25 +559,25 @@ const thebe_selector_output = ".output, .cell_output"
 
     <span class="c1"># Get train, test data files</span>
     <span class="n">tweets_train_files</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="nb">file</span>
-        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_train</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+        <span class="n">file</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_train</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span> <span class="ow">and</span> <span class="n">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
     <span class="p">]</span>
     <span class="n">tweets_test_files</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="nb">file</span>
-        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_test</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+        <span class="n">file</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path_test</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span> <span class="ow">and</span> <span class="n">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
     <span class="p">]</span>
 
     <span class="c1"># Extract texts from each file</span>
     <span class="n">t_train</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
-        <span class="n">train_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
+        <span class="n">train_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="n">t_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">train_doc_1</span><span class="p">))</span>
 
     <span class="n">t_test</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
-        <span class="n">test_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
+        <span class="n">test_doc_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="n">t_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">test_doc_1</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">t_train</span><span class="p">,</span> <span class="n">t_test</span>
@@ -626,7 +626,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="k">def</span> <span class="nf">download_zip_data_from_google_drive</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     
-    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> 
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
 </pre></div>
 </div>
 <p>The function <code class="docutils literal notranslate"><span class="pre">download_zip_data_from_google_drive</span></code> only downloads a zip file from Google Drive and does nothing else.</p>
@@ -639,13 +639,17 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 
     <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
         <span class="n">list_of_text_in_one_file</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file_name</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="n">text_in_one_file_as_string</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">list_of_text_in_one_file</span><span class="p">)</span>
         <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file_as_string</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">all_docs</span>
 </pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">What is the Level of Abstraction?</p>
+<p>The level of abstraction is the amount of complexity by which a system is viewed or programmed. The higher the level, the less detail. The lower the level, the more detail. — PCMag</p>
 </div>
 <p>That is why:</p>
 <ul class="simple">
@@ -658,8 +662,8 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 
     <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
         <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">all_docs</span>
@@ -678,14 +682,14 @@ const thebe_selector_output = ".output, .cell_output"
 <h2><span class="section-number">1.1.6. </span>Duplication<a class="headerlink" href="#duplication" title="Permalink to this headline">¶</a></h2>
 <p>There is duplication in the code below. The part of code that is used to get the training data is very similar to the part of code that is used to get the test data.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_train</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
-    <span class="n">train_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">tweets_train_files</span><span class="p">:</span>
+    <span class="n">train_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_train</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="n">t_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">train_doc_1</span><span class="p">))</span>
 
 
 <span class="n">t_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
-    <span class="n">test_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">tweets_test_files</span><span class="p">:</span>
+    <span class="n">test_doc_1</span> <span class="o">=</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path_test</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
     <span class="n">t_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">test_doc_1</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -708,8 +712,8 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 
     <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
         <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">all_docs</span>
@@ -719,6 +723,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="descriptive-names">
 <h2><span class="section-number">1.1.7. </span>Descriptive Names<a class="headerlink" href="#descriptive-names" title="Permalink to this headline">¶</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Descriptive Names</p>
+<p>A long descriptive name is better than a short enigmatic name. A long descriptive name is better than a long descriptive comment. — Clean Code by Robert C. Martin</p>
+</div>
 <p>Users can understand what the function<code class="docutils literal notranslate"><span class="pre">extract_texts_from_multiple_files</span></code> does by looking at its name.</p>
 <p>Don’t be afraid to write long names. <strong>It is better to write long names rather than write vague names.</strong> If you try to shorten your code by writing something like <code class="docutils literal notranslate"><span class="pre">get_texts</span></code> , it would be difficult for others to understand exactly what this function does without looking at the source code.</p>
 <p>If the descriptive name of a function is too long such as <code class="docutils literal notranslate"><span class="pre">download_file_from_</span> <span class="pre">Google_drive_and_extract_text_from_that_file</span></code> . It is a good sign that your function is doing multiple things and you should split it into smaller functions.</p>
@@ -742,7 +750,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>Since the functions <code class="docutils literal notranslate"><span class="pre">download_zip_data_from_google_drive</span></code> , <code class="docutils literal notranslate"><span class="pre">unzip_data</span></code> , and <code class="docutils literal notranslate"><span class="pre">get_train_test_docs</span></code> are all trying to achieve one goal: get data, we could put them into one class called <code class="docutils literal notranslate"><span class="pre">DataGetter</span></code> .</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">listdir</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span>
@@ -774,7 +782,7 @@ const thebe_selector_output = ".output, .cell_output"
 
     <span class="k">def</span> <span class="nf">download_zip_data_from_google_drive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">unzip_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -798,9 +806,9 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 
         <span class="k">return</span> <span class="p">[</span>
-            <span class="nb">file</span>
-            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">file</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
+            <span class="n">file</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span> <span class="ow">and</span> <span class="n">file</span> <span class="o">!=</span> <span class="s2">&quot;truth.txt&quot;</span>
         <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">extract_texts_from_multiple_files</span><span class="p">(</span>
@@ -808,8 +816,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 
         <span class="n">all_docs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">text_in_one_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_texts_from_each_file</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
             <span class="n">all_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_in_one_file</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">all_docs</span>

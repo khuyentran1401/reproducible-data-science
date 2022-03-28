@@ -247,16 +247,6 @@ const thebe_selector_output = ".output, .cell_output"
    1.1. Introduction
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#group-configuration-files">
-   1.2. Group Configuration Files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#override-default-parameters">
-   1.3. Override Default Parameters
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -282,16 +272,6 @@ const thebe_selector_output = ".output, .cell_output"
    1.1. Introduction
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#group-configuration-files">
-   1.2. Group Configuration Files
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#override-default-parameters">
-   1.3. Override Default Parameters
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -301,9 +281,13 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tip admonition">
-<p class="admonition-title">How to run the code in this tutorial</p>
-<p>You can access the code of this tutorial via this <a class="reference external" href="https://github.com/khuyentran1401/hydra_demo">GitHub repository</a>.</p>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="configure-your-data-science-projects-with-hydra">
 <h1><span class="section-number">1. </span>Configure your Data Science Projects with Hydra<a class="headerlink" href="#configure-your-data-science-projects-with-hydra" title="Permalink to this headline">¶</a></h1>
@@ -314,6 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>The video below shows some simple features of Hydra.</p>
+<p><a class="reference external" href="https://github.com/khuyentran1401/hydra_demo">GitHub repository of the demo</a>.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/IzEngnqOaRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
@@ -340,142 +325,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span><span class="p">,</span> <span class="n">OmegaConf</span>
 
 
-<span class="nd">@hydra.main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="nd">@hydra</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">):</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
 
 <span class="n">process_data</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Output:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="s1">&#39;Income&#39;</span>, <span class="s1">&#39;Recency&#39;</span>, <span class="s1">&#39;NumWebVisitsMonth&#39;</span>, <span class="s1">&#39;Complain&#39;</span>, <span class="s1">&#39;age&#39;</span>, <span class="s1">&#39;total_purchases&#39;</span>, <span class="s1">&#39;enrollment_years&#39;</span>, <span class="s1">&#39;family_size&#39;</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="group-configuration-files">
-<h2><span class="section-number">1.2. </span>Group Configuration Files<a class="headerlink" href="#group-configuration-files" title="Permalink to this headline">¶</a></h2>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/t9hwWxBnU0o?start=55" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
-</div>
-<p>Imagine the structure of your <code class="docutils literal notranslate"><span class="pre">config</span></code> directory looks like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>config
-├── main.yaml
-└── process
-    ├── process_1.yaml
-    ├── process_2.yaml
-    ├── process_3.yaml
-    └── process_4.yaml
-</pre></div>
-</div>
-<p>Each file has different values for the same parameters. You can set the parameters in the file <code class="docutils literal notranslate"><span class="pre">process_2.yaml</span></code> as default by adding the following to <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">process</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">process_2</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">_self_</span>
-</pre></div>
-</div>
-<p>Now the parameters in <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code> are merged with the parameters in <code class="docutils literal notranslate"><span class="pre">process_2.yaml</span></code>.</p>
-<p>Running the file <a class="reference external" href="https://github.com/khuyentran1401/hydra_demo/blob/master/hydra_group/src/print_config.py"><code class="docutils literal notranslate"><span class="pre">print_config.py</span></code></a>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python print_config.py
-</pre></div>
-</div>
-<p>should print:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_2.yaml</span>
-<span class="nt">process</span><span class="p">:</span>
-  <span class="nt">keep_columns</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Income</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Recency</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Complain</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">age</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total_purchases</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_years</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">family_size</span>
-  <span class="nt">remove_outliers_threshold</span><span class="p">:</span>
-    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">90</span>
-    <span class="nt">Income</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600000</span>
-  <span class="nt">family_size</span><span class="p">:</span>
-    <span class="nt">Married</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Together</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Absurd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Widow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">YOLO</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Divorced</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Single</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Alone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-
-<span class="c1"># From main.yaml</span>
-<span class="nt">raw_data</span><span class="p">:</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span>
-<span class="nt">intermediate</span><span class="p">:</span>
-  <span class="nt">dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span>
-<span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-<span class="nt">image</span><span class="p">:</span>
-  <span class="nt">kmeans</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span>
-  <span class="nt">clusters</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="override-default-parameters">
-<h2><span class="section-number">1.3. </span>Override Default Parameters<a class="headerlink" href="#override-default-parameters" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/t9hwWxBnU0o?start=167&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/t9hwWxBnU0o?start=167" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
-</div>
-<p>You can also override the default parameters on the command line. For example, to replace <code class="docutils literal notranslate"><span class="pre">process_2</span></code> with <code class="docutils literal notranslate"><span class="pre">process_1</span></code>, run the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python print_config.py <span class="nv">process</span><span class="o">=</span>process_1
-</pre></div>
-</div>
-<p>The output should be the combination of all parameters in <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code> and in <code class="docutils literal notranslate"><span class="pre">process_1.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_1.yaml</span>
-<span class="nt">process</span><span class="p">:</span>
-  <span class="nt">keep_columns</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Income</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Recency</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp3</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp4</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp5</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp1</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp2</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Complain</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Response</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">age</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total_purchases</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_years</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">family_size</span>
-  <span class="nt">remove_outliers_threshold</span><span class="p">:</span>
-    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">90</span>
-    <span class="nt">Income</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600000</span>
-  <span class="nt">family_size</span><span class="p">:</span>
-    <span class="nt">Married</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Together</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Absurd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Widow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">YOLO</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Divorced</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Single</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Alone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    
-<span class="c1"># From main.yaml</span>
-<span class="nt">raw_data</span><span class="p">:</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span>
-<span class="nt">intermediate</span><span class="p">:</span>
-  <span class="nt">dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span>
-<span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-<span class="nt">image</span><span class="p">:</span>
-  <span class="nt">kmeans</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span>
-  <span class="nt">clusters</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span>
 </pre></div>
 </div>
 </div>

@@ -1,0 +1,943 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.1. BentoML: Create an ML Powered Prediction Service in Minutes &#8212; Build a Reproducible and Maintainable Data Science Project</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script kind="utterances">
+
+    var commentsRunWhenDOMLoaded = cb => {
+    if (document.readyState != 'loading') {
+        cb()
+    } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', cb)
+    } else {
+        document.attachEvent('onreadystatechange', function() {
+        if (document.readyState == 'complete') cb()
+        })
+    }
+}
+
+var addUtterances = () => {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://utteranc.es/client.js";
+    script.async = "async";
+
+    script.setAttribute("repo", "https://github.com/khuyentran1401/reproducible-data-science");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("theme", "github-light");
+    script.setAttribute("label", "💬 comment");
+    script.setAttribute("crossorigin", "anonymous");
+
+    sections = document.querySelectorAll("div.section");
+    if (sections !== null) {
+        section = sections[sections.length-1];
+        section.appendChild(script);
+    }
+}
+commentsRunWhenDOMLoaded(addUtterances);
+</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="7. Deploy Models" href="deploy_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/data_simplified_icon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Build a Reproducible and Maintainable Data Science Project</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Build a Reproducible and Maintainable Data Science Project
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../structure_project/structure_project.html">
+   1. Structure Project
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/functions.html">
+     1.1. Stop writing Python functions that take more than three minutes to understand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_code/testing_code.html">
+   2. Test Code
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest.html">
+     2.1. Pytest for Data Scientists
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_code/pytest_plugins.html">
+     2.3. 4 Useful Plugins for Pytest
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing_data/testing_data.html">
+   3. Test Data
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/great_expectations.html">
+     3.1. Great Expectations: Always Know What to Expect From Your Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/pandera.html">
+     3.2. Validate Your pandas DataFrame with Pandera
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../testing_data/schema.html">
+     3.3. Introduction to Schema: A Python Libary to Validate your Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../orchestration/orchestration.html">
+   4. Build Pipelines
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
+     4.1. Create Maintainable and Modular Data Science Pipelines with Kedro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../orchestration/prefect.html">
+     4.2. Optimize Your Data Science Workflow in a Few Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../experiment_tracking/experiment_tracking.html">
+   5. Experiment Tracking
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/hydra.html">
+     5.1. Configure your Data Science Projects with Hydra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../experiment_tracking/wandb.html">
+     5.2. Introduction to Weight &amp; Biases: Track and Visualize your Machine Learning Experiments in 3 Lines of Code
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../version_control/version_control.html">
+   6. Version Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dvc.html">
+     6.1. Introduction to DVC: Data Version Control Tool for Machine Learning Projects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/dagshub.html">
+     6.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../version_control/code_formatting.html">
+     6.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="deploy_models.html">
+   7. Deploy Models
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7.1. BentoML: Create an ML Powered Prediction Service in Minutes
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/deploy_models/bentoml.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fdeploy_models/bentoml.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   7.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-bentoml">
+   7.1.2. What is BentoML?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#process-the-data">
+   7.1.3. Process the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-models">
+   7.1.4. Save Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-services">
+   7.1.5. Create Services
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-data-model-with-pydantic">
+   7.1.6. Create Data Model with pydantic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-bentos">
+   7.1.7. Build Bentos
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deploy-to-heroku">
+   7.1.8. Deploy to Heroku
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-a-ui-for-your-service-using-streamlit">
+   7.1.9. Build a UI for Your Service Using Streamlit
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>BentoML: Create an ML Powered Prediction Service in Minutes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   7.1.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-bentoml">
+   7.1.2. What is BentoML?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#process-the-data">
+   7.1.3. Process the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-models">
+   7.1.4. Save Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-services">
+   7.1.5. Create Services
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-data-model-with-pydantic">
+   7.1.6. Create Data Model with pydantic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-bentos">
+   7.1.7. Build Bentos
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deploy-to-heroku">
+   7.1.8. Deploy to Heroku
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-a-ui-for-your-service-using-streamlit">
+   7.1.9. Build a UI for Your Service Using Streamlit
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <p><a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/tree/bentoml_demo"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
+<div class="section" id="bentoml-create-an-ml-powered-prediction-service-in-minutes">
+<h1><span class="section-number">7.1. </span>BentoML: Create an ML Powered Prediction Service in Minutes<a class="headerlink" href="#bentoml-create-an-ml-powered-prediction-service-in-minutes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2><span class="section-number">7.1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>You have just built a machine learning model to predict which group a customer belongs to. The model seems to do a good job in segmenting your customers. You decide to give this model to your team members so that they can develop a web application on top of your model.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*pxPlfd5nl8I8N8tnj0WieQ.png" /></p>
+<p>Wait, but how will you ship this model to your team members? Wouldn’t it be nice if your team members can <strong>use your model without setting up any environment or messing with your code</strong>? That is when BentoML comes in handy.</p>
+</div>
+<div class="section" id="what-is-bentoml">
+<h2><span class="section-number">7.1.2. </span>What is BentoML?<a class="headerlink" href="#what-is-bentoml" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/bentoml/BentoML">BentoML</a> is a Python open-source library that enables users to create a machine learning-powered prediction service in minutes, which helps to bridge the gap between data science and DevOps.</p>
+<p>To use the version of BentoML that will be used in this section, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">bentoml</span><span class="o">==</span><span class="m">1</span>.0.0a4
+</pre></div>
+</div>
+<p>To understand how BentoML works, we will use BentoML to serve a model that segments new customers based on their personalities.</p>
+</div>
+<div class="section" id="process-the-data">
+<h2><span class="section-number">7.1.3. </span>Process the Data<a class="headerlink" href="#process-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Start with downloading the <a class="reference external" href="https://www.kaggle.com/imakash3011/customer-personality-analysis">Customer Personality Analysis</a> dataset from Kaggle. Next, we will process the data.</p>
+<p>Since we will use the <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">PCA</span></code> to process the new data later, we will save these scikit-learn’s transformers in pickle files under the <code class="docutils literal notranslate"><span class="pre">processors</span></code> directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># Scale</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Reduce dimension</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">pca_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">])</span>
+
+<span class="c1"># Save processors</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;processors/scaler.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;processors/PCA.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><em>Find the full code to read and process the data</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/process_data.py"><em>here</em></a><em>.</em></p>
+</div>
+<div class="section" id="save-models">
+<h2><span class="section-number">7.1.4. </span>Save Models<a class="headerlink" href="#save-models" title="Permalink to this headline">¶</a></h2>
+<p>Next, we will train the<code class="docutils literal notranslate"><span class="pre">KMeans</span></code> model on the processed dataset and save the model to BentoML’s local model store.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">import</span> <span class="nn">bentoml.sklearn</span>
+
+<span class="n">pca_df</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pca_df</span><span class="p">)</span>
+
+<span class="n">bentoml</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;customer_segmentation_kmeans&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After running the code above, the model will be saved under <code class="docutils literal notranslate"><span class="pre">~/bentoml/models/</span></code> . You can view all models that are stored locally by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml models list
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Tag                                            Module           Path                                                                       Size       Creation Time       
+customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/bentoml/models/customer_segmentation_kmeans/o2ztyneoqsnwswyg  <span class="m">10</span>.08 KiB  <span class="m">2022</span>-02-15 <span class="m">17</span>:26:51
+</pre></div>
+</div>
+<p>Note that the model is versioned with a specific tag. If we save another model with the same name, you should see a different tag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml models list
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Tag                                            Module           Path                                                                       Size       Creation Time       
+customer_segmentation_kmeans:ye5eeaeoscnwswyg  bentoml.sklearn  /home/khuyen/bentoml/models/customer_segmentation_kmeans/ye5eeaeoscnwswyg  <span class="m">10</span>.08 KiB  <span class="m">2022</span>-02-15 <span class="m">18</span>:54:50
+customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/bentoml/models/customer_segmentation_kmeans/o2ztyneoqsnwswyg  <span class="m">10</span>.08 KiB  <span class="m">2022</span>-02-15 <span class="m">17</span>:26:51
+</pre></div>
+</div>
+<p>This is pretty nice since versioning the model will allow you to go back and forth between different models.</p>
+<p><em>Find full code on training and saving the model</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/segment.py"><em>here</em></a><em>.</em></p>
+</div>
+<div class="section" id="create-services">
+<h2><span class="section-number">7.1.5. </span>Create Services<a class="headerlink" href="#create-services" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the model, let’s load the latest customer segmentation model and create a service with that model in <code class="docutils literal notranslate"><span class="pre">bentoml_app_pandas.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bentoml</span>
+<span class="kn">import</span> <span class="nn">bentoml.sklearn</span>
+<span class="kn">from</span> <span class="nn">bentoml.io</span> <span class="kn">import</span> <span class="n">NumpyNdarray</span><span class="p">,</span> <span class="n">PandasDataFrame</span>
+
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load model</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">bentoml</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">load_runner</span><span class="p">(</span><span class="s2">&quot;customer_segmentation_kmeans:latest&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create service with the model</span>
+<span class="n">service</span> <span class="o">=</span> <span class="n">bentoml</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s2">&quot;customer_segmentation_kmeans&quot;</span><span class="p">,</span> <span class="n">runners</span><span class="o">=</span><span class="p">[</span><span class="n">classifier</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>After defining the service, we can use it to create an API function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an API function</span>
+<span class="nd">@service</span><span class="o">.</span><span class="n">api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">PandasDataFrame</span><span class="p">(),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+
+    <span class="c1"># Process data</span>
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;processors/scaler.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+
+    <span class="n">scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;processors/PCA.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+    <span class="n">processed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">scaled_df</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Predict</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The decorator <code class="docutils literal notranslate"><span class="pre">&#64;service.api</span></code> declares that the function <code class="docutils literal notranslate"><span class="pre">predict</span></code> is an API, whose input is a <code class="docutils literal notranslate"><span class="pre">PandasDataFrame</span></code> and output is a <code class="docutils literal notranslate"><span class="pre">NumpyNdarray</span></code> .</p>
+<p>Now let’s try out the service in debug mode by running <code class="docutils literal notranslate"><span class="pre">bentoml</span> <span class="pre">serve</span></code> . Since <code class="docutils literal notranslate"><span class="pre">bentoml_app_pandas.py</span></code> is under the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory, we run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml serve src/bentoml_app_pandas.py:service --reload
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">01</span>:52:13 PM<span class="o">]</span> INFO     Starting development BentoServer from <span class="s2">&quot;src/bentoml_app_pandas.py:service&quot;</span>                                                                              
+<span class="o">[</span><span class="m">01</span>:52:17 PM<span class="o">]</span> INFO     Service imported from source: bentoml.Service<span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;customer_segmentation_kmeans&quot;</span>, <span class="nv">import_str</span><span class="o">=</span><span class="s2">&quot;src.bentoml_app_pandas:service&quot;</span>,                        
+                       <span class="nv">working_dir</span><span class="o">=</span><span class="s2">&quot;/home/khuyen/customer_segmentation&quot;</span><span class="o">)</span>                                                                                                      
+<span class="o">[</span><span class="m">01</span>:52:17 PM<span class="o">]</span> INFO     Will watch <span class="k">for</span> changes <span class="k">in</span> these directories: <span class="o">[</span><span class="s1">&#39;/home/khuyen/customer_segmentation&#39;</span><span class="o">]</span>                                                       config.py:342
+              INFO     Uvicorn running on http://127.0.0.1:5000 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>                                                                           config.py:564
+              INFO     Started reloader process <span class="o">[</span><span class="m">605974</span><span class="o">]</span> using statreload                                                                                     basereload.py:56
+<span class="o">[</span><span class="m">01</span>:52:21 PM<span class="o">]</span> INFO     Started server process <span class="o">[</span><span class="m">606151</span><span class="o">]</span>                                                                                                            server.py:75
+              INFO     Waiting <span class="k">for</span> application startup.                                                                                                               on.py:45
+              INFO     Application startup complete.  
+</pre></div>
+</div>
+<p>We can now interact with the API by going to <a class="reference external" href="http://127.0.0.1:5000/">http://127.0.0.1:5000</a> and clicking the “Try it out” button:</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*1gsFwFoaCc7RqTPWwtcNjg.png" /></p>
+<p>Insert the following value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s2">&quot;Income&quot;</span><span class="p">:</span> <span class="mi">58138</span><span class="p">,</span> <span class="s2">&quot;Recency&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">,</span> <span class="s2">&quot;NumWebVisitsMonth&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Complain&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span><span class="s2">&quot;total_purchases&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span><span class="s2">&quot;enrollment_years&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span><span class="s2">&quot;family_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>… to the Request body should give you a value of <code class="docutils literal notranslate"><span class="pre">1</span></code> . This means that the model predicts that the customer with these characteristics belongs to cluster 1.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*yoa7BCkJjjr9IuwUzW85-Q.gif" /></p>
+</div>
+<div class="section" id="create-data-model-with-pydantic">
+<h2><span class="section-number">7.1.6. </span>Create Data Model with pydantic<a class="headerlink" href="#create-data-model-with-pydantic" title="Permalink to this headline">¶</a></h2>
+<p>To make sure that users insert the correct values with the right data types into the API, we can use pydantic to create a custom data model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bentoml.io</span> <span class="kn">import</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">NumpyNdarray</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="c1"># Code to create service</span>
+<span class="o">...</span>
+
+<span class="c1"># Create customer model</span>
+<span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+
+    <span class="n">Income</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">58138</span>
+    <span class="n">Recency</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">58</span>
+    <span class="n">NumWebVisitsMonth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">Complain</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">total_purchases</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">enrollment_years</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">family_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Create an API function</span>
+<span class="nd">@service</span><span class="o">.</span><span class="n">api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">JSON</span><span class="p">(</span><span class="n">pydantic_model</span><span class="o">=</span><span class="n">Customer</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">customer</span><span class="p">:</span> <span class="n">Customer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">customer</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Code to process and predict data</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Now you should see the default values under the Request body.</p>
+<p><img alt="" src="https://miro.medium.com/max/662/1*6eQdlONSzafIOcT6r9kSAQ.png" /></p>
+<p><em>Find full code on creating the API</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/bentoml_app.py"><em>here</em></a><em>.</em></p>
+</div>
+<div class="section" id="build-bentos">
+<h2><span class="section-number">7.1.7. </span>Build Bentos<a class="headerlink" href="#build-bentos" title="Permalink to this headline">¶</a></h2>
+<p>After making sure that everything looks good, we can start putting the model, service, and dependencies into a bento.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*Q_gi8bLO6NmSXKY-x5D9jg.png" /></p>
+<p>To build Bentos, start with creating a file named <code class="docutils literal notranslate"><span class="pre">bentofile.yaml</span></code> in your project directory:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">service</span><span class="p">:</span> <span class="s">&quot;src/bentoml_app.py:service&quot;</span>
+<span class="nt">include</span><span class="p">:</span>
+ <span class="p p-Indicator">-</span> <span class="s">&quot;src/bentoml_app.py&quot;</span>
+<span class="nt">python</span><span class="p">:</span>
+  <span class="nt">packages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy==1.20.3</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandas==1.3.4</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scikit-learn==1.0.2</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pydantic==1.9.0</span>
+</pre></div>
+</div>
+<p>Details about the file above:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">include</span></code> section tells BentoML which files to include in a bento. In this file, we include both <code class="docutils literal notranslate"><span class="pre">bentoml_app.py</span></code> and all processors we saved earlier.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">python</span></code> section tells BentoML what are Python packages the service depends on.</p></li>
+</ul>
+<p>Now we are ready to build Bentos!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml build
+</pre></div>
+</div>
+<p><img alt="" src="https://miro.medium.com/max/675/1*VxXEGqpddQDN_KGF3zNrcA.png" /></p>
+<p>The Bentos built will be saved under the <code class="docutils literal notranslate"><span class="pre">~/bentoml/bentos/&lt;model-name&gt;/&lt;tag&gt;</span></code> directory. The files in the directory should look similar to the below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.
+├── apis
+│   └── openapi.yaml
+├── bento.yaml
+├── env
+│   ├── conda
+│   ├── docker
+│   │   ├── Dockerfile
+│   │   ├── entrypoint.sh
+│   │   └── init.sh
+│   └── python
+│       ├── requirements.lock.txt
+│       ├── requirements.txt
+│       └── version.txt
+├── models
+│   └── customer_segmentation_kmeans
+│       ├── latest
+│       └── qb6awgeoswnwswyg
+│           ├── model.yaml
+│           └── saved_model.pkl
+├── README.md
+└── src
+    ├── processors
+    │   ├── PCA.pkl
+    │   └── scaler.pkl
+    └── src
+        ├── bentoml_app.py
+        └── streamlit_app.py
+</pre></div>
+</div>
+<p>Pretty cool! We have just created a folder with model, service, processors, Python requirements, and a Dockerfile in a few lines of code!</p>
+</div>
+<div class="section" id="deploy-to-heroku">
+<h2><span class="section-number">7.1.8. </span>Deploy to Heroku<a class="headerlink" href="#deploy-to-heroku" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have the built Bentos, you can either containerize it as <a class="reference external" href="https://docs.bentoml.org/en/latest/concepts/containerize_bentos.html#containerize-bentos-page">Docker images</a> or deploy it to Heroku. Since I want to create a public link for my API, I’ll deploy it to the Heroku Container Registry.</p>
+<p>Start with installing <a class="reference external" href="https://www.heroku.com/">Heroku</a>, then login to a Heroku account on your command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ heroku login
+</pre></div>
+</div>
+<p>Login to the Heroku Container Registry:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ heroku container:login
+</pre></div>
+</div>
+<p>Create a Heroku app:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">APP_NAME</span><span class="o">=</span>bentoml-her0ku-<span class="k">$(</span>date +%s <span class="p">|</span> base64 <span class="p">|</span> tr <span class="s1">&#39;[:upper:]&#39;</span> <span class="s1">&#39;[:lower:]&#39;</span> <span class="p">|</span> tr -dc _a-z-0-9<span class="k">)</span>heroku create <span class="nv">$APP_NAME</span>
+</pre></div>
+</div>
+<p>Next, go to the docker directory under your latest built Bentos. To view the directories of your Bentos, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml list -o json
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;customer_segmentation_kmeans:4xidjrepjonwswyg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;src.bentoml_app:service&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/khuyen/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;29.13 KiB&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;creation_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-16 17:15:01&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Since my latest Bentos is in <code class="docutils literal notranslate"><span class="pre">~/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg</span></code> , I’ll run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg/env/docker
+</pre></div>
+</div>
+<p>Containerize Bentos and push it to the Heroku app that was created above:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ heroku container:push web --app <span class="nv">$APP_NAME</span>  --context-path<span class="o">=</span>../..
+</pre></div>
+</div>
+<p>Release the app:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ heroku container:release web --app <span class="nv">$APP_NAME</span>
+</pre></div>
+</div>
+<p>The new app now should be listed in the <a class="reference external" href="https://dashboard.heroku.com/apps">Heroku dashboard</a>:</p>
+<p><img alt="" src="https://miro.medium.com/max/458/1*5az3H_dnTtChHoM_GMh0FQ.png" /></p>
+<p>Click the app’s name then click “Open app” to open up the app of your API:</p>
+<p><img alt="" src="https://miro.medium.com/max/442/1*I4egOGqVIEMCV6kXHMj_DA.png" /></p>
+<p>The public link for my API service is <a class="reference external" href="https://bentoml-her0ku-mty0ndg3mza0ngo.herokuapp.com/">https://bentoml-her0ku-mty0ndg3mza0ngo.herokuapp.com</a>.</p>
+<p><img alt="" src="https://miro.medium.com/max/623/1*D-SgFdF7yQKpHJCI5vtWSw.png" /></p>
+<p>Now you can use the public link to make prediction requests with sample data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s2">&quot;https://bentoml-her0ku-mty0ndg3mza0ngo.herokuapp.com/predict&quot;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">},</span>
+    <span class="n">data</span><span class="o">=</span><span class="s1">&#39;{&quot;Income&quot;: 58138, &quot;Recency&quot;: 58, &quot;NumWebVisitsMonth&quot;: 2, &quot;Complain&quot;: 0,&quot;age&quot;: 64,&quot;total_purchases&quot;: 25,&quot;enrollment_years&quot;: 10,&quot;family_size&quot;: 1}&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2</span>
+</pre></div>
+</div>
+<p>That’s it! Now you can send this link to other members of your team so that they can build a machine learning-powered web app. <strong>No installation and setup</strong> are needed to use your machine learning model. How cool is that?</p>
+<p>If you prefer to create a simple UI yourself, the next section will show you how to do that with Streamlit.</p>
+</div>
+<div class="section" id="build-a-ui-for-your-service-using-streamlit">
+<h2><span class="section-number">7.1.9. </span>Build a UI for Your Service Using Streamlit<a class="headerlink" href="#build-a-ui-for-your-service-using-streamlit" title="Permalink to this headline">¶</a></h2>
+<p>If you want your managers or stakeholders to try out your model, it can be a good idea to build a simple UI for your model using <a class="reference external" href="https://streamlit.io/">Streamlit</a>.</p>
+<p>In the file <code class="docutils literal notranslate"><span class="pre">streamlit_app.py</span></code>, I get the inputs from users then use those inputs to make prediction requests.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Customer Segmentation Web App&quot;</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------------------- #</span>
+<span class="c1"># Get inputs from user</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Income&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;Income&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">step</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">58138</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Customer&#39;s yearly household income&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Recency&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;Recency&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">58</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of days since customer&#39;s last purchase&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;NumWebVisitsMonth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;NumWebVisitsMonth&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of visits to company’s website in the last month&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;Complain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;Complain&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1 if the customer complained in the last 2 years, 0 otherwise&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;age&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Customer&#39;s age&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;total_purchases&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;total_purchases&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Total number of purchases through website, catalogue, or store&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;enrollment_years&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;enrollment_years&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of years a client has enrolled with a company&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;family_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+    <span class="s2">&quot;family_size&quot;</span><span class="p">,</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Total number of members in a customer&#39;s family&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------------------- #</span>
+<span class="c1"># Make prediction</span>
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Get the cluster of this customer&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+        <span class="n">data_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="s2">&quot;https://bentoml-her0ku-mty0ndg3mza0ngo.herokuapp.com/predict&quot;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">data_json</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This customer belongs to the cluster </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run the Streamlit app:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ streamlit run src/streamlit_app.py
+</pre></div>
+</div>
+<p>then go to <a class="reference external" href="http://localhost:8501/">http://localhost:8501</a>. You should see a web app like the below:</p>
+<p><img alt="" src="https://miro.medium.com/max/662/1*N_d36Qnw-sISy8qH3_v9iw.gif" /></p>
+<p>The app is now more intuitive to play with.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./deploy_models"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="deploy_models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Deploy Models</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Khuyen Tran<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

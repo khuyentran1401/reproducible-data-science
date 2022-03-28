@@ -156,7 +156,7 @@ def extract_texts_from_multiple_files(path_to_file: str, files: list) -> List[st
     return all_docs
 ```
 
-```{admonition}
+```{admonition} What is the Level of Abstraction?
 :class: tip
 The level of abstraction is the amount of complexity by which a system is viewed or programmed. The higher the level, the less detail. The lower the level, the more detail. — PCMag
 ```
@@ -238,7 +238,7 @@ def extract_texts_from_multiple_files(path_to_file: str, files: list) -> List[st
 Since the code to extract texts from training files and the code to extract texts from test files are similar, we put the repeated code into the function `extract_tests_from_multiple_files`. This function can extract texts from either training or test files.
 
 ### Descriptive Names
-```{admonition} 
+```{admonition} Descriptive Names
 :class: tip
 A long descriptive name is better than a short enigmatic name. A long descriptive name is better than a long descriptive comment. — Clean Code by Robert C. Martin
 ```

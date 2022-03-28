@@ -272,8 +272,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../deployment/deployment.html">
-   7. Deployment
+  <a class="reference internal" href="../deploy_models/deploy_models.html">
+   7. Deploy Models
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -282,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../deployment/bentoml.html">
+    <a class="reference internal" href="../deploy_models/bentoml.html">
      7.1. BentoML: Create an ML Powered Prediction Service in Minutes
     </a>
    </li>
@@ -526,7 +526,7 @@ const thebe_selector_output = ".output, .cell_output"
 
   <span class="n">text</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-  <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">sentiment</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">sentiment</span><span class="p">)</span>
 
   <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
 
@@ -541,7 +541,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>When running <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">test_example.py</span></code>, we will see no output. In order to see the output of the<code class="docutils literal notranslate"><span class="pre">print</span></code> function, we need to include <code class="docutils literal notranslate"><span class="pre">-s</span></code> at the end of our command</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest test_example.py -s
-<span class="o">=======================</span> <span class="m">1</span> passed in <span class="m">0</span>.49s <span class="o">=======================</span>
+<span class="o">=======================</span> <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.49s <span class="o">=======================</span>
 </pre></div>
 </div>
 <p>Awesome! Now we know we can use <code class="docutils literal notranslate"><span class="pre">text.sentiment.polarity</span></code>to get the <a class="reference external" href="https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d">polarity of the sentiment.</a></p>
@@ -578,7 +578,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">res</span> <span class="o">=</span> <span class="n">extend</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">res</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
     
-<span class="nd">@pytest.mark.repeat</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_extend_random</span><span class="p">():</span>
   <span class="sd">&#39;&#39;&#39;Generate random list and repeat the test 100 times&#39;&#39;&#39;</span>
     <span class="n">l1</span> <span class="o">=</span> <span class="p">[]</span>
@@ -595,7 +595,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest test_repeat.py 
-<span class="o">=======================</span> <span class="m">101</span> passed in <span class="m">0</span>.09s <span class="o">=======================</span>
+<span class="o">=======================</span> <span class="m">101</span> passed <span class="k">in</span> <span class="m">0</span>.09s <span class="o">=======================</span>
 </pre></div>
 </div>
 <p>Awesome. Now we are certain that the order of insertion will always be preserved when using <code class="docutils literal notranslate"><span class="pre">extend()</span></code> since 101 tests passed.</p>
