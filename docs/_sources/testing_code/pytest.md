@@ -350,9 +350,9 @@ def test_extract_sentiment():
 
     assert sentiment > 0
 ```
-Simply add`sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))` to import functions from the parent directory.
+ Simply add `sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))` to import functions from the parent directory.
 
-Under the root directory ( `test_structure_example/` ), run `pytest tests/test_process.py` or run `pytest test_process.py` under `test_structure_example/tests` directory.
+Under the root directory (`test_structure_example/`), run `pytest tests/test_process.py` or run `pytest test_process.py`.
 
 ```bash
 =========================== 1 passed in 0.69s ============================

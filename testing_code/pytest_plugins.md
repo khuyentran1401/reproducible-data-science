@@ -102,7 +102,7 @@ $ pytest test_example.py -s
 ======================= 1 passed in 0.49s =======================
 ```
 
-Awesome! Now we know we can use `text.sentiment.polarity`to get the [polarity of the sentiment.](https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d)
+Awesome! Now we know we can use `text.sentiment.polarity` to get the [polarity of the sentiment.](https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d)
 
 ### Repeat One Test Multiple Times
 
@@ -272,9 +272,9 @@ def test_list_range(benchmark):
 
 ![](https://miro.medium.com/max/700/1*eNMmh8kC3l7DY8NcPpWhlw.png)
 
-The output is nice and easy to read! From the output, we know that the list range method takes the least amount of time to execute and the `concat` method takes the most amount of time to execute!
+The output is nice and easy to read! 
 
-We know that the`concat` method takes more time to execute than other methods, but how much longer?
+We know that the `concat` method takes more time to execute than other methods, but how much longer?
 
 We can visualize the results using `--benchmark-historgram`
 
@@ -284,6 +284,6 @@ pytest test_benchmark.py --benchmark-histogram
 
 ![](https://miro.medium.com/max/700/1*IjxjbiloXfuJSdE_bymF2w.png)
 
-Wow! The`concat` method takes much longer to run compared to other methods.
+Wow! The `concat` method takes much longer to run compared to other methods.
 
 You can learn more about `pytest-benchmark` [here](https://pypi.org/project/pytest-benchmark/).

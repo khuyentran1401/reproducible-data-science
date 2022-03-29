@@ -215,13 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -380,48 +375,43 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   8.1.1. Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-bentoml">
-   8.1.2. What is BentoML?
+   8.1.1. What is BentoML?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#process-the-data">
-   8.1.3. Process the Data
+   8.1.2. Process the Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#save-models">
-   8.1.4. Save Models
+   8.1.3. Save Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-services">
-   8.1.5. Create Services
+   8.1.4. Create Services
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-data-model-with-pydantic">
-   8.1.6. Create Data Model with pydantic
+   8.1.5. Create Data Model with pydantic
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-bentos">
-   8.1.7. Build Bentos
+   8.1.6. Build Bentos
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#deploy-to-heroku">
-   8.1.8. Deploy to Heroku
+   8.1.7. Deploy to Heroku
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-a-ui-for-your-service-using-streamlit">
-   8.1.9. Build a UI for Your Service Using Streamlit
+   8.1.8. Build a UI for Your Service Using Streamlit
   </a>
  </li>
 </ul>
@@ -445,48 +435,43 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   8.1.1. Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-bentoml">
-   8.1.2. What is BentoML?
+   8.1.1. What is BentoML?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#process-the-data">
-   8.1.3. Process the Data
+   8.1.2. Process the Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#save-models">
-   8.1.4. Save Models
+   8.1.3. Save Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-services">
-   8.1.5. Create Services
+   8.1.4. Create Services
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-data-model-with-pydantic">
-   8.1.6. Create Data Model with pydantic
+   8.1.5. Create Data Model with pydantic
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-bentos">
-   8.1.7. Build Bentos
+   8.1.6. Build Bentos
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#deploy-to-heroku">
-   8.1.8. Deploy to Heroku
+   8.1.7. Deploy to Heroku
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-a-ui-for-your-service-using-streamlit">
-   8.1.9. Build a UI for Your Service Using Streamlit
+   8.1.8. Build a UI for Your Service Using Streamlit
   </a>
  </li>
 </ul>
@@ -501,14 +486,8 @@ const thebe_selector_output = ".output, .cell_output"
   <p><a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/tree/bentoml_demo"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
 <div class="section" id="bentoml-create-an-ml-powered-prediction-service-in-minutes">
 <h1><span class="section-number">8.1. </span>BentoML: Create an ML Powered Prediction Service in Minutes<a class="headerlink" href="#bentoml-create-an-ml-powered-prediction-service-in-minutes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="motivation">
-<h2><span class="section-number">8.1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
-<p>You have just built a machine learning model to predict which group a customer belongs to. The model seems to do a good job in segmenting your customers. You decide to give this model to your team members so that they can develop a web application on top of your model.</p>
-<p><img alt="" src="https://miro.medium.com/max/700/1*pxPlfd5nl8I8N8tnj0WieQ.png" /></p>
-<p>Wait, but how will you ship this model to your team members? Wouldn’t it be nice if your team members can <strong>use your model without setting up any environment or messing with your code</strong>? That is when BentoML comes in handy.</p>
-</div>
 <div class="section" id="what-is-bentoml">
-<h2><span class="section-number">8.1.2. </span>What is BentoML?<a class="headerlink" href="#what-is-bentoml" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.1. </span>What is BentoML?<a class="headerlink" href="#what-is-bentoml" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/bentoml/BentoML">BentoML</a> is a Python open-source library that enables users to create a machine learning-powered prediction service in minutes, which helps to bridge the gap between data science and DevOps.</p>
 <p>To use the version of BentoML that will be used in this section, type:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">bentoml</span><span class="o">==</span><span class="m">1</span>.0.0a4
@@ -517,7 +496,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>To understand how BentoML works, we will use BentoML to serve a model that segments new customers based on their personalities.</p>
 </div>
 <div class="section" id="process-the-data">
-<h2><span class="section-number">8.1.3. </span>Process the Data<a class="headerlink" href="#process-the-data" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.2. </span>Process the Data<a class="headerlink" href="#process-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Start with downloading the <a class="reference external" href="https://www.kaggle.com/imakash3011/customer-personality-analysis">Customer Personality Analysis</a> dataset from Kaggle. Next, we will process the data.</p>
 <p>Since we will use the <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">PCA</span></code> to process the new data later, we will save these scikit-learn’s transformers in pickle files under the <code class="docutils literal notranslate"><span class="pre">processors</span></code> directory.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
@@ -544,7 +523,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p><em>Find the full code to read and process the data</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/process_data.py"><em>here</em></a><em>.</em></p>
 </div>
 <div class="section" id="save-models">
-<h2><span class="section-number">8.1.4. </span>Save Models<a class="headerlink" href="#save-models" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.3. </span>Save Models<a class="headerlink" href="#save-models" title="Permalink to this headline">¶</a></h2>
 <p>Next, we will train the<code class="docutils literal notranslate"><span class="pre">KMeans</span></code> model on the processed dataset and save the model to BentoML’s local model store.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">import</span> <span class="nn">bentoml.sklearn</span>
@@ -579,7 +558,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p><em>Find full code on training and saving the model</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/segment.py"><em>here</em></a><em>.</em></p>
 </div>
 <div class="section" id="create-services">
-<h2><span class="section-number">8.1.5. </span>Create Services<a class="headerlink" href="#create-services" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.4. </span>Create Services<a class="headerlink" href="#create-services" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have the model, let’s load the latest customer segmentation model and create a service with that model in <code class="docutils literal notranslate"><span class="pre">bentoml_app_pandas.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bentoml</span>
 <span class="kn">import</span> <span class="nn">bentoml.sklearn</span>
@@ -643,7 +622,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p><img alt="" src="https://miro.medium.com/max/700/1*yoa7BCkJjjr9IuwUzW85-Q.gif" /></p>
 </div>
 <div class="section" id="create-data-model-with-pydantic">
-<h2><span class="section-number">8.1.6. </span>Create Data Model with pydantic<a class="headerlink" href="#create-data-model-with-pydantic" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.5. </span>Create Data Model with pydantic<a class="headerlink" href="#create-data-model-with-pydantic" title="Permalink to this headline">¶</a></h2>
 <p>To make sure that users insert the correct values with the right data types into the API, we can use pydantic to create a custom data model:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bentoml.io</span> <span class="kn">import</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">NumpyNdarray</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
@@ -678,7 +657,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p><em>Find full code on creating the API</em> <a class="reference external" href="https://github.com/khuyentran1401/customer_segmentation/blob/bentoml_demo/src/bentoml_app.py"><em>here</em></a><em>.</em></p>
 </div>
 <div class="section" id="build-bentos">
-<h2><span class="section-number">8.1.7. </span>Build Bentos<a class="headerlink" href="#build-bentos" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.6. </span>Build Bentos<a class="headerlink" href="#build-bentos" title="Permalink to this headline">¶</a></h2>
 <p>After making sure that everything looks good, we can start putting the model, service, and dependencies into a bento.</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*Q_gi8bLO6NmSXKY-x5D9jg.png" /></p>
 <p>To build Bentos, start with creating a file named <code class="docutils literal notranslate"><span class="pre">bentofile.yaml</span></code> in your project directory:</p>
@@ -737,7 +716,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p>Pretty cool! We have just created a folder with model, service, processors, Python requirements, and a Dockerfile in a few lines of code!</p>
 </div>
 <div class="section" id="deploy-to-heroku">
-<h2><span class="section-number">8.1.8. </span>Deploy to Heroku<a class="headerlink" href="#deploy-to-heroku" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.7. </span>Deploy to Heroku<a class="headerlink" href="#deploy-to-heroku" title="Permalink to this headline">¶</a></h2>
 <p>Now that you have the built Bentos, you can either containerize it as <a class="reference external" href="https://docs.bentoml.org/en/latest/concepts/containerize_bentos.html#containerize-bentos-page">Docker images</a> or deploy it to Heroku. Since I want to create a public link for my API, I’ll deploy it to the Heroku Container Registry.</p>
 <p>Start with installing <a class="reference external" href="https://www.heroku.com/">Heroku</a>, then login to a Heroku account on your command line:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ heroku login
@@ -803,7 +782,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p>If you prefer to create a simple UI yourself, the next section will show you how to do that with Streamlit.</p>
 </div>
 <div class="section" id="build-a-ui-for-your-service-using-streamlit">
-<h2><span class="section-number">8.1.9. </span>Build a UI for Your Service Using Streamlit<a class="headerlink" href="#build-a-ui-for-your-service-using-streamlit" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.1.8. </span>Build a UI for Your Service Using Streamlit<a class="headerlink" href="#build-a-ui-for-your-service-using-streamlit" title="Permalink to this headline">¶</a></h2>
 <p>If you want your managers or stakeholders to try out your model, it can be a good idea to build a simple UI for your model using <a class="reference external" href="https://streamlit.io/">Streamlit</a>.</p>
 <p>In the file <code class="docutils literal notranslate"><span class="pre">streamlit_app.py</span></code>, I get the inputs from users then use those inputs to make prediction requests.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>

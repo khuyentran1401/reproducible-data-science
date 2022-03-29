@@ -359,7 +359,7 @@ if __name__ == "__main__":
 ```
 
 ```{note}
-In the code above, I use `staticmethod` _as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods [here](https://realpython.com/instance-class-and-static-methods-demystified/).
+In the code above, I use `staticmethod` as the decorators for some methods because these methods do not use any class attributes or class methods. Find more about these methods [here](https://realpython.com/instance-class-and-static-methods-demystified/).
 ```
 
 As we can see, none of the functions above have more than 3 arguments! Even though the code that uses a class is longer compared to the code that uses a function, it is much more readable! We also know exactly what each piece of code does.

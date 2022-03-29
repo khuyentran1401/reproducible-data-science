@@ -88,7 +88,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.1. Create Maintainable and Modular Data Science Pipelines with Kedro" href="kedro_pipelines.html" />
+    <link rel="next" title="5.1. Orchestrate a Data Science Project in Python With Prefect" href="prefect.html" />
     <link rel="prev" title="4.3. Introduction to Schema: A Python Libary to Validate your Data" href="../testing_data/schema.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -216,13 +216,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -395,6 +390,62 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="build-pipelines">
 <h1><span class="section-number">5. </span>Build Pipelines<a class="headerlink" href="#build-pipelines" title="Permalink to this headline">¶</a></h1>
+<p>As a data scientist, why should you care about optimizing your data science workflow? Let’s start with an example of a basic data science project.</p>
+<p>Imagine you were working with an Iris dataset. You started with building functions to process your data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for getting the classes from the Iris data set.&quot;&quot;&quot;</span>
+    <span class="o">...</span>
+
+
+<span class="k">def</span> <span class="nf">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">target_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Task for encoding the categorical columns in the Iris data set.&quot;&quot;&quot;</span>
+
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
+<span class="sd">    sets, each split into features and labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>After defining the functions, you execute them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define parameters</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;species&#39;</span>
+<span class="n">test_data_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="c1"># Run functions</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/raw/iris.csv&quot;</span><span class="p">)</span>
+<span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">encode_categorical_columns</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">get_classes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">target_col</span><span class="o">=</span><span class="n">target_col</span><span class="p">)</span> 
+<span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> 
+                            <span class="n">test_data_ratio</span><span class="o">=</span><span class="n">test_data_ratio</span><span class="p">,</span> 
+                            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your code ran fine, and you saw nothing wrong with the output, so you think the workflow is good enough. However, there can be many disadvantages with a linear workflow like above.</p>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*1dE70akxwDPMtw2s1LyHpQ.png" /></p>
+<p>The disadvantages are:</p>
+<ul class="simple">
+<li><p>If there is an error in the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> , the output produced by the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be lost, and the workflow will need to start from the beginning. This can be frustrating if it takes a long time to execute the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> .</p></li>
+</ul>
+<p><img alt="" src="https://miro.medium.com/max/1000/1*b6hmvPxzWYr9GAX2Q2Sdvw.png" /></p>
+<ul class="simple">
+<li><p>Since the functions <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> and <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> are not dependent on each other, they can be executed at the same time to save time:</p></li>
+</ul>
+<p><img alt="" src="https://miro.medium.com/max/700/1*iuzgmRBi2iMsCsF9IOkABw.png" /></p>
+<p>Running the functions this way can also prevent wasting unnecessary time on functions that don’t work. If there is an error in the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> , the workflow will restart right away without waiting for the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> to finish.</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*X40DYs9p2UPcXasHTQ62mQ.png" /></p>
+<p>Now, you might agree with me that it is important to optimize the workflow of different functions. However, it can be a lot of works to manually manage the workflow.</p>
+<p>Is there a way that you can <strong>automatically optimize the workflow</strong> by adding only several lines of code? That is when orchestration libraries come in handy.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -431,10 +482,10 @@ const thebe_selector_output = ".output, .cell_output"
             <p class="prev-next-title"><span class="section-number">4.3. </span>Introduction to Schema: A Python Libary to Validate your Data</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="kedro_pipelines.html" title="next page">
+    <a class='right-next' id="next-link" href="prefect.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">5.1. </span>Create Maintainable and Modular Data Science Pipelines with Kedro</p>
+        <p class="prev-next-title"><span class="section-number">5.1. </span>Orchestrate a Data Science Project in Python With Prefect</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

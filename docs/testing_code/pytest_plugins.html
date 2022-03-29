@@ -216,13 +216,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -546,7 +541,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="o">=======================</span> <span class="m">1</span> passed in <span class="m">0</span>.49s <span class="o">=======================</span>
 </pre></div>
 </div>
-<p>Awesome! Now we know we can use <code class="docutils literal notranslate"><span class="pre">text.sentiment.polarity</span></code>to get the <a class="reference external" href="https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d">polarity of the sentiment.</a></p>
+<p>Awesome! Now we know we can use <code class="docutils literal notranslate"><span class="pre">text.sentiment.polarity</span></code> to get the <a class="reference external" href="https://towardsdatascience.com/supercharge-your-python-string-with-textblob-2d9c08a8da05#087d">polarity of the sentiment.</a></p>
 </div>
 <div class="section" id="repeat-one-test-multiple-times">
 <h2><span class="section-number">3.2.4. </span>Repeat One Test Multiple Times<a class="headerlink" href="#repeat-one-test-multiple-times" title="Permalink to this headline">¶</a></h2>
@@ -690,14 +685,14 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p><img alt="" src="https://miro.medium.com/max/700/1*eNMmh8kC3l7DY8NcPpWhlw.png" /></p>
-<p>The output is nice and easy to read! From the output, we know that the list range method takes the least amount of time to execute and the <code class="docutils literal notranslate"><span class="pre">concat</span></code> method takes the most amount of time to execute!</p>
-<p>We know that the<code class="docutils literal notranslate"><span class="pre">concat</span></code> method takes more time to execute than other methods, but how much longer?</p>
+<p>The output is nice and easy to read!</p>
+<p>We know that the <code class="docutils literal notranslate"><span class="pre">concat</span></code> method takes more time to execute than other methods, but how much longer?</p>
 <p>We can visualize the results using <code class="docutils literal notranslate"><span class="pre">--benchmark-historgram</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest test_benchmark.py --benchmark-histogram
 </pre></div>
 </div>
 <p><img alt="" src="https://miro.medium.com/max/700/1*IjxjbiloXfuJSdE_bymF2w.png" /></p>
-<p>Wow! The<code class="docutils literal notranslate"><span class="pre">concat</span></code> method takes much longer to run compared to other methods.</p>
+<p>Wow! The <code class="docutils literal notranslate"><span class="pre">concat</span></code> method takes much longer to run compared to other methods.</p>
 <p>You can learn more about <code class="docutils literal notranslate"><span class="pre">pytest-benchmark</span></code> <a class="reference external" href="https://pypi.org/project/pytest-benchmark/">here</a>.</p>
 </div>
 </div>

@@ -21,7 +21,6 @@ chapters:
   - file: testing_data/schema.md
 - file: orchestration/orchestration.md
   sections:
-  - file: orchestration/kedro_pipelines.md
   - file: orchestration/prefect.md
 - file: experiment_tracking/experiment_tracking.md
   sections:
