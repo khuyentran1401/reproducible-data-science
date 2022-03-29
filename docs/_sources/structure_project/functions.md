@@ -23,9 +23,7 @@ You want your Python function to:
 
 These practices will make your functions more readable and easier to detect errors.
 
-Inspired by the book _Clean Code: A Handbook of Agile Software Craftsmanship_ by Robert C. Martin with code examples written in Java, I decided to write an article on how to write clean code in Python for data scientists.
-
-In this article, I will show you how to utilize the 6 practices mentioned above to write better Python functions.
+In this section, I will show you how to utilize the 6 practices mentioned above to write better Python functions.
 
 ### Get Started
 

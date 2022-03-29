@@ -593,7 +593,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="introduction">
 <h2><span class="section-number">4.2.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>To learn how Pandera works, let’s start with creating a simple dataset:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 
 <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
@@ -619,7 +619,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Create multiple tests for each column using <code class="docutils literal notranslate"><span class="pre">Column</span></code></p></li>
 <li><p>Specify the type of test using <code class="docutils literal notranslate"><span class="pre">Check</span></code></p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandera</span> <span class="k">as</span> <span class="nn">pa</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandera</span> <span class="kn">as</span> <span class="nn">pa</span>
 <span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Check</span>
 
 <span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
@@ -673,7 +673,7 @@ failure cases:
     <span class="n">store</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">isin</span><span class="o">=</span><span class="n">nearby_stores</span><span class="p">)</span>
     <span class="n">price</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">le</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    <span class="nd">@pa</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
+    <span class="nd">@pa.check</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">price_sum_lt_20</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Series</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span>
 
@@ -753,7 +753,7 @@ failure cases:
 <span class="n">get_total_price</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: error <span class="k">in</span> check_input decorator of <span class="k">function</span> <span class="s1">&#39;get_total_price&#39;</span>: expected series <span class="s1">&#39;price&#39;</span> to have <span class="nb">type</span> int64, got object
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: error in check_input decorator of <span class="k">function</span> <span class="s1">&#39;get_total_price&#39;</span>: expected series <span class="s1">&#39;price&#39;</span> to have <span class="nb">type</span> int64, got object
 </pre></div>
 </div>
 <p>Validating data before processing is very nice since it <strong>prevents</strong> us from <strong>wasting a significant amount of time on processing the data</strong>.</p>
@@ -822,7 +822,7 @@ failure cases:
 <div class="section" id="deal-with-null-values">
 <h3><span class="section-number">4.2.6.1. </span>Deal with Null Values<a class="headerlink" href="#deal-with-null-values" title="Permalink to this headline">¶</a></h3>
 <p>By default, Pandera will raise an error if there are null values in a column we are testing. If null values are acceptable, add <code class="docutils literal notranslate"><span class="pre">nullable=False</span></code> to our <code class="docutils literal notranslate"><span class="pre">Column</span></code> class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="n">fruits</span> <span class="o">=</span> <span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
@@ -835,7 +835,7 @@ failure cases:
 <span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
-        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
         <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
     <span class="p">}</span>
 <span class="p">)</span>
@@ -850,7 +850,7 @@ failure cases:
     <span class="p">{</span>
         <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
         <span class="s2">&quot;store&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_duplicates</span><span class="o">=</span><span class="kc">False</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nearby_stores</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">allow_duplicates</span><span class="o">=</span><span class="bp">False</span>
         <span class="p">),</span>
         <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">less_than</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span>
     <span class="p">}</span>
@@ -874,7 +874,7 @@ failure cases:
     <span class="p">}</span>
 <span class="p">)</span>
 
-<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">coerce</span><span class="o">=</span><span class="kc">True</span><span class="p">)})</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">coerce</span><span class="o">=</span><span class="bp">True</span><span class="p">)})</span>
 <span class="n">validated</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 <span class="n">validated</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
@@ -904,7 +904,7 @@ dtype: object
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">available_fruits</span><span class="p">)),</span>
-        <span class="s2">&quot;store_+&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">favorite_stores</span><span class="p">),</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="s2">&quot;store_+&quot;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">favorite_stores</span><span class="p">),</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
@@ -975,8 +975,8 @@ dtype: object
 <div class="section" id="load-from-yaml">
 <h2><span class="section-number">4.2.9. </span>Load from YAML<a class="headerlink" href="#load-from-yaml" title="Permalink to this headline">¶</a></h2>
 <p>To load from a YAML file, simple use <code class="docutils literal notranslate"><span class="pre">pa.io.from_yaml(yaml_schema)</span></code> :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">f</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">yaml_schema</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">f</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="n">yaml_schema</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">yaml_schema</span><span class="p">)</span>
 </pre></div>

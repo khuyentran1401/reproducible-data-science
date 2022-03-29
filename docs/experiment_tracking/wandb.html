@@ -521,7 +521,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># Instantiate the model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">)</span>
 
-<span class="n">kfold</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">kfold</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1"># Get metrics</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kfold</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -548,7 +548,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>You should see something like this</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wandb: Currently logged <span class="k">in</span> as: khuyentran1401 <span class="o">(</span>use <span class="sb">`</span>wandb login --relogin<span class="sb">`</span> to force relogin<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wandb: Currently logged in as: khuyentran1401 <span class="o">(</span>use <span class="sb">`</span>wandb login --relogin<span class="sb">`</span> to force relogin<span class="o">)</span>
 wandb: Tracking run with wandb version <span class="m">0</span>.10.12
 wandb: Syncing run resilient-dragon-34
 wandb: ⭐️ View project at https://wandb.ai/khuyentran1401/iris
@@ -583,7 +583,7 @@ wandb:     _timestamp ▁
 
     <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> 
                 <span class="n">group</span><span class="o">=</span><span class="n">name_model</span><span class="p">,</span> <span class="c1"># Group experiments by model</span>
-                <span class="n">reinit</span><span class="o">=</span><span class="kc">True</span>
+                <span class="n">reinit</span><span class="o">=</span><span class="bp">True</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -594,7 +594,7 @@ wandb:     _timestamp ▁
 
     <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;iris&#39;</span><span class="p">,</span> 
                 <span class="n">group</span><span class="o">=</span><span class="n">name_model</span><span class="p">,</span> <span class="c1"># Group experiments by model</span>
-                <span class="n">reinit</span><span class="o">=</span><span class="kc">True</span>
+                <span class="n">reinit</span><span class="o">=</span><span class="bp">True</span>
     <span class="p">)</span>
 
     <span class="c1"># code to get metrics</span>

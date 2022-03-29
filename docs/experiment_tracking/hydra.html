@@ -495,10 +495,10 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span><span class="p">,</span> <span class="n">OmegaConf</span>
 
 
-<span class="nd">@hydra</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="nd">@hydra.main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">):</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
 
 <span class="n">process_data</span><span class="p">()</span>
 </pre></div>
