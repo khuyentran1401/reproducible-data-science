@@ -10,9 +10,9 @@ chapters:
 - file: structure_project/structure_project.md
   sections: 
   - file: structure_project/functions.md
-- file: testing_code/testing_code.md
+- file: testing_code/testing_code.ipynb
   sections:
-  - file: testing_code/pytest.md
+  - file: testing_code/pytest.ipynb
   - file: testing_code/pytest_plugins.md
 - file: testing_data/testing_data.md
   sections:
