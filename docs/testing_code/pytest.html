@@ -329,9 +329,9 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/testing_code/pytest.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/testing_code/pytest.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -364,6 +364,23 @@ const thebe_selector_output = ".output, .cell_output"
             class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/khuyentran1401/reproducible-data-science/master?urlpath=tree/./testing_code/pytest.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
 
         </div>
 
@@ -499,6 +516,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U pytest
 </pre></div>
 </div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/Y9tJeUIg-kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+</div>
 <p>To test the function shown above, we can simply create a function that starts with <code class="docutils literal notranslate"><span class="pre">test_</span></code> and followed with the name of the function we want to test, which is <code class="docutils literal notranslate"><span class="pre">extract_sentiment</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#sentiment.py</span>
 <span class="k">def</span> <span class="nf">extract_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -559,6 +580,9 @@ E       assert <span class="m">0</span>.8 &lt; <span class="nv">0</span>
 </div>
 <div class="section" id="multiple-tests-for-the-same-function">
 <h2><span class="section-number">3.1.2. </span>Multiple Tests for the Same Function<a class="headerlink" href="#multiple-tests-for-the-same-function" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <p>We might want to test our function with other examples. What will the name of the new test function be?</p>
 <p>The second function’s name can be something like <code class="docutils literal notranslate"><span class="pre">test_extract_sentiment_2</span></code> or <code class="docutils literal notranslate"><span class="pre">test_extract_sentiment_negative</span></code> if we want to test our function on a text with negative sentiment. Any function name would work as long as it starts with <code class="docutils literal notranslate"><span class="pre">test</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#sentiment.py</span>
@@ -599,6 +623,10 @@ E       assert <span class="m">0</span>.0 &lt; <span class="nv">0</span>
 </div>
 <div class="section" id="parametrization-combining-tests">
 <h2><span class="section-number">3.1.3. </span>Parametrization: Combining Tests<a class="headerlink" href="#parametrization-combining-tests" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/dnru6nSnwHU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+</div>
 <p>The 2 test functions above are used to test the same function. Is there any way we can combine 2 examples into one test function? That is when parameterization comes in handy.</p>
 <div class="section" id="parametrize-with-a-list-of-samples">
 <h3><span class="section-number">3.1.3.1. </span>Parametrize with a List of Samples<a class="headerlink" href="#parametrize-with-a-list-of-samples" title="Permalink to this headline">¶</a></h3>
@@ -719,6 +747,10 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 </div>
 <div class="section" id="fixtures-use-the-same-data-to-test-different-functions">
 <h2><span class="section-number">3.1.5. </span>Fixtures: Use the Same Data to Test Different Functions<a class="headerlink" href="#fixtures-use-the-same-data-to-test-different-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/Jx2G0BQIjMs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+</div>
 <p>What if we want to use the same data to test different functions? For example, we want to test whether the sentence ‘Today I found a duck and I am happy” contains the word ‘duck’ <strong>and</strong> its sentiment is positive. We want to apply 2 functions for the same data: ‘Today I found a duck and I am happy”. That is when <code class="docutils literal notranslate"><span class="pre">fixture</span></code> comes in handy.</p>
 <p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> fixtures are a way of providing data to different test function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest.fixture</span>
@@ -744,6 +776,10 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 </div>
 <div class="section" id="structure-your-projects">
 <h2><span class="section-number">3.1.6. </span>Structure your Projects<a class="headerlink" href="#structure-your-projects" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/714TfDztVVM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+</div>
 <p>Last but not least, when our code grows bigger, we might want to put data science functions and test functions in 2 different folders. This will make it easier for us to find the location for each function.</p>
 <p>Name our test function with either <code class="docutils literal notranslate"><span class="pre">test_&lt;name&gt;.py</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_test.py</span></code> . Pytest will search for the file whose name ends or starts with ‘test’ and executes the functions whose name starts with ‘test’ within that file.</p>
 <p>There are different ways to organize your files. You can either organize our data science file and test file in the same directory or in 2 different directories, one for source code and one for tests</p>
