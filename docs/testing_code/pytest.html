@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -546,7 +551,7 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>Pytest will loop through our script and run the functions that start with <code class="docutils literal notranslate"><span class="pre">test</span></code>. The output of the test above will look like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==========================================</span> <span class="m">1</span> passed in <span class="m">0</span>.68s <span class="o">===========================================</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==========================================</span> <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.68s <span class="o">===========================================</span>
 </pre></div>
 </div>
 <p>Pretty cool! We don’t need to specify which function to test. As long as the function’s name starts with <code class="docutils literal notranslate"><span class="pre">test,</span></code> pytest will detect and execute that function! We don’t even need to import pytest in order to run pytest</p>
@@ -573,7 +578,7 @@ def test_extract_sentiment<span class="o">()</span>:
     
 &gt;       assert sentiment &lt; <span class="m">0</span>
 E       assert <span class="m">0</span>.8 &lt; <span class="nv">0</span>
-<span class="o">==========================================</span> <span class="m">1</span> failed in <span class="m">0</span>.84s <span class="o">===========================================</span>
+<span class="o">==========================================</span> <span class="m">1</span> failed <span class="k">in</span> <span class="m">0</span>.84s <span class="o">===========================================</span>
 </pre></div>
 </div>
 <p>From the output, we can see that the test failed because the sentiment of the function is 0.8, and it is not less than 0! We are not only able to know whether our function works as expected but also know WHY it doesn’t work. From this insight, we know where to fix our function to work as we want.</p>
@@ -615,7 +620,7 @@ def test_extract_sentiment_negative<span class="o">()</span>:
     
 &gt;       assert sentiment &lt; <span class="m">0</span>
 E       assert <span class="m">0</span>.0 &lt; <span class="nv">0</span>
-<span class="o">=====================================</span> <span class="m">1</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.80s <span class="o">======================================</span>
+<span class="o">=====================================</span> <span class="m">1</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.80s <span class="o">======================================</span>
 </pre></div>
 </div>
 <p>From the output, we know that one test passed and one failed and why the test failed. We expect the sentence “I do not think this will turn out well” to be negative, but it turns out to be 0.</p>
@@ -646,7 +651,7 @@ E       assert <span class="m">0</span>.0 &lt; <span class="nv">0</span>
 
 <span class="n">testdata</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I think today will be a great day&quot;</span><span class="p">,</span><span class="s2">&quot;I do not think this will turn out well&quot;</span><span class="p">]</span>
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_extract_sentiment</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
 
     <span class="n">sentiment</span> <span class="o">=</span> <span class="n">extract_sentiment</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -665,7 +670,7 @@ E       assert <span class="m">0</span>.0 &lt; <span class="nv">0</span>
     
 &gt;       assert sentiment &gt; <span class="m">0</span>
 E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
-<span class="o">======================</span> <span class="m">1</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.80s <span class="o">===================</span>
+<span class="o">======================</span> <span class="m">1</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.80s <span class="o">===================</span>
 </pre></div>
 </div>
 <p>Using <code class="docutils literal notranslate"><span class="pre">parametrize()</span></code>, we are able to test 2 different examples in once function!</p>
@@ -692,11 +697,11 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
     <span class="k">return</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span>
 
 <span class="n">testdata</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;There is a duck in this text&#39;</span><span class="p">,</span><span class="bp">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;There is nothing here&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="s1">&#39;There is a duck in this text&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;There is nothing here&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="p">]</span>
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;sample, expected_output&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;sample, expected_output&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_text_contain_word</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">):</span>
 
     <span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;duck&#39;</span>
@@ -707,7 +712,7 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 <p>The structure of the parameters for our function is<code class="docutils literal notranslate"><span class="pre">parametrize(‘sample,</span> <span class="pre">expected_out’,</span> <span class="pre">testdata)</span></code> with <code class="docutils literal notranslate"><span class="pre">testdata=[(&lt;sample1&gt;,</span> <span class="pre">&lt;output1&gt;),</span> <span class="pre">(&lt;sample2&gt;,</span> <span class="pre">&lt;output2&gt;)</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pytest process.py
 
-<span class="o">==========================================</span> <span class="m">2</span> passed in <span class="m">0</span>.04s <span class="o">===========================================</span>
+<span class="o">==========================================</span> <span class="m">2</span> passed <span class="k">in</span> <span class="m">0</span>.04s <span class="o">===========================================</span>
 </pre></div>
 </div>
 <p>Awesome! Both of our tests passed!</p>
@@ -718,7 +723,7 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 <p>When the number of test functions in your script gets bigger, you may want to test one function instead of multiple functions at once. That could be easily done with <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">file.py::function_name</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">testdata</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I think today will be a great day&quot;</span><span class="p">,</span><span class="s2">&quot;I do not think this will turn out well&quot;</span><span class="p">]</span>
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_extract_sentiment</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
 
     <span class="n">sentiment</span> <span class="o">=</span> <span class="n">extract_sentiment</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -727,11 +732,11 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 
 
 <span class="n">testdata</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">&#39;There is a duck in this text&#39;</span><span class="p">,</span><span class="bp">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;There is nothing here&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="s1">&#39;There is a duck in this text&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;There is nothing here&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="p">]</span>
 
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;sample, expected_output&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;sample, expected_output&#39;</span><span class="p">,</span> <span class="n">testdata</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_text_contain_word</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">):</span>
 
     <span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;duck&#39;</span>
@@ -753,7 +758,7 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 </div>
 <p>What if we want to use the same data to test different functions? For example, we want to test whether the sentence ‘Today I found a duck and I am happy” contains the word ‘duck’ <strong>and</strong> its sentiment is positive. We want to apply 2 functions for the same data: ‘Today I found a duck and I am happy”. That is when <code class="docutils literal notranslate"><span class="pre">fixture</span></code> comes in handy.</p>
 <p><code class="docutils literal notranslate"><span class="pre">pytest</span></code> fixtures are a way of providing data to different test function:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest.fixture</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">example_data</span><span class="p">():</span>
     <span class="k">return</span> <span class="s1">&#39;Today I found a duck and I am happy&#39;</span>
 
@@ -768,7 +773,7 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 
     <span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;duck&#39;</span>
 
-    <span class="k">assert</span> <span class="n">text_contain_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">example_data</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span>
+    <span class="k">assert</span> <span class="n">text_contain_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">example_data</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
 </pre></div>
 </div>
 <p>In the example above, we create an example data with the decorator <code class="docutils literal notranslate"><span class="pre">&#64;pytest.fixture</span></code> above the function <code class="docutils literal notranslate"><span class="pre">example_data.</span></code> This will turn <code class="docutils literal notranslate"><span class="pre">example_data</span></code> into a variable with value “Today I found a duck and I am happy”.</p>
@@ -829,7 +834,7 @@ E       assert <span class="m">0</span>.0 &gt; <span class="nv">0</span>
 </div>
 <p>Simply add <code class="docutils literal notranslate"><span class="pre">sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),</span> <span class="pre">os.path.pardir)))</span></code> to import functions from the parent directory.</p>
 <p>Under the root directory (<code class="docutils literal notranslate"><span class="pre">test_structure_example/</span></code>), run <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">tests/test_process.py</span></code> or run <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">test_process.py</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">===========================</span> <span class="m">1</span> passed in <span class="m">0</span>.69s <span class="o">============================</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">===========================</span> <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.69s <span class="o">============================</span>
 </pre></div>
 </div>
 </div>

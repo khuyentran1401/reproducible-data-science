@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -216,13 +221,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -525,7 +525,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>GitHub has a strict file limit of 100MB so uploading a medium binary file can easily exceed this limit.</p></li>
 <li><p>It is messy to compare the change in different versions of data with GitHub. I used to manually accept over 100 changes in data after using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, and it was a pain.</p></li>
 </ul>
-<p><a class="reference external" href="https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0">DVC</a> (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.</p>
+<p><a class="reference internal" href="dvc.html"><span class="doc std std-doc">DVC</span></a> (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.</p>
 <p><img alt="" src="https://miro.medium.com/max/483/1*jjZ9YOz4Nhrq-MCunOBxaw.png" /></p>
 <p>Wouldn’t it be nice if there is a platform that is similar to GitHub, but is more optimized for data scientists and machine learning engineers? That is when DagsHub comes in handy.</p>
 </div>
@@ -544,7 +544,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="version-your-data-and-code">
 <h2><span class="section-number">7.2.3. </span>Version Your Data and Code<a class="headerlink" href="#version-your-data-and-code" title="Permalink to this headline">¶</a></h2>
-<p>Assume that you have a local copy of your GitHub repository in your machine, we will use <a class="reference external" href="https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0">DVC</a> to version your binary data.</p>
+<p>Assume that you have a local copy of your GitHub repository in your machine, we will use <a class="reference internal" href="dvc.html"><span class="doc std std-doc">DVC</span></a> to version your binary data.</p>
 <p>Start with installing DVC:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dvc
 </pre></div>
@@ -762,41 +762,41 @@ git push origin master
 <li><p><code class="docutils literal notranslate"><span class="pre">outs</span></code> specifies the outputs of the stage</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">metrics</span></code> specifies the metrics of the stage</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">stages</span><span class="p">:</span>
-  <span class="nt">process_data</span><span class="p">:</span>
-    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/process_data.py</span>
-    <span class="nt">deps</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/raw</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">params.yml</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/main.py</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/process_data.py</span>
-    <span class="nt">outs</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">data/intermediate</span><span class="p">:</span>
-        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="nt">segment</span><span class="p">:</span>
-    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/segment.py</span>
-    <span class="nt">deps</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">params.yml</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/main.py</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">src/segment.py</span>
-    <span class="nt">outs</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">data/final</span><span class="p">:</span>
-        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="p p-Indicator">-</span> <span class="nt">image</span><span class="p">:</span>
-        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="p p-Indicator">-</span> <span class="nt">model/cluster.pkl</span><span class="p">:</span>
-        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">metrics</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">metrics.csv</span><span class="p">:</span>
-        <span class="nt">persist</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-  <span class="nt">analyze</span><span class="p">:</span>
-    <span class="nt">cmd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python src/run_notebook.py</span>
-    <span class="nt">deps</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">notebook/analyze_data.ipynb</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">data/final</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">stages</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">process_data</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cmd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python src/process_data.py</span><span class="w"></span>
+<span class="w">    </span><span class="nt">deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/raw</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">params.yml</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/main.py</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/process_data.py</span><span class="w"></span>
+<span class="w">    </span><span class="nt">outs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">data/intermediate</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">segment</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cmd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python src/segment.py</span><span class="w"></span>
+<span class="w">    </span><span class="nt">deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config/main.yaml</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/intermediate</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">params.yml</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/main.py</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">src/segment.py</span><span class="w"></span>
+<span class="w">    </span><span class="nt">outs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">data/final</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">model/cluster.pkl</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">    </span><span class="nt">metrics</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">metrics.csv</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">persist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">  </span><span class="nt">analyze</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">cmd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python src/run_notebook.py</span><span class="w"></span>
+<span class="w">    </span><span class="nt">deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notebook/analyze_data.ipynb</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/final</span><span class="w"></span>
 </pre></div>
 </div>
 <p>All files listed dunder <code class="docutils literal notranslate"><span class="pre">outs</span></code> are cached, which is similar to what happens when you use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">add</span></code> . That’s why you no longer need to use <code class="docutils literal notranslate"><span class="pre">dvc</span> <span class="pre">add</span></code> with those files.</p>

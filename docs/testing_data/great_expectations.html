@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -216,13 +221,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -613,8 +613,8 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>This code block allows us to create and customize the configuration of our Datasource.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">example_yaml</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">name: {datasource_name}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">example_yaml</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">name: </span><span class="si">{</span><span class="n">datasource_name</span><span class="si">}</span><span class="s2"></span>
 <span class="s2">class_name: Datasource</span>
 <span class="s2">execution_engine:</span>
 <span class="s2">  class_name: PandasExecutionEngine</span>
@@ -658,7 +658,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>After going through all questions, another notebook will be automatically created for you. In this notebook, you can select columns and other factors that you care about and let a profiler write some candidate expectations for you.</p>
 <p><img alt="" src="https://miro.medium.com/max/1000/1*GHL5Fgbc2CFEL1mLoxcI9Q.gif" /></p>
 <p>The first cell of this notebook will load the data specified in your Datasource. This is very convenient because you can visualize and learn some characteristics of your dataset.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validator</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fetch_all</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validator</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_rows</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fetch_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can also specify which columns to ignore so that Great Expectations will not create expectations for those columns.</p>
@@ -812,22 +812,22 @@ max      <span class="m">91</span>.370000
 <li><p><code class="docutils literal notranslate"><span class="pre">expectation_suite_name</span></code> specifies the name of the Expectations Suite</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">data_asset_name</span></code> specifies the dataset to validate</p></li>
 </ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">my_checkpoint_name = &quot;first_checkpoint&quot;</span>  <span class="c1"># This was populated from your CLI command.</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">my_checkpoint_name = &quot;first_checkpoint&quot;</span><span class="w">  </span><span class="c1"># This was populated from your CLI command.</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">yaml_config = f&quot;&quot;&quot;</span>
-<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span><span class="nv">my_checkpoint_name</span><span class="p p-Indicator">}</span>
-<span class="nt">config_version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="nt">class_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">SimpleCheckpoint</span>
-<span class="nt">run_name_template</span><span class="p">:</span> <span class="s">&quot;%Y%m%d-%H%M%S-my-run-name-template&quot;</span>
-<span class="nt">validations</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">batch_request</span><span class="p">:</span>
-      <span class="nt">datasource_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data</span>
-      <span class="nt">data_connector_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span>
-      <span class="nt">data_asset_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">second_data.csv</span>
-      <span class="nt">data_connector_query</span><span class="p">:</span>
-        <span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-    <span class="nt">expectation_suite_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">yaml_config = f&quot;&quot;&quot;</span><span class="w"></span>
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nv">my_checkpoint_name</span><span class="p p-Indicator">}</span><span class="w"></span>
+<span class="nt">config_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="nt">class_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SimpleCheckpoint</span><span class="w"></span>
+<span class="nt">run_name_template</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%Y%m%d-%H%M%S-my-run-name-template&quot;</span><span class="w"></span>
+<span class="nt">validations</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">batch_request</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">datasource_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_asset_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">second_data.csv</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_query</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">expectation_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span><span class="w"></span>
+<span class="s">&quot;&quot;&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>After uncommenting and running the last cell of this notebook, you will see a table that shows whether your validation fails or succeeds. Luckily, the data <code class="docutils literal notranslate"><span class="pre">second_data.csv</span></code> passes all tests!</p>
@@ -841,16 +841,16 @@ max      <span class="m">91</span>.370000
 </pre></div>
 </div>
 <p>In the future, if you want to use the same Expectation Suite to validate another data, let’s say <code class="docutils literal notranslate"><span class="pre">third_data.csv</span></code> , you can just switch <code class="docutils literal notranslate"><span class="pre">second_data.csv</span></code> with <code class="docutils literal notranslate"><span class="pre">third_data.csv</span></code> :</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_checkpoint</span>
-<span class="nt">runtime_configuration</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
-<span class="nt">validations</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">batch_request</span><span class="p">:</span>
-      <span class="nt">datasource_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data</span>
-      <span class="nt">data_connector_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span>
-      <span class="nt">data_asset_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">third_data.csv</span> <span class="c1"># new data to validate </span>
-      <span class="nt">data_connector_query</span><span class="p">:</span>
-        <span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-    <span class="nt">expectation_suite_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_checkpoint</span><span class="w"></span>
+<span class="nt">runtime_configuration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w"></span>
+<span class="nt">validations</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">batch_request</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">datasource_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_asset_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">third_data.csv</span><span class="w"> </span><span class="c1"># new data to validate </span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_query</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">expectation_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Instead of going back to the notebook and rerunning the last cell, you can just run the Checkpoint in your terminal!</p>
@@ -862,24 +862,24 @@ max      <span class="m">91</span>.370000
 <div class="section" id="validate-two-different-datasets-at-once">
 <h3><span class="section-number">4.1.5.1. </span>Validate Two Different Datasets at Once<a class="headerlink" href="#validate-two-different-datasets-at-once" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes, you might want to validate two different datasets at once using the same Expectation Suite. That can be easily done by adding another <code class="docutils literal notranslate"><span class="pre">batch_request</span></code> :</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">validations</span><span class="p">:</span>
-  <span class="c1"># Validate second_data.csv</span>
-  <span class="p p-Indicator">-</span> <span class="nt">batch_request</span><span class="p">:</span>
-      <span class="nt">datasource_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data</span>
-      <span class="nt">data_connector_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span>
-      <span class="nt">data_asset_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">second_data.csv</span>
-      <span class="nt">data_connector_query</span><span class="p">:</span>
-        <span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-    <span class="nt">expectation_suite_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span>
-    
-  <span class="c1"># Validate third_data.csv</span>
-  <span class="p p-Indicator">-</span> <span class="nt">batch_request</span><span class="p">:</span>
-      <span class="nt">datasource_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data</span>
-      <span class="nt">data_connector_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span>
-      <span class="nt">data_asset_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">third_data.csv</span>
-      <span class="nt">data_connector_query</span><span class="p">:</span>
-        <span class="nt">index</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-1</span>
-    <span class="nt">expectation_suite_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">validations</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Validate second_data.csv</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">batch_request</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">datasource_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_asset_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">second_data.csv</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_query</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">expectation_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span><span class="w"></span>
+<span class="w">    </span>
+<span class="w">  </span><span class="c1"># Validate third_data.csv</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">batch_request</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">datasource_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_inferred_data_connector_name</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_asset_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">third_data.csv</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data_connector_query</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">expectation_suite_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first_data.csv.warning</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Let’s try to run again and see what we get.</p>

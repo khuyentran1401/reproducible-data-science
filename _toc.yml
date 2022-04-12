@@ -9,6 +9,7 @@ chapters:
 - file: how_to_read.md
 - file: structure_project/structure_project.md
   sections: 
+  - file: structure_project/introduction.md
   - file: structure_project/functions.md
 - file: testing_code/testing_code.ipynb
   sections:

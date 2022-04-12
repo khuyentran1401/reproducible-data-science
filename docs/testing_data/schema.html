@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -216,13 +221,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -569,9 +569,9 @@ const thebe_selector_output = ".output, .cell_output"
 <h2><span class="section-number">4.3.2. </span>Validate Data Types<a class="headerlink" href="#validate-data-types" title="Permalink to this headline">¶</a></h2>
 <p>Imagine this is data that presents the information about your friends.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Norma Fisher&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Richard&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">45.74</span><span class="p">},</span> 
-    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Colleen Taylor&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;North Laurenshire&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="mf">93.9</span><span class="p">},</span> 
-    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Melinda Kennedy&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Cherylside&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="mf">66.33</span><span class="p">}</span>
+    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Norma Fisher&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Richard&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">45.74</span><span class="p">},</span> 
+    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Colleen Taylor&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;North Laurenshire&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="mf">93.9</span><span class="p">},</span> 
+    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Melinda Kennedy&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Cherylside&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="mf">66.33</span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -730,7 +730,7 @@ Key <span class="s1">&#39;name&#39;</span> error:
 <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Forbidden key encountered: <span class="s1">&#39;detailed_info&#39;</span> in <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Norma Fisher&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;South Richard&#39;</span>, <span class="s1">&#39;closeness (1-5)&#39;</span>: <span class="m">4</span>, <span class="s1">&#39;detailed_info&#39;</span>: <span class="o">{</span><span class="s1">&#39;favorite_color&#39;</span>: <span class="s1">&#39;Pink&#39;</span>, <span class="s1">&#39;phone number&#39;</span>: <span class="s1">&#39;7593824219489&#39;</span><span class="o">}}</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Forbidden key encountered: <span class="s1">&#39;detailed_info&#39;</span> <span class="k">in</span> <span class="o">{</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Norma Fisher&#39;</span>, <span class="s1">&#39;city&#39;</span>: <span class="s1">&#39;South Richard&#39;</span>, <span class="s1">&#39;closeness (1-5)&#39;</span>: <span class="m">4</span>, <span class="s1">&#39;detailed_info&#39;</span>: <span class="o">{</span><span class="s1">&#39;favorite_color&#39;</span>: <span class="s1">&#39;Pink&#39;</span>, <span class="s1">&#39;phone number&#39;</span>: <span class="s1">&#39;7593824219489&#39;</span><span class="o">}}</span>
 </pre></div>
 </div>
 <p>Now we are aware of the existence of the forbidden column every time schema throws an error!</p>

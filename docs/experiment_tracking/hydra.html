@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -216,13 +221,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../orchestration/kedro_pipelines.html">
-     5.1. Create Maintainable and Modular Data Science Pipelines with Kedro
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../orchestration/prefect.html">
-     5.2. Optimize Your Data Science Workflow in a Few Lines of Code
+     5.1. Orchestrate a Data Science Project in Python With Prefect
     </a>
    </li>
   </ul>
@@ -456,10 +456,7 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tip admonition">
-<p class="admonition-title">How to run the code in this tutorial</p>
-<p>You can access the code of this tutorial via this <a class="reference external" href="https://github.com/khuyentran1401/hydra_demo">GitHub repository</a>.</p>
-</div>
+  <p><a class="reference external" href="https://github.com/khuyentran1401/hydra_demo"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
 <div class="section" id="configure-your-data-science-projects-with-hydra">
 <h1><span class="section-number">6.1. </span>Configure your Data Science Projects with Hydra<a class="headerlink" href="#configure-your-data-science-projects-with-hydra" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
@@ -474,20 +471,20 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_html"><iframe width="560" height="315" src="https://www.youtube.com/embed/IzEngnqOaRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
 </div>
 <p>Imagine your YAML configuration file looks like this:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span>
-  <span class="nt">keep_columns</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Income</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Recency</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Complain</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">age</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total_purchases</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_years</span>
-      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">family_size</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">keep_columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recency</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Complain</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">age</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_purchases</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollment_years</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">family_size</span><span class="w"></span>
 
-  <span class="nt">remove_outliers_threshold</span><span class="p">:</span>
-    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">90</span>
-    <span class="nt">Income</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600000</span>
+<span class="w">  </span><span class="nt">remove_outliers_threshold</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Income</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600000</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To access the list under <code class="docutils literal notranslate"><span class="pre">process.keep_columns</span></code> in the configuration file, simple add the <code class="docutils literal notranslate"><span class="pre">&#64;hydra.main</span></code> decorator to the function that uses the configuration:</p>
@@ -495,10 +492,10 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span><span class="p">,</span> <span class="n">OmegaConf</span>
 
 
-<span class="nd">@hydra.main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="nd">@hydra</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;../config&quot;</span><span class="p">,</span> <span class="n">config_name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">):</span>
 
-    <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">keep_columns</span><span class="p">)</span>
 
 <span class="n">process_data</span><span class="p">()</span>
 </pre></div>
@@ -525,9 +522,9 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>Each file has different values for the same parameters. You can set the parameters in the file <code class="docutils literal notranslate"><span class="pre">process_2.yaml</span></code> as default by adding the following to <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">process</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">process_2</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">_self_</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">process</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process_2</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_self_</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now the parameters in <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code> are merged with the parameters in <code class="docutils literal notranslate"><span class="pre">process_2.yaml</span></code>.</p>
@@ -536,41 +533,41 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>should print:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_2.yaml</span>
-<span class="nt">process</span><span class="p">:</span>
-  <span class="nt">keep_columns</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Income</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Recency</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Complain</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">age</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total_purchases</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_years</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">family_size</span>
-  <span class="nt">remove_outliers_threshold</span><span class="p">:</span>
-    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">90</span>
-    <span class="nt">Income</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600000</span>
-  <span class="nt">family_size</span><span class="p">:</span>
-    <span class="nt">Married</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Together</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Absurd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Widow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">YOLO</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Divorced</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Single</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Alone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_2.yaml</span><span class="w"></span>
+<span class="nt">process</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">keep_columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recency</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Complain</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">age</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_purchases</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollment_years</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">family_size</span><span class="w"></span>
+<span class="w">  </span><span class="nt">remove_outliers_threshold</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Income</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600000</span><span class="w"></span>
+<span class="w">  </span><span class="nt">family_size</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Married</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Together</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Absurd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Widow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">YOLO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Divorced</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Single</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Alone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
 
-<span class="c1"># From main.yaml</span>
-<span class="nt">raw_data</span><span class="p">:</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span>
-<span class="nt">intermediate</span><span class="p">:</span>
-  <span class="nt">dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span>
-<span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-<span class="nt">image</span><span class="p">:</span>
-  <span class="nt">kmeans</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span>
-  <span class="nt">clusters</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span>
+<span class="c1"># From main.yaml</span><span class="w"></span>
+<span class="nt">raw_data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span><span class="w"></span>
+<span class="nt">intermediate</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/intermediate</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span><span class="w"></span>
+<span class="nt">flow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="nt">image</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kmeans</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span><span class="w"></span>
+<span class="w">  </span><span class="nt">clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -590,47 +587,47 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <p>The output should be the combination of all parameters in <code class="docutils literal notranslate"><span class="pre">main.yaml</span></code> and in <code class="docutils literal notranslate"><span class="pre">process_1.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_1.yaml</span>
-<span class="nt">process</span><span class="p">:</span>
-  <span class="nt">keep_columns</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Income</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Recency</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp3</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp4</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp5</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp1</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AcceptedCmp2</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Complain</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Response</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">age</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">total_purchases</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_years</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">family_size</span>
-  <span class="nt">remove_outliers_threshold</span><span class="p">:</span>
-    <span class="nt">age</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">90</span>
-    <span class="nt">Income</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600000</span>
-  <span class="nt">family_size</span><span class="p">:</span>
-    <span class="nt">Married</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Together</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
-    <span class="nt">Absurd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Widow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">YOLO</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Divorced</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Single</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    <span class="nt">Alone</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-    
-<span class="c1"># From main.yaml</span>
-<span class="nt">raw_data</span><span class="p">:</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span>
-<span class="nt">intermediate</span><span class="p">:</span>
-  <span class="nt">dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">data/intermediate</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span>
-  <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span>
-<span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-<span class="nt">image</span><span class="p">:</span>
-  <span class="nt">kmeans</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span>
-  <span class="nt">clusters</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># From process_1.yaml</span><span class="w"></span>
+<span class="nt">process</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">keep_columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Income</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recency</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NumWebVisitsMonth</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AcceptedCmp3</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AcceptedCmp4</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AcceptedCmp5</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AcceptedCmp1</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AcceptedCmp2</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Complain</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Response</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">age</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">total_purchases</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollment_years</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">family_size</span><span class="w"></span>
+<span class="w">  </span><span class="nt">remove_outliers_threshold</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Income</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600000</span><span class="w"></span>
+<span class="w">  </span><span class="nt">family_size</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Married</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Together</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Absurd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Widow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">YOLO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Divorced</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Single</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">Alone</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="w">    </span>
+<span class="c1"># From main.yaml</span><span class="w"></span>
+<span class="nt">raw_data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/raw/marketing_campaign.csv</span><span class="w"></span>
+<span class="nt">intermediate</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/intermediate</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scale_features.csv</span><span class="w"></span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${intermediate.dir}/${intermediate.name}</span><span class="w"></span>
+<span class="nt">flow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span><span class="w"></span>
+<span class="nt">image</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kmeans</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image/elbow.png</span><span class="w"></span>
+<span class="w">  </span><span class="nt">clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image/cluster.png</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

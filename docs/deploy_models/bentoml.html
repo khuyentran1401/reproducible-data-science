@@ -149,8 +149,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -499,7 +504,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h2><span class="section-number">8.1.2. </span>Process the Data<a class="headerlink" href="#process-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Start with downloading the <a class="reference external" href="https://www.kaggle.com/imakash3011/customer-personality-analysis">Customer Personality Analysis</a> dataset from Kaggle. Next, we will process the data.</p>
 <p>Since we will use the <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">PCA</span></code> to process the new data later, we will save these scikit-learn’s transformers in pickle files under the <code class="docutils literal notranslate"><span class="pre">processors</span></code> directory.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -565,8 +570,8 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <span class="kn">from</span> <span class="nn">bentoml.io</span> <span class="kn">import</span> <span class="n">NumpyNdarray</span><span class="p">,</span> <span class="n">PandasDataFrame</span>
 
 <span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Load model</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">bentoml</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">load_runner</span><span class="p">(</span><span class="s2">&quot;customer_segmentation_kmeans:latest&quot;</span><span class="p">)</span>
@@ -577,7 +582,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 </div>
 <p>After defining the service, we can use it to create an API function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an API function</span>
-<span class="nd">@service.api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">PandasDataFrame</span><span class="p">(),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
+<span class="nd">@service</span><span class="o">.</span><span class="n">api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">PandasDataFrame</span><span class="p">(),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
 <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 
     <span class="c1"># Process data</span>
@@ -604,7 +609,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">01</span>:52:13 PM<span class="o">]</span> INFO     Starting development BentoServer from <span class="s2">&quot;src/bentoml_app_pandas.py:service&quot;</span>                                                                              
 <span class="o">[</span><span class="m">01</span>:52:17 PM<span class="o">]</span> INFO     Service imported from source: bentoml.Service<span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;customer_segmentation_kmeans&quot;</span>, <span class="nv">import_str</span><span class="o">=</span><span class="s2">&quot;src.bentoml_app_pandas:service&quot;</span>,                        
                        <span class="nv">working_dir</span><span class="o">=</span><span class="s2">&quot;/home/khuyen/customer_segmentation&quot;</span><span class="o">)</span>                                                                                                      
-<span class="o">[</span><span class="m">01</span>:52:17 PM<span class="o">]</span> INFO     Will watch <span class="k">for</span> changes in these directories: <span class="o">[</span><span class="s1">&#39;/home/khuyen/customer_segmentation&#39;</span><span class="o">]</span>                                                       config.py:342
+<span class="o">[</span><span class="m">01</span>:52:17 PM<span class="o">]</span> INFO     Will watch <span class="k">for</span> changes <span class="k">in</span> these directories: <span class="o">[</span><span class="s1">&#39;/home/khuyen/customer_segmentation&#39;</span><span class="o">]</span>                                                       config.py:342
               INFO     Uvicorn running on http://127.0.0.1:5000 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>                                                                           config.py:564
               INFO     Started reloader process <span class="o">[</span><span class="m">605974</span><span class="o">]</span> using statreload                                                                                     basereload.py:56
 <span class="o">[</span><span class="m">01</span>:52:21 PM<span class="o">]</span> INFO     Started server process <span class="o">[</span><span class="m">606151</span><span class="o">]</span>                                                                                                            server.py:75
@@ -643,7 +648,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
     <span class="n">family_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1"># Create an API function</span>
-<span class="nd">@service.api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">JSON</span><span class="p">(</span><span class="n">pydantic_model</span><span class="o">=</span><span class="n">Customer</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
+<span class="nd">@service</span><span class="o">.</span><span class="n">api</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">JSON</span><span class="p">(</span><span class="n">pydantic_model</span><span class="o">=</span><span class="n">Customer</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="n">NumpyNdarray</span><span class="p">())</span>
 <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">customer</span><span class="p">:</span> <span class="n">Customer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">customer</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -661,15 +666,15 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <p>After making sure that everything looks good, we can start putting the model, service, and dependencies into a bento.</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*Q_gi8bLO6NmSXKY-x5D9jg.png" /></p>
 <p>To build Bentos, start with creating a file named <code class="docutils literal notranslate"><span class="pre">bentofile.yaml</span></code> in your project directory:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">service</span><span class="p">:</span> <span class="s">&quot;src/bentoml_app.py:service&quot;</span>
-<span class="nt">include</span><span class="p">:</span>
- <span class="p p-Indicator">-</span> <span class="s">&quot;src/bentoml_app.py&quot;</span>
-<span class="nt">python</span><span class="p">:</span>
-  <span class="nt">packages</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy==1.20.3</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandas==1.3.4</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scikit-learn==1.0.2</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pydantic==1.9.0</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;src/bentoml_app.py:service&quot;</span><span class="w"></span>
+<span class="nt">include</span><span class="p">:</span><span class="w"></span>
+<span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;src/bentoml_app.py&quot;</span><span class="w"></span>
+<span class="nt">python</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">packages</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy==1.20.3</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas==1.3.4</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scikit-learn==1.0.2</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pydantic==1.9.0</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Details about the file above:</p>
@@ -734,15 +739,15 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bentoml list -o json
 </pre></div>
 </div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;customer_segmentation_kmeans:4xidjrepjonwswyg&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;src.bentoml_app:service&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/khuyen/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;29.13 KiB&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;creation_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-16 17:15:01&quot;</span>
-  <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;customer_segmentation_kmeans:4xidjrepjonwswyg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;src.bentoml_app:service&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/khuyen/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29.13 KiB&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;creation_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-02-16 17:15:01&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Since my latest Bentos is in <code class="docutils literal notranslate"><span class="pre">~/bentoml/bentos/customer_segmentation_kmeans/4xidjrepjonwswyg</span></code> , I’ll run:</p>
@@ -772,7 +777,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
     <span class="n">data</span><span class="o">=</span><span class="s1">&#39;{&quot;Income&quot;: 58138, &quot;Recency&quot;: 58, &quot;NumWebVisitsMonth&quot;: 2, &quot;Complain&quot;: 0,&quot;age&quot;: 64,&quot;total_purchases&quot;: 25,&quot;enrollment_years&quot;: 10,&quot;family_size&quot;: 1}&#39;</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">text</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2</span>
@@ -789,7 +794,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
 <span class="kn">import</span> <span class="nn">math</span>
 
 <span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">streamlit</span> <span class="kn">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
 
 <span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Customer Segmentation Web App&quot;</span><span class="p">)</span>
 
@@ -858,7 +863,7 @@ customer_segmentation_kmeans:o2ztyneoqsnwswyg  bentoml.sklearn  /home/khuyen/ben
             <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">},</span>
             <span class="n">data</span><span class="o">=</span><span class="n">data_json</span><span class="p">,</span>
         <span class="p">)</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;This customer belongs to the cluster {prediction}&quot;</span><span class="p">)</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This customer belongs to the cluster </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Run the Streamlit app:</p>

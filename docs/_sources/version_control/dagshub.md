@@ -13,7 +13,7 @@ GitHub is a great platform for version control your code, but it is not ideal to
 -   GitHub has a strict file limit of 100MB so uploading a medium binary file can easily exceed this limit.
 -   It is messy to compare the change in different versions of data with GitHub. I used to manually accept over 100 changes in data after using `git pull`, and it was a pain.
 
-[DVC](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0) (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.
+[DVC](../version_control/dvc.md) (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.
 
 ![](https://miro.medium.com/max/483/1*jjZ9YOz4Nhrq-MCunOBxaw.png)
 
@@ -43,7 +43,7 @@ You can check out the repository above [here](https://dagshub.com/khuyentran1401
 
 ### Version Your Data and Code
 
-Assume that you have a local copy of your GitHub repository in your machine, we will use [DVC](https://towardsdatascience.com/introduction-to-dvc-data-version-control-tool-for-machine-learning-projects-7cb49c229fe0) to version your binary data.
+Assume that you have a local copy of your GitHub repository in your machine, we will use [DVC](../version_control/dvc.md) to version your binary data.
 
 Start with installing DVC:
 

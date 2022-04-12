@@ -150,8 +150,13 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../structure_project/introduction.html">
+     2.1. How to Structure a Data Science Project for Readability and Transparency
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../structure_project/functions.html">
-     2.1. Best Practices for Writing Python Functions
+     2.2. Best Practices for Writing Python Functions
     </a>
    </li>
   </ul>
@@ -605,7 +610,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>A <code class="docutils literal notranslate"><span class="pre">Task</span></code> is a discrete action in a Prefect flow. Start with turning the functions defined above into tasks using the decorator <code class="docutils literal notranslate"><span class="pre">prefect.task</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -732,7 +737,7 @@ Flow run succeeded!
 </pre></div>
 </div>
 <p>Your JSON file should look similar to this:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;test_data_ratio&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;test_data_ratio&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You can also change parameters for each run using Prefect Cloud, which will be introduced in the next section.</p>
@@ -843,7 +848,7 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="kn">from</span> <span class="nn">prefect.engine.results</span> <span class="kn">import</span> <span class="n">LocalResult</span>
 
-<span class="nd">@task</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;{date:%a_%b_</span><span class="si">%d</span><span class="s2">_%Y_%H:%M:%S}/{task_name}_output&quot;</span><span class="p">,</span> 
+<span class="nd">@task</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;{date:</span><span class="si">%a</span><span class="s2">_%b_</span><span class="si">%d</span><span class="s2">_%Y_%H:%M:%S}/</span><span class="si">{task_name}</span><span class="s2">_output&quot;</span><span class="p">,</span> 
       <span class="n">result</span> <span class="o">=</span> <span class="n">LocalResult</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;data/processed&#39;</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Task for splitting the classical Iris data set into training and test</span>
@@ -877,11 +882,11 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 
 <span class="n">data_engineering_flow</span> <span class="o">=</span> <span class="n">StartFlowRun</span><span class="p">(</span><span class="n">flow_name</span><span class="o">=</span><span class="s2">&quot;data-engineer&quot;</span><span class="p">,</span> 
                                     <span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;Iris Project&#39;</span><span class="p">,</span>
-                                    <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                    <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                                     
 <span class="n">data_science_flow</span> <span class="o">=</span> <span class="n">StartFlowRun</span><span class="p">(</span><span class="n">flow_name</span><span class="o">=</span><span class="s2">&quot;data-science&quot;</span><span class="p">,</span> 
                                 <span class="n">project_name</span><span class="o">=</span><span class="s1">&#39;Iris Project&#39;</span><span class="p">,</span>
-                                <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Next, calling <code class="docutils literal notranslate"><span class="pre">data_science_flow</span></code> under the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager. Use <code class="docutils literal notranslate"><span class="pre">upstream_tasks</span></code> to specify the tasks/flows that will be executed before the <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow is executed.</p>
@@ -920,13 +925,13 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 <div class="section" id="logging">
 <h3><span class="section-number">5.1.4.6. </span>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
 <p>You can log the print statements within a task by simply adding <code class="docutils literal notranslate"><span class="pre">log_stdout=True</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">report_accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">test_y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">report_accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">test_y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
   <span class="n">target</span> <span class="o">=</span> <span class="o">...</span> 
   <span class="n">accuracy</span> <span class="o">=</span> <span class="o">...</span>
     
-  <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Model accuracy on test set: {round(accuracy * 100, 2)}&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model accuracy on test set: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">accuracy</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And you should see an output like below when executing the task:</p>
