@@ -268,7 +268,7 @@ Now, whenever you run `git commit`, your code will be automatically checked and 
 
 ![](https://miro.medium.com/max/700/1*ME8Am81QCLXffJ2uER7tAw.gif)
 
-We will dig deeper into pre-commit in [the section about code formatting](../version_control/code_formatting.md). 
+We will dig deeper into pre-commit in [the section about code formatting](../version_control/code_formatting.ipynb). 
 
 ### Add API Documentation
 

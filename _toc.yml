@@ -31,7 +31,7 @@ chapters:
   sections:
   - file: version_control/dvc.md
   - file: version_control/dagshub.md
-  - file: version_control/code_formatting.md
+  - file: version_control/code_formatting.ipynb
 - file: deploy_models/deploy_models.md
   sections: 
   - file: deploy_models/bentoml.md
