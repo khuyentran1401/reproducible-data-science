@@ -35,3 +35,4 @@ chapters:
 - file: deploy_models/deploy_models.md
   sections: 
   - file: deploy_models/bentoml.md
+  - file: deploy_models/github_actions.md

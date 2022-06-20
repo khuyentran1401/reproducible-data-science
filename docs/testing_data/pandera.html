@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4.2. Validate Your pandas DataFrame with Pandera &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,6 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -77,15 +76,15 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4.3. Introduction to Schema: A Python Libary to Validate your Data" href="schema.html" />
@@ -97,7 +96,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -106,9 +119,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -126,14 +140,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Build a Reproducible and Maintainable Data Science Project
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Build a Reproducible and Maintainable Data Science Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../how_to_read.html">
    1. How to read this book
@@ -296,90 +311,180 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/testing_data/pandera.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Ftesting_data/pandera.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Ftesting_data/pandera.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/testing_data/pandera.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
    4.2.1. Motivation
@@ -466,12 +571,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Validate Your pandas DataFrame with Pandera</h1>
@@ -574,14 +678,15 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/pandera_example/pandera.ipynb"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
-<div class="section" id="validate-your-pandas-dataframe-with-pandera">
-<h1><span class="section-number">4.2. </span>Validate Your pandas DataFrame with Pandera<a class="headerlink" href="#validate-your-pandas-dataframe-with-pandera" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="motivation">
-<h2><span class="section-number">4.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<section id="validate-your-pandas-dataframe-with-pandera">
+<h1><span class="section-number">4.2. </span>Validate Your pandas DataFrame with Pandera<a class="headerlink" href="#validate-your-pandas-dataframe-with-pandera" title="Permalink to this headline">#</a></h1>
+<section id="motivation">
+<h2><span class="section-number">4.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>In the previous section, I showed how to use Great Expectations to validate your data.</p>
 <p>Even though Great Expectations provide a lot of useful utilities, it can be complicated to create a validation suite with Great Expectations. For a small data science project, using Great Expectations can be overkill.</p>
 <p>That is why in this section, we will learn about <a class="reference external" href="https://pandera.readthedocs.io/en/stable/">Pandera</a>, a simple Python library for validating a pandas DataFrame.</p>
@@ -589,9 +694,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install pandera
 </pre></div>
 </div>
-</div>
-<div class="section" id="introduction">
-<h2><span class="section-number">4.2.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="introduction">
+<h2><span class="section-number">4.2.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>To learn how Pandera works, let’s start with creating a simple dataset:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -646,9 +751,9 @@ failure cases:
 <li><p>Since not all values in the column <code class="docutils literal notranslate"><span class="pre">price</span></code> are less than 4, the test fails.</p></li>
 </ul>
 <p>Find other built-in <code class="docutils literal notranslate"><span class="pre">Checks</span></code> methods <a class="reference external" href="https://pandera.readthedocs.io/en/stable/reference/generated/pandera.checks.Check.html#pandera-checks-check">here</a>.</p>
-</div>
-<div class="section" id="custom-checks">
-<h2><span class="section-number">4.2.3. </span>Custom Checks<a class="headerlink" href="#custom-checks" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="custom-checks">
+<h2><span class="section-number">4.2.3. </span>Custom Checks<a class="headerlink" href="#custom-checks" title="Permalink to this headline">#</a></h2>
 <p>We can also create custom checks using <code class="docutils literal notranslate"><span class="pre">lambda</span></code> . In the code below, <code class="docutils literal notranslate"><span class="pre">Check(lambda</span> <span class="pre">price:</span> <span class="pre">sum(price)</span> <span class="pre">&lt;</span> <span class="pre">20)</span></code> checks if the sum of the column <code class="docutils literal notranslate"><span class="pre">price</span></code> is less than 20.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
     <span class="p">{</span>
@@ -662,9 +767,9 @@ failure cases:
 <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="schema-model">
-<h2><span class="section-number">4.2.4. </span>Schema Model<a class="headerlink" href="#schema-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="schema-model">
+<h2><span class="section-number">4.2.4. </span>Schema Model<a class="headerlink" href="#schema-model" title="Permalink to this headline">#</a></h2>
 <p>When our tests are complicated, using dataclass can make our tests look much cleaner than using a dictionary. Luckily, Pandera also allows us to create tests using a dataclass instead of a dictionary.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera.typing</span> <span class="kn">import</span> <span class="n">Series</span>
 
@@ -680,11 +785,11 @@ failure cases:
 <span class="n">Schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="validation-decorator">
-<h2><span class="section-number">4.2.5. </span>Validation Decorator<a class="headerlink" href="#validation-decorator" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="check-input">
-<h3><span class="section-number">4.2.5.1. </span>Check Input<a class="headerlink" href="#check-input" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="validation-decorator">
+<h2><span class="section-number">4.2.5. </span>Validation Decorator<a class="headerlink" href="#validation-decorator" title="Permalink to this headline">#</a></h2>
+<section id="check-input">
+<h3><span class="section-number">4.2.5.1. </span>Check Input<a class="headerlink" href="#check-input" title="Permalink to this headline">#</a></h3>
 <p>Now that we know how to create tests for our data, how do we use it to test the input of our function? A straightforward approach is to add <code class="docutils literal notranslate"><span class="pre">schema.validate(input)</span></code> inside a function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
@@ -757,9 +862,9 @@ failure cases:
 </pre></div>
 </div>
 <p>Validating data before processing is very nice since it <strong>prevents</strong> us from <strong>wasting a significant amount of time on processing the data</strong>.</p>
-</div>
-<div class="section" id="check-output">
-<h3><span class="section-number">4.2.5.2. </span>Check Output<a class="headerlink" href="#check-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="check-output">
+<h3><span class="section-number">4.2.5.2. </span>Check Output<a class="headerlink" href="#check-output" title="Permalink to this headline">#</a></h3>
 <p>We can also use Pandera’s <code class="docutils literal notranslate"><span class="pre">check_output</span></code> decorator to check the output of a function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">check_output</span>
 
@@ -793,9 +898,9 @@ failure cases:
 <span class="n">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="check-both-inputs-and-outputs">
-<h3><span class="section-number">4.2.5.3. </span>Check Both Inputs and Outputs<a class="headerlink" href="#check-both-inputs-and-outputs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="check-both-inputs-and-outputs">
+<h3><span class="section-number">4.2.5.3. </span>Check Both Inputs and Outputs<a class="headerlink" href="#check-both-inputs-and-outputs" title="Permalink to this headline">#</a></h3>
 <p>Now you might wonder, is there a way to check both inputs and outputs? We can do that using the decorator <code class="docutils literal notranslate"><span class="pre">check_io</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandera</span> <span class="kn">import</span> <span class="n">check_io</span>
 
@@ -815,12 +920,12 @@ failure cases:
 <span class="n">combine_fruits</span><span class="p">(</span><span class="n">fruits_nearby</span><span class="p">,</span> <span class="n">fruits_faraway</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="other-arguments-for-column-validation">
-<h2><span class="section-number">4.2.6. </span>Other Arguments for Column Validation<a class="headerlink" href="#other-arguments-for-column-validation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="deal-with-null-values">
-<h3><span class="section-number">4.2.6.1. </span>Deal with Null Values<a class="headerlink" href="#deal-with-null-values" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="other-arguments-for-column-validation">
+<h2><span class="section-number">4.2.6. </span>Other Arguments for Column Validation<a class="headerlink" href="#other-arguments-for-column-validation" title="Permalink to this headline">#</a></h2>
+<section id="deal-with-null-values">
+<h3><span class="section-number">4.2.6.1. </span>Deal with Null Values<a class="headerlink" href="#deal-with-null-values" title="Permalink to this headline">#</a></h3>
 <p>By default, Pandera will raise an error if there are null values in a column we are testing. If null values are acceptable, add <code class="docutils literal notranslate"><span class="pre">nullable=False</span></code> to our <code class="docutils literal notranslate"><span class="pre">Column</span></code> class:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -842,9 +947,9 @@ failure cases:
 <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="deal-with-duplicates">
-<h3><span class="section-number">4.2.6.2. </span>Deal with Duplicates<a class="headerlink" href="#deal-with-duplicates" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="deal-with-duplicates">
+<h3><span class="section-number">4.2.6.2. </span>Deal with Duplicates<a class="headerlink" href="#deal-with-duplicates" title="Permalink to this headline">#</a></h3>
 <p>By default, duplicates are acceptable. To raise an error when there are duplicates, use <code class="docutils literal notranslate"><span class="pre">allow_duplicates=False</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
     <span class="p">{</span>
@@ -861,9 +966,9 @@ failure cases:
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SchemaError: series <span class="s1">&#39;store&#39;</span> contains duplicate values: <span class="o">{</span><span class="m">2</span>: <span class="s1">&#39;Walmart&#39;</span><span class="o">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-data-types">
-<h3><span class="section-number">4.2.6.3. </span>Convert Data Types<a class="headerlink" href="#convert-data-types" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="convert-data-types">
+<h3><span class="section-number">4.2.6.3. </span>Convert Data Types<a class="headerlink" href="#convert-data-types" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">coerce=True</span></code> changes the data type of a column if its data type doesn’t satisfy the test condition.</p>
 <p>In the code below, the data type of price is changed from integer to string.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -885,9 +990,9 @@ price    object
 dtype: object
 </pre></div>
 </div>
-</div>
-<div class="section" id="match-patterns">
-<h3><span class="section-number">4.2.6.4. </span>Match Patterns<a class="headerlink" href="#match-patterns" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="match-patterns">
+<h3><span class="section-number">4.2.6.4. </span>Match Patterns<a class="headerlink" href="#match-patterns" title="Permalink to this headline">#</a></h3>
 <p>What if we want to change all columns that start with the word <code class="docutils literal notranslate"><span class="pre">store</span></code> ?</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">favorite_stores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Aldi&quot;</span><span class="p">,</span> <span class="s2">&quot;Walmart&quot;</span><span class="p">,</span> <span class="s2">&quot;Whole Foods&quot;</span><span class="p">,</span> <span class="s2">&quot;Schnucks&quot;</span><span class="p">]</span>
 
@@ -910,13 +1015,13 @@ dtype: object
 <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="export-and-load-from-a-yaml-file">
-<h2><span class="section-number">4.2.7. </span>Export and Load From a YAML File<a class="headerlink" href="#export-and-load-from-a-yaml-file" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="export-to-yaml">
-<h2><span class="section-number">4.2.8. </span>Export to YAML<a class="headerlink" href="#export-to-yaml" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="export-and-load-from-a-yaml-file">
+<h2><span class="section-number">4.2.7. </span>Export and Load From a YAML File<a class="headerlink" href="#export-and-load-from-a-yaml-file" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="export-to-yaml">
+<h2><span class="section-number">4.2.8. </span>Export to YAML<a class="headerlink" href="#export-to-yaml" title="Permalink to this headline">#</a></h2>
 <p>Using a YAML file is a neat way to show your tests to colleagues who don’t know Python. We can keep a record of all validations in a YAML file using <code class="docutils literal notranslate"><span class="pre">schema.to_yaml()</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
@@ -971,9 +1076,9 @@ dtype: object
 <span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-from-yaml">
-<h2><span class="section-number">4.2.9. </span>Load from YAML<a class="headerlink" href="#load-from-yaml" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="load-from-yaml">
+<h2><span class="section-number">4.2.9. </span>Load from YAML<a class="headerlink" href="#load-from-yaml" title="Permalink to this headline">#</a></h2>
 <p>To load from a YAML file, simple use <code class="docutils literal notranslate"><span class="pre">pa.io.from_yaml(yaml_schema)</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">f</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">yaml_schema</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -981,8 +1086,8 @@ dtype: object
 <span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">yaml_schema</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1006,9 +1111,11 @@ dtype: object
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="great_expectations.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1024,24 +1131,28 @@ dtype: object
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Khuyen Tran<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Khuyen Tran<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

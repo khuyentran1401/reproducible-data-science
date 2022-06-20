@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4.3. Introduction to Schema: A Python Libary to Validate your Data &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,6 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -77,15 +76,15 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="5. Build Pipelines" href="../orchestration/orchestration.html" />
@@ -97,7 +96,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -106,9 +119,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -126,14 +140,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Build a Reproducible and Maintainable Data Science Project
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Build a Reproducible and Maintainable Data Science Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../how_to_read.html">
    1. How to read this book
@@ -296,90 +311,180 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/testing_data/schema.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Ftesting_data/schema.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Ftesting_data/schema.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/testing_data/schema.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-schema">
    4.3.1. What is schema?
@@ -453,12 +558,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Introduction to Schema: A Python Libary to Validate your Data</h1>
@@ -548,25 +652,26 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/blob/master/data_science_tools/schema.ipynb"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
-<div class="section" id="introduction-to-schema-a-python-libary-to-validate-your-data">
-<h1><span class="section-number">4.3. </span>Introduction to Schema: A Python Libary to Validate your Data<a class="headerlink" href="#introduction-to-schema-a-python-libary-to-validate-your-data" title="Permalink to this headline">¶</a></h1>
+<section id="introduction-to-schema-a-python-libary-to-validate-your-data">
+<h1><span class="section-number">4.3. </span>Introduction to Schema: A Python Libary to Validate your Data<a class="headerlink" href="#introduction-to-schema-a-python-libary-to-validate-your-data" title="Permalink to this headline">#</a></h1>
 <p><img alt="" src="https://miro.medium.com/max/700/0*HSqvCAEj62jir0Lq" /></p>
 <p>Photo by <a class="reference external" href="https://unsplash.com/&#64;nonsapvisuals?utm_source=medium&amp;utm_medium=referral">Nonsap Visuals</a> on <a class="reference external" href="https://unsplash.com/?utm_source=medium&amp;utm_medium=referral">Unsplash</a></p>
-<div class="section" id="what-is-schema">
-<h2><span class="section-number">4.3.1. </span>What is schema?<a class="headerlink" href="#what-is-schema" title="Permalink to this headline">¶</a></h2>
+<section id="what-is-schema">
+<h2><span class="section-number">4.3.1. </span>What is schema?<a class="headerlink" href="#what-is-schema" title="Permalink to this headline">#</a></h2>
 <p>In the last two sections, we learned how to validate a pandas DataFrame. However, sometimes you might want to validate Python data structures instead of a pandas DataFrame. That is when schema comes in handy.</p>
 <p><a class="reference external" href="https://github.com/keleshev/schema"><strong>schema</strong></a> is a library for validating Python data structures.</p>
 <p>Install schema with</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install schema
 </pre></div>
 </div>
-</div>
-<div class="section" id="validate-data-types">
-<h2><span class="section-number">4.3.2. </span>Validate Data Types<a class="headerlink" href="#validate-data-types" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="validate-data-types">
+<h2><span class="section-number">4.3.2. </span>Validate Data Types<a class="headerlink" href="#validate-data-types" title="Permalink to this headline">#</a></h2>
 <p>Imagine this is data that presents the information about your friends.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Norma Fisher&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Richard&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;extrovert&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="s1">&#39;favorite_temperature&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">45.74</span><span class="p">},</span> 
@@ -609,9 +714,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </pre></div>
 </div>
 <p>This will return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the data is as expected or <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
-</div>
-<div class="section" id="validate-datatype-of-some-columns-while-ignoring-the-rest">
-<h2><span class="section-number">4.3.3. </span>Validate datatype of some columns while ignoring the rest<a class="headerlink" href="#validate-datatype-of-some-columns-while-ignoring-the-rest" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="validate-datatype-of-some-columns-while-ignoring-the-rest">
+<h2><span class="section-number">4.3.3. </span>Validate datatype of some columns while ignoring the rest<a class="headerlink" href="#validate-datatype-of-some-columns-while-ignoring-the-rest" title="Permalink to this headline">#</a></h2>
 <p>But what if we don’t care about the data types of all of the columns but just care about the value of some columns? We can specify that with <code class="docutils literal notranslate"><span class="pre">str:</span> <span class="pre">object</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
@@ -627,9 +732,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </div>
 <p>As you can see, we try to validate the data types of ‘name’, ‘city’, and ‘favorite_temperature’, while ignoring the data types of the rest of the features in our data.</p>
 <p>The data is valid because the data types of the 3 features specified are correct.</p>
-</div>
-<div class="section" id="validate-with-function">
-<h2><span class="section-number">4.3.4. </span>Validate with Function<a class="headerlink" href="#validate-with-function" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="validate-with-function">
+<h2><span class="section-number">4.3.4. </span>Validate with Function<a class="headerlink" href="#validate-with-function" title="Permalink to this headline">#</a></h2>
 <p>What if we want to determine whether the data within a column satisfies a specific condition that is not relevant to data types such as the range of the values in a column?</p>
 <p>Schema allows you to use a function to specify the condition for your data.</p>
 <p>If we want to check whether the values in the ‘closeness’ column is between 1 and 5, we can use <code class="docutils literal notranslate"><span class="pre">lambda</span></code> like below</p>
@@ -647,11 +752,11 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </pre></div>
 </div>
 <p>As you can see, we specify <code class="docutils literal notranslate"><span class="pre">n,</span></code>the value in each row of the column ‘closeness’, to between 1 and 5 with <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">n:</span> <span class="pre">1</span> <span class="pre">&lt;=</span> <span class="pre">n</span> <span class="pre">&lt;=5.</span></code> Neat!</p>
-</div>
-<div class="section" id="validate-several-schemas">
-<h2><span class="section-number">4.3.5. </span>Validate Several Schemas<a class="headerlink" href="#validate-several-schemas" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="and">
-<h3><span class="section-number">4.3.5.1. </span><em>And</em><a class="headerlink" href="#and" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="validate-several-schemas">
+<h2><span class="section-number">4.3.5. </span>Validate Several Schemas<a class="headerlink" href="#validate-several-schemas" title="Permalink to this headline">#</a></h2>
+<section id="and">
+<h3><span class="section-number">4.3.5.1. </span><em>And</em><a class="headerlink" href="#and" title="Permalink to this headline">#</a></h3>
 <p>What if you want to make sure your ‘closeness’ column to be between 1 and 5 <strong>and</strong> the data type to be an integer?</p>
 <p>That is when <code class="docutils literal notranslate"><span class="pre">And</span></code> comes in handy</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -668,9 +773,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </pre></div>
 </div>
 <p>While all the values are within 1 and 5, the data type is not a float. Because one of the conditions is not satisfied, the data is not valid.</p>
-</div>
-<div class="section" id="or">
-<h3><span class="section-number">4.3.5.2. </span><em>Or</em><a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="or">
+<h3><span class="section-number">4.3.5.2. </span><em>Or</em><a class="headerlink" href="#or" title="Permalink to this headline">#</a></h3>
 <p>If we want the data of column to be valid if either of the conditions is satisfied, we can use <code class="docutils literal notranslate"><span class="pre">Or</span></code></p>
 <p>For example, if we want the city’s name to contain either 1 or 2 words, we can use</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -683,9 +788,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 <span class="n">schema</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="combination-of-and-and-or">
-<h3><span class="section-number">4.3.5.3. </span><em>Combination of And and Or</em><a class="headerlink" href="#combination-of-and-and-or" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="combination-of-and-and-or">
+<h3><span class="section-number">4.3.5.3. </span><em>Combination of And and Or</em><a class="headerlink" href="#combination-of-and-and-or" title="Permalink to this headline">#</a></h3>
 <p>What if we want the data type of ‘city’ to be a string but the length can be either 1 or 2? Luckily, this could be handled easily by combining <code class="docutils literal notranslate"><span class="pre">And</span></code> and <code class="docutils literal notranslate"><span class="pre">Or</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">([{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="n">And</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Or</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">==</span><span class="mi">2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span><span class="mi">1</span><span class="p">)),</span> 
@@ -700,10 +805,10 @@ Key <span class="s1">&#39;name&#39;</span> error:
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output: True
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="optional">
-<h2><span class="section-number">4.3.6. </span>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="optional">
+<h2><span class="section-number">4.3.6. </span>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">#</a></h2>
 <p>What if we <strong>don’t have</strong> the detailed information about <strong>some</strong> of your friends?</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Norma Fisher&#39;</span><span class="p">,</span>  <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;South Richard&#39;</span><span class="p">,</span>  <span class="s1">&#39;closeness (1-5)&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="s1">&#39;detailed_info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;favorite_color&#39;</span><span class="p">:</span> <span class="s1">&#39;Pink&#39;</span><span class="p">,</span>   <span class="s1">&#39;phone number&#39;</span><span class="p">:</span> <span class="s1">&#39;7593824219489&#39;</span><span class="p">}},</span> 
@@ -716,9 +821,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Output: True
 </pre></div>
 </div>
-</div>
-<div class="section" id="forbidden">
-<h2><span class="section-number">4.3.7. </span>Forbidden<a class="headerlink" href="#forbidden" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="forbidden">
+<h2><span class="section-number">4.3.7. </span>Forbidden<a class="headerlink" href="#forbidden" title="Permalink to this headline">#</a></h2>
 <p>Sometimes, we might also want to make sure a certain kind of data is not in our data, such as private information. We can specify which column is forbidden with <code class="docutils literal notranslate"><span class="pre">Forbidden</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">schema</span> <span class="kn">import</span> <span class="n">Forbidden</span>
 
@@ -734,9 +839,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </pre></div>
 </div>
 <p>Now we are aware of the existence of the forbidden column every time schema throws an error!</p>
-</div>
-<div class="section" id="nested-dictionary">
-<h2><span class="section-number">4.3.8. </span>Nested dictionary<a class="headerlink" href="#nested-dictionary" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="nested-dictionary">
+<h2><span class="section-number">4.3.8. </span>Nested dictionary<a class="headerlink" href="#nested-dictionary" title="Permalink to this headline">#</a></h2>
 <p>So far, schema has enabled us to perform many sophisticated validations in several lines of code. But in the real-life, we might deal with a more sophisticated data structure than the example above.</p>
 <p>Can we use it for data with a more complicated structure? Such as a dictionary within a dictionary? Yes we can.</p>
 <p>Imagine our data looks like below:</p>
@@ -757,9 +862,9 @@ Key <span class="s1">&#39;name&#39;</span> error:
 </pre></div>
 </div>
 <p>The syntax is straight forward! We just need to write another dictionary within the dictionary and specify the data type for each key.</p>
-</div>
-<div class="section" id="convert-data-type">
-<h2><span class="section-number">4.3.9. </span>Convert Data Type<a class="headerlink" href="#convert-data-type" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="convert-data-type">
+<h2><span class="section-number">4.3.9. </span>Convert Data Type<a class="headerlink" href="#convert-data-type" title="Permalink to this headline">#</a></h2>
 <p>Not only can schema be used to validate data but also can be used to convert the data type if it happens not to be like what we expected!</p>
 <p>For example, we can convert string ‘123’ to integer 123 with <code class="docutils literal notranslate"><span class="pre">Use(int)</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Schema</span><span class="p">(</span><span class="n">Use</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
@@ -768,8 +873,8 @@ Key <span class="s1">&#39;name&#39;</span> error:
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">123</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -793,9 +898,11 @@ Key <span class="s1">&#39;name&#39;</span> error:
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="pandera.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -811,24 +918,28 @@ Key <span class="s1">&#39;name&#39;</span> error:
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Khuyen Tran<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Khuyen Tran<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>5.1. Orchestrate a Data Science Project in Python With Prefect &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,6 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -77,15 +76,15 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6. Experiment Tracking" href="../experiment_tracking/experiment_tracking.html" />
@@ -97,7 +96,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -106,9 +119,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -126,14 +140,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Build a Reproducible and Maintainable Data Science Project
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Build a Reproducible and Maintainable Data Science Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../how_to_read.html">
    1. How to read this book
@@ -296,90 +311,180 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/orchestration/prefect.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Forchestration/prefect.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Forchestration/prefect.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/orchestration/prefect.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-prefect">
    5.1.1. What is Prefect?
@@ -473,12 +578,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Orchestrate a Data Science Project in Python With Prefect</h1>
@@ -588,25 +692,26 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <p><a class="reference external" href="https://github.com/khuyentran1401/Data-science/tree/master/data_science_tools/prefect_example"><img alt="View the code" src="https://img.shields.io/badge/GitHub-View_the_Code-blue?logo=GitHub" /></a></p>
-<div class="section" id="orchestrate-a-data-science-project-in-python-with-prefect">
-<h1><span class="section-number">5.1. </span>Orchestrate a Data Science Project in Python With Prefect<a class="headerlink" href="#orchestrate-a-data-science-project-in-python-with-prefect" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-is-prefect">
-<h2><span class="section-number">5.1.1. </span>What is Prefect?<a class="headerlink" href="#what-is-prefect" title="Permalink to this headline">¶</a></h2>
+<section id="orchestrate-a-data-science-project-in-python-with-prefect">
+<h1><span class="section-number">5.1. </span>Orchestrate a Data Science Project in Python With Prefect<a class="headerlink" href="#orchestrate-a-data-science-project-in-python-with-prefect" title="Permalink to this headline">#</a></h1>
+<section id="what-is-prefect">
+<h2><span class="section-number">5.1.1. </span>What is Prefect?<a class="headerlink" href="#what-is-prefect" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://www.prefect.io/">Prefect</a> is an open-sourced framework to build workflows in Python. Prefect makes it easy to build, run, and monitor data pipelines at scale.</p>
 <p>To install Prefect, type:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install prefect
 </pre></div>
 </div>
-</div>
-<div class="section" id="build-your-workflow-with-prefect">
-<h2><span class="section-number">5.1.2. </span>Build Your Workflow with Prefect<a class="headerlink" href="#build-your-workflow-with-prefect" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="build-your-workflow-with-prefect">
+<h2><span class="section-number">5.1.2. </span>Build Your Workflow with Prefect<a class="headerlink" href="#build-your-workflow-with-prefect" title="Permalink to this headline">#</a></h2>
 <p>To learn how Prefect works, let’s encapsulate the workflow introduced above with Prefect.</p>
-<div class="section" id="first-step-create-tasks">
-<h3><span class="section-number">5.1.2.1. </span>First Step — Create Tasks<a class="headerlink" href="#first-step-create-tasks" title="Permalink to this headline">¶</a></h3>
+<section id="first-step-create-tasks">
+<h3><span class="section-number">5.1.2.1. </span>First Step — Create Tasks<a class="headerlink" href="#first-step-create-tasks" title="Permalink to this headline">#</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">Task</span></code> is a discrete action in a Prefect flow. Start with turning the functions defined above into tasks using the decorator <code class="docutils literal notranslate"><span class="pre">prefect.task</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
@@ -636,9 +741,9 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="o">...</span> 
 </pre></div>
 </div>
-</div>
-<div class="section" id="second-step-create-a-flow">
-<h3><span class="section-number">5.1.2.2. </span>Second Step — Create a Flow<a class="headerlink" href="#second-step-create-a-flow" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="second-step-create-a-flow">
+<h3><span class="section-number">5.1.2.2. </span>Second Step — Create a Flow<a class="headerlink" href="#second-step-create-a-flow" title="Permalink to this headline">#</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">Flow</span></code> represents the entire workflow by managing the dependencies between tasks. To create a flow, simply insert the code to run your functions inside the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span>
 
@@ -694,9 +799,9 @@ Flow run succeeded!
 <p>And you should see the visualization of the <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> workflow like below!</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*JzMfqTsK9EZ09GnhgQm1lA.png" /></p>
 <p>Note that Prefect automatically manages the orders of execution among tasks so that the workflow is optimized. This is pretty cool for a few additional pieces of code!</p>
-</div>
-<div class="section" id="third-step-add-parameters">
-<h3><span class="section-number">5.1.2.3. </span>Third step — Add Parameters<a class="headerlink" href="#third-step-add-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="third-step-add-parameters">
+<h3><span class="section-number">5.1.2.3. </span>Third step — Add Parameters<a class="headerlink" href="#third-step-add-parameters" title="Permalink to this headline">#</a></h3>
 <p>If you find yourself frequently experimenting with different values of one variable, it’s ideal to turn that variable into a <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_data_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">split_data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">categorical_columns</span><span class="p">,</span> 
@@ -741,12 +846,12 @@ Flow run succeeded!
 </pre></div>
 </div>
 <p>You can also change parameters for each run using Prefect Cloud, which will be introduced in the next section.</p>
-</div>
-</div>
-<div class="section" id="monitor-your-workflow">
-<h2><span class="section-number">5.1.3. </span>Monitor Your Workflow<a class="headerlink" href="#monitor-your-workflow" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="overview">
-<h3><span class="section-number">5.1.3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="monitor-your-workflow">
+<h2><span class="section-number">5.1.3. </span>Monitor Your Workflow<a class="headerlink" href="#monitor-your-workflow" title="Permalink to this headline">#</a></h2>
+<section id="overview">
+<h3><span class="section-number">5.1.3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h3>
 <p>Prefect also allows you to monitor your workflow in Prefect Cloud. Follow <a class="reference external" href="https://docs.prefect.io/orchestration/getting-started/set-up.html#server-or-cloud">this instruction</a> to install relevant dependencies for Prefect Cloud.</p>
 <p>After all of the dependencies are installed and set up, start with creating a project on Prefect by running:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ prefect create project <span class="s2">&quot;Iris Project&quot;</span>
@@ -772,38 +877,38 @@ Flow run succeeded!
 <p>You can also view the summary of other runs, when they are executed, and their configurations.</p>
 <p><img alt="" src="https://miro.medium.com/max/594/1*Jce9rCOQURyNJPBNye0c-Q.png" /></p>
 <p>It is pretty cool how these important pieces of information are automatically tracked by Perfect!</p>
-</div>
-<div class="section" id="run-the-workflow-with-default-parameters">
-<h3><span class="section-number">5.1.3.2. </span>Run the Workflow with Default Parameters<a class="headerlink" href="#run-the-workflow-with-default-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="run-the-workflow-with-default-parameters">
+<h3><span class="section-number">5.1.3.2. </span>Run the Workflow with Default Parameters<a class="headerlink" href="#run-the-workflow-with-default-parameters" title="Permalink to this headline">#</a></h3>
 <p>Note that the workflow is registered to Prefect Cloud, but it is not executed yet. To execute the workflow with the default parameters, click Quick Run in the top right corner.</p>
 <p><img alt="" src="https://miro.medium.com/max/376/1*kSdZ7ILVXcMurXJc-1n6Dw.png" /></p>
 <p>Click the run that is created. Now you will be able to see the activity for your new flow run in real-time!</p>
 <p><img alt="" src="https://miro.medium.com/max/1000/1*JbKeDKz2sN_9cQP89yXVvg.gif" /></p>
-</div>
-<div class="section" id="run-the-workflow-with-custom-parameters">
-<h3><span class="section-number">5.1.3.3. </span>Run the Workflow with Custom Parameters<a class="headerlink" href="#run-the-workflow-with-custom-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="run-the-workflow-with-custom-parameters">
+<h3><span class="section-number">5.1.3.3. </span>Run the Workflow with Custom Parameters<a class="headerlink" href="#run-the-workflow-with-custom-parameters" title="Permalink to this headline">#</a></h3>
 <p>To run the workflow with custom parameters, click the Run tab, then change the parameters under Inputs.</p>
 <p><img alt="" src="https://miro.medium.com/max/1885/1*4FD_0vEttydd1pvivVEpjw.png" /></p>
 <p>When you are satisfied with the parameters, simply click the Run button to start the run.</p>
-</div>
-<div class="section" id="view-the-graph-of-the-workflow">
-<h3><span class="section-number">5.1.3.4. </span>View the Graph of the Workflow<a class="headerlink" href="#view-the-graph-of-the-workflow" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="view-the-graph-of-the-workflow">
+<h3><span class="section-number">5.1.3.4. </span>View the Graph of the Workflow<a class="headerlink" href="#view-the-graph-of-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>Clicking Schematic will give you the graph of the entire workflow.</p>
 <p><img alt="" src="https://miro.medium.com/max/1000/1*Inj8ey1ZWrMiVtmDPCYGyQ.png" /></p>
-</div>
-</div>
-<div class="section" id="other-features">
-<h2><span class="section-number">5.1.4. </span>Other Features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="other-features">
+<h2><span class="section-number">5.1.4. </span>Other Features<a class="headerlink" href="#other-features" title="Permalink to this headline">#</a></h2>
 <p>Besides some basic features mentioned above, Prefect also provides some other cool features that will significantly increase the efficiency of your workflow.</p>
-<div class="section" id="input-caching">
-<h3><span class="section-number">5.1.4.1. </span>Input Caching<a class="headerlink" href="#input-caching" title="Permalink to this headline">¶</a></h3>
+<section id="input-caching">
+<h3><span class="section-number">5.1.4.1. </span>Input Caching<a class="headerlink" href="#input-caching" title="Permalink to this headline">#</a></h3>
 <p>Remember the problem we mentioned at the beginning of the section? Normally, if the function <code class="docutils literal notranslate"><span class="pre">get_classes</span></code> fails, the data created by the function <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be discarded and the entire workflow needs to start from the beginning.</p>
 <p>However, with Prefect, the output of <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> is stored. Next time when the workflow is rerun, the output of <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> will be used by the next task <strong>without rerunning</strong> the task <code class="docutils literal notranslate"><span class="pre">encode_categorical_columns</span></code> .</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*WN5iFz3QunvTDNc8ijpizg.png" /></p>
 <p>This can result in a huge decrease in the time it takes to run the workflow.</p>
-</div>
-<div class="section" id="persist-output">
-<h3><span class="section-number">5.1.4.2. </span>Persist Output<a class="headerlink" href="#persist-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="persist-output">
+<h3><span class="section-number">5.1.4.2. </span>Persist Output<a class="headerlink" href="#persist-output" title="Permalink to this headline">#</a></h3>
 <p>Sometimes, you might want to export your task’s data to an external location. This can be done by inserting to the task function the code to save the data.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">test_data_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
   
@@ -858,9 +963,9 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 </pre></div>
 </div>
 <p>Prefect also provides other <code class="docutils literal notranslate"><span class="pre">Result</span></code> classes such as <code class="docutils literal notranslate"><span class="pre">GCSResult</span></code> and <code class="docutils literal notranslate"><span class="pre">S3Result</span></code> . You can check out API docs for results <a class="reference external" href="https://docs.prefect.io/api/latest/engine/results.html">here</a>.</p>
-</div>
-<div class="section" id="use-output-of-another-flow-for-the-current-flow">
-<h3><span class="section-number">5.1.4.3. </span>Use Output of Another Flow for the Current Flow<a class="headerlink" href="#use-output-of-another-flow-for-the-current-flow" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="use-output-of-another-flow-for-the-current-flow">
+<h3><span class="section-number">5.1.4.3. </span>Use Output of Another Flow for the Current Flow<a class="headerlink" href="#use-output-of-another-flow-for-the-current-flow" title="Permalink to this headline">#</a></h3>
 <p>If you are working with multiple flows, for example, <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow and <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow, you might want to use the output of the <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow for the <code class="docutils literal notranslate"><span class="pre">data-science</span></code> flow.</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*Hl_8w9TqtGTzMKW_RygsDw.png" /></p>
 <p>After saving the output of your <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> flow as a file, you can read that file using the <code class="docutils literal notranslate"><span class="pre">read</span></code> method:</p>
@@ -869,9 +974,9 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 <span class="n">train_test_dict</span> <span class="o">=</span> <span class="n">LocalResult</span><span class="p">(</span><span class="nb">dir</span><span class="o">=...</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">location</span><span class="o">=...</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="connect-dependent-flows">
-<h3><span class="section-number">5.1.4.4. </span>Connect Dependent Flows<a class="headerlink" href="#connect-dependent-flows" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="connect-dependent-flows">
+<h3><span class="section-number">5.1.4.4. </span>Connect Dependent Flows<a class="headerlink" href="#connect-dependent-flows" title="Permalink to this headline">#</a></h3>
 <p>Imagine this scenario: You created two flows that depend on each other. The flow <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> needs to be executed before the flow <code class="docutils literal notranslate"><span class="pre">data-science</span></code></p>
 <p>Somebody who looked at your workflow didn’t understand the relationship between these two flows. As a result, they executed the flow <code class="docutils literal notranslate"><span class="pre">data-science</span></code> and the flow <code class="docutils literal notranslate"><span class="pre">data-engineer</span></code> at the same time and encountered an error!</p>
 <p><img alt="" src="https://miro.medium.com/max/700/1*J7-kWMCMm3332B-Ff0D6JA.png" /></p>
@@ -899,9 +1004,9 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 <p>Now the two flows are connected like below:</p>
 <p><img alt="" src="https://miro.medium.com/max/450/1*X1ck_cQSkmpJ3G9CBaw18g.png" /></p>
 <p>Pretty cool!</p>
-</div>
-<div class="section" id="schedule-your-flow">
-<h3><span class="section-number">5.1.4.5. </span>Schedule Your Flow<a class="headerlink" href="#schedule-your-flow" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="schedule-your-flow">
+<h3><span class="section-number">5.1.4.5. </span>Schedule Your Flow<a class="headerlink" href="#schedule-your-flow" title="Permalink to this headline">#</a></h3>
 <p>Prefect also makes it seamless to execute a flow at a certain time or at a certain interval.</p>
 <p>For example, to run a flow every 1 minute, you can initiate the class <code class="docutils literal notranslate"><span class="pre">IntervalSchedule</span></code> and add <code class="docutils literal notranslate"><span class="pre">schedule</span></code> to the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">Flow(...)</span></code> context manager:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">IntervalSchedule</span>
@@ -921,9 +1026,9 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 </div>
 <p>Now your flow will be rerun every 1 minute!</p>
 <p>Learn more about different ways to schedule your flow <a class="reference external" href="https://docs.prefect.io/core/concepts/schedules.html#overview">here</a>.</p>
-</div>
-<div class="section" id="logging">
-<h3><span class="section-number">5.1.4.6. </span>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="logging">
+<h3><span class="section-number">5.1.4.6. </span>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">#</a></h3>
 <p>You can log the print statements within a task by simply adding <code class="docutils literal notranslate"><span class="pre">log_stdout=True</span></code> to <code class="docutils literal notranslate"><span class="pre">&#64;task</span></code> :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@task</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">report_accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">test_y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -938,9 +1043,9 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2021</span>-11-06 <span class="m">11</span>:41:16-0500<span class="o">]</span> INFO - prefect.TaskRunner <span class="p">|</span> Model accuracy on <span class="nb">test</span> set: <span class="m">93</span>.33
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -964,9 +1069,11 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="orchestration.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -982,24 +1089,28 @@ def split_data<span class="o">(</span>data: pd.DataFrame, test_data_ratio: float
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Khuyen Tran<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Khuyen Tran<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

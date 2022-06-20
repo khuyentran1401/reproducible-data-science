@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>7.2. DagsHub: a GitHub Supplement for Data Scientists and ML Engineers &#8212; Build a Reproducible and Maintainable Data Science Project</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,6 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -77,15 +76,15 @@ var addUtterances = () => {
 }
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="7.3. 4 pre-commit Plugins to Automate Code Reviewing and Formatting in Python" href="code_formatting.html" />
@@ -97,7 +96,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -106,9 +119,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -126,14 +140,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Build a Reproducible and Maintainable Data Science Project
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Build a Reproducible and Maintainable Data Science Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../how_to_read.html">
    1. How to read this book
@@ -296,90 +311,180 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/version_control/dagshub.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fversion_control/dagshub.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/khuyentran1401/reproducible-data-science/issues/new?title=Issue%20on%20page%20%2Fversion_control/dagshub.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/version_control/dagshub.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
    7.2.1. Motivation
@@ -434,12 +539,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers</h1>
@@ -510,14 +614,15 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <p><a class="reference external" href="https://dagshub.com/khuyentran1401/dagshub-demo"><img alt="View the code" src="https://img.shields.io/badge/DagsHub-View_the_Code-blue?logo=DagsHub" /></a></p>
-<div class="section" id="dagshub-a-github-supplement-for-data-scientists-and-ml-engineers">
-<h1><span class="section-number">7.2. </span>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers<a class="headerlink" href="#dagshub-a-github-supplement-for-data-scientists-and-ml-engineers" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="motivation">
-<h2><span class="section-number">7.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<section id="dagshub-a-github-supplement-for-data-scientists-and-ml-engineers">
+<h1><span class="section-number">7.2. </span>DagsHub: a GitHub Supplement for Data Scientists and ML Engineers<a class="headerlink" href="#dagshub-a-github-supplement-for-data-scientists-and-ml-engineers" title="Permalink to this headline">#</a></h1>
+<section id="motivation">
+<h2><span class="section-number">7.2.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>As a data scientist, you might want to version your code, model, data, parameters, and metrics so that you can reproduce a certain experiment.</p>
 <p><img alt="" src="https://miro.medium.com/max/696/1*d8A13xRhLkUtOLIXTrQF-A.png" /></p>
 <p>GitHub is a great platform for version control your code, but it is not ideal to version your data, model, and metrics for two reasons:</p>
@@ -528,9 +633,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p><a class="reference internal" href="dvc.html"><span class="doc std std-doc">DVC</span></a> (Data Version Control) is an ideal tool for versioning your binary data. However, you cannot view the DVC tracked files on GitHub.</p>
 <p><img alt="" src="https://miro.medium.com/max/483/1*jjZ9YOz4Nhrq-MCunOBxaw.png" /></p>
 <p>Wouldn’t it be nice if there is a platform that is similar to GitHub, but is more optimized for data scientists and machine learning engineers? That is when DagsHub comes in handy.</p>
-</div>
-<div class="section" id="what-is-dagshub">
-<h2><span class="section-number">7.2.2. </span>What is DagsHub?<a class="headerlink" href="#what-is-dagshub" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-is-dagshub">
+<h2><span class="section-number">7.2.2. </span>What is DagsHub?<a class="headerlink" href="#what-is-dagshub" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://dagshub.com/">DagsHub</a> is a platform for data scientists and machine learning engineers to version their data, models, experiments, and code.</p>
 <p>DagsHub allows you to either create a new repository on their platform or connect to a repository on GitHub. If you want to create a new repository on DagsHub, click New Repository:</p>
 <p><img alt="" src="https://miro.medium.com/max/187/1*jzsHKGaK7kNA61ymys_muA.png" /></p>
@@ -541,9 +646,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The interface of your new repository on DagsHub should look very similar to the interface on GitHub with the addition of some tabs such as Experiments, Data, Models, Notebooks, DVC, and Git.</p>
 <p><img alt="" src="https://miro.medium.com/max/654/1*kMLz2t7SYnPPmdNMlfcPUA.png" /></p>
 <p>You can check out the repository above <a class="reference external" href="https://dagshub.com/khuyentran1401/dagshub-demo">here</a>. Let’s explore some functionalities of DagsHub.</p>
-</div>
-<div class="section" id="version-your-data-and-code">
-<h2><span class="section-number">7.2.3. </span>Version Your Data and Code<a class="headerlink" href="#version-your-data-and-code" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="version-your-data-and-code">
+<h2><span class="section-number">7.2.3. </span>Version Your Data and Code<a class="headerlink" href="#version-your-data-and-code" title="Permalink to this headline">#</a></h2>
 <p>Assume that you have a local copy of your GitHub repository in your machine, we will use <a class="reference internal" href="dvc.html"><span class="doc std std-doc">DVC</span></a> to version your binary data.</p>
 <p>Start with installing DVC:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dvc
@@ -591,9 +696,9 @@ git push origin master
 <p><img alt="" src="https://miro.medium.com/max/634/1*Bdw8maYccZ-sIY4hx8RqnA.png" /></p>
 <p>This is very convenient since I can look at both the code and the data within one platform.</p>
 <p><img alt="" src="https://miro.medium.com/max/553/1*6eghrlMA8OWL9HllX0Siow.png" /></p>
-</div>
-<div class="section" id="track-experiments">
-<h2><span class="section-number">7.2.4. </span>Track Experiments<a class="headerlink" href="#track-experiments" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="track-experiments">
+<h2><span class="section-number">7.2.4. </span>Track Experiments<a class="headerlink" href="#track-experiments" title="Permalink to this headline">#</a></h2>
 <p>Libraries like MLFlow allow data scientists to track their experiments along with models and parameters. However, they don’t track the code.</p>
 <p>Wouldn’t it be nice if you can save the code, models, parameters, data of an experiment?</p>
 <p><img alt="" src="https://miro.medium.com/max/696/1*d8A13xRhLkUtOLIXTrQF-A.png" /></p>
@@ -602,8 +707,8 @@ git push origin master
 <p><img alt="" src="https://miro.medium.com/max/608/1*Z4-z-bHAgnLRRYAFot2iEg.png" /></p>
 <p>It is a good practice to use MLFlow to experiment with different parameters quickly without committing your code. Once you find the experiments with good results, you can use DagsHub logger to save the results to open formats (metric.csv, param.yaml) and encapsulate them with the code, model, data that produced it.</p>
 <p>Let’s learn how to log your experiment with each of these methods.</p>
-<div class="section" id="log-your-experiments-with-mlflow">
-<h3><span class="section-number">7.2.4.1. </span>Log Your Experiments with MLFlow<a class="headerlink" href="#log-your-experiments-with-mlflow" title="Permalink to this headline">¶</a></h3>
+<section id="log-your-experiments-with-mlflow">
+<h3><span class="section-number">7.2.4.1. </span>Log Your Experiments with MLFlow<a class="headerlink" href="#log-your-experiments-with-mlflow" title="Permalink to this headline">#</a></h3>
 <p><a class="reference external" href="https://www.mlflow.org/">MLflow</a> is an open-source platform that allows you to track and compare experiments. To install MLflow, type:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install mlflow
 </pre></div>
@@ -640,9 +745,9 @@ git push origin master
 <p>That’s it! Now every time you run your code, the parameters and metrics for each experiment will show up under the Experiments tab of your DagsHub repository:</p>
 <p><img alt="" src="https://miro.medium.com/max/683/1*4ceDabZwVZPprquhmnsjnA.png" /></p>
 <p>Being able to log your MLflow experiments in a remote server like DagsHub instead of a local database will allow your teammates to have access to your experiments within their browser.</p>
-</div>
-<div class="section" id="log-your-experiments-with-dagshub-logger">
-<h3><span class="section-number">7.2.4.2. </span>Log Your Experiments with DagsHub Logger<a class="headerlink" href="#log-your-experiments-with-dagshub-logger" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="log-your-experiments-with-dagshub-logger">
+<h3><span class="section-number">7.2.4.2. </span>Log Your Experiments with DagsHub Logger<a class="headerlink" href="#log-your-experiments-with-dagshub-logger" title="Permalink to this headline">#</a></h3>
 <p>Once you find a good experiment and are ready to log the code, data, and outputs of that experiment, simply switch MLFlow to DagsHub logger.</p>
 <p>To use DagsHub logger, start with install DagsHub:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install dagshub
@@ -681,9 +786,9 @@ git push origin master
 </div>
 <p>Now, the new experiment will be logged with Git under the Experiment tab.</p>
 <p><img alt="" src="https://miro.medium.com/max/635/1*237DLbf2EGNRUxGnhg6vbQ.png" /></p>
-</div>
-<div class="section" id="use-both-mlflow-and-dagshub-logger-at-the-same-time">
-<h3><span class="section-number">7.2.4.3. </span>Use Both MLflow and DagsHub Logger at the Same Time<a class="headerlink" href="#use-both-mlflow-and-dagshub-logger-at-the-same-time" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="use-both-mlflow-and-dagshub-logger-at-the-same-time">
+<h3><span class="section-number">7.2.4.3. </span>Use Both MLflow and DagsHub Logger at the Same Time<a class="headerlink" href="#use-both-mlflow-and-dagshub-logger-at-the-same-time" title="Permalink to this headline">#</a></h3>
 <p>Even though it is useful to switch between MLflow and DagsHub logger, I found it inconvenient to rewrite my code every time I want to switch to another logger.</p>
 <p>My solution was to create a <code class="docutils literal notranslate"><span class="pre">BaseLogger</span></code> class whose methods are <code class="docutils literal notranslate"><span class="pre">log_metrics</span></code> and <code class="docutils literal notranslate"><span class="pre">log_params</span></code> . Each method will use both MLflow logger and DagsHub logger.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
@@ -723,10 +828,10 @@ git push origin master
       <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="compare-between-mlflow-experiments">
-<h2><span class="section-number">7.2.5. </span>Compare Between MLflow Experiments<a class="headerlink" href="#compare-between-mlflow-experiments" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="compare-between-mlflow-experiments">
+<h2><span class="section-number">7.2.5. </span>Compare Between MLflow Experiments<a class="headerlink" href="#compare-between-mlflow-experiments" title="Permalink to this headline">#</a></h2>
 <p>To compare between two or more experiments, tick the boxes of the experiments you want to compare then click Compare.</p>
 <p><img alt="" src="https://miro.medium.com/max/460/1*DoNK5KzL8nZTh3hKWwIbyg.png" /></p>
 <p>You should see the comparisons of all experiments like below:</p>
@@ -734,9 +839,9 @@ git push origin master
 <p>DagsHub also automatically create plots such as parallel coordinate plot and bar plots so that you can observe the relationships between the parameters and the outputs</p>
 <p><img alt="" src="https://miro.medium.com/max/660/1*H7C8W6U6OhteUFWxPiC0yg.png" /></p>
 <p><img alt="" src="https://miro.medium.com/max/601/1*WFEB-kbo4Ffh72PuZqIP7A.png" /></p>
-</div>
-<div class="section" id="compare-between-git-experiments">
-<h2><span class="section-number">7.2.6. </span>Compare Between Git Experiments<a class="headerlink" href="#compare-between-git-experiments" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="compare-between-git-experiments">
+<h2><span class="section-number">7.2.6. </span>Compare Between Git Experiments<a class="headerlink" href="#compare-between-git-experiments" title="Permalink to this headline">#</a></h2>
 <p>To compare the difference in files between two Git experiments, copy their commit IDs under the Experiments tab:</p>
 <p><img alt="" src="https://miro.medium.com/max/313/1*-0Sl07-AzcMgNQE30nhhtw.png" /></p>
 <p>Then paste each commit ID on each branch under the Files tab:</p>
@@ -750,9 +855,9 @@ git push origin master
 <p><img alt="" src="https://miro.medium.com/max/234/1*BCcU90Hhrp1gIhiyZvXNkQ.png" /></p>
 <p><img alt="" src="https://miro.medium.com/max/649/1*FbgjRteEF316TZ_I3gO-Rw.png" /></p>
 <p>Since data scientists work a lot with Jupyter Notebook, being able to compare the outputs of two notebooks is useful.</p>
-</div>
-<div class="section" id="bonus-tip-create-a-dvc-pipeline">
-<h2><span class="section-number">7.2.7. </span>Bonus Tip: Create a DVC Pipeline<a class="headerlink" href="#bonus-tip-create-a-dvc-pipeline" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="bonus-tip-create-a-dvc-pipeline">
+<h2><span class="section-number">7.2.7. </span>Bonus Tip: Create a DVC Pipeline<a class="headerlink" href="#bonus-tip-create-a-dvc-pipeline" title="Permalink to this headline">#</a></h2>
 <p>Sometimes, you might want others to understand the workflow of your project (.i.e, how the outputs of one script are used for another script). DagsHub allows you to create the visualization of your data workflow through the DVC pipeline.</p>
 <p><img alt="" src="https://miro.medium.com/max/652/1*cRlRw_j245fudBc3UD6D5g.png" /></p>
 <p>To create a DVC pipeline, start with creating a <code class="docutils literal notranslate"><span class="pre">dvc.yaml</span></code> file. In the code below, I break my workflow into 3 stages: <code class="docutils literal notranslate"><span class="pre">process_data</span></code> , <code class="docutils literal notranslate"><span class="pre">segment</span></code> , and <code class="docutils literal notranslate"><span class="pre">analyze</span></code> . For each of the stages,</p>
@@ -823,8 +928,8 @@ Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>
 <p>If you go to your repository on DagsHub, you should see a nice interactive graph of the entire pipeline on DagsHub!</p>
 <p><img alt="" src="https://miro.medium.com/max/647/1*sgoqLuVvng22Sni8Fz6kyg.gif" /></p>
 <p>You can get more details about a node in the graph by clicking that node. Now others can understand your data workflow by just simply going to your repository on DagsHub.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -848,9 +953,11 @@ Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="dvc.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -866,24 +973,28 @@ Updating lock file <span class="s1">&#39;dvc.lock&#39;</span>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Khuyen Tran<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Khuyen Tran<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
