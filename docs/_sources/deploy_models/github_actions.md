@@ -453,7 +453,7 @@ prediction = requests.post(
 
 You have just learned how to use GitHub actions to create workflows that automatically test a pull request from a team member and deploy the ML model to the existing service. I hope this section will give you the motivation to automate your tasks with GitHub Actions.
 
-### **Reference**
+### Reference
 
 _Deploy to Heroku with github actions_. remarkablemark. (2021, March 12). Retrieved May 31, 2022, from [https://remarkablemark.org/blog/2021/03/12/github-actions-deploy-to-heroku/](https://remarkablemark.org/blog/2021/03/12/github-actions-deploy-to-heroku/)
 
